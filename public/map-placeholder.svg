@@ -1,0 +1,16 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#F3F3EF"/>
+  <path d="M0 520C130 470 220 430 340 420C500 408 570 486 740 472C910 458 1010 360 1200 312" stroke="#B6BDC3" stroke-width="6"/>
+  <path d="M0 260C120 300 240 350 380 330C560 304 640 190 830 204C980 216 1070 300 1200 344" stroke="#C7CDD2" stroke-width="6"/>
+  <path d="M160 112L220 170L130 264L76 212L160 112Z" fill="#DBDEE1"/>
+  <path d="M910 90L1020 134L960 244L860 188L910 90Z" fill="#DBDEE1"/>
+  <path d="M810 428L920 460L886 596L778 564L810 428Z" fill="#DBDEE1"/>
+  <path d="M394 318C394 276 426 244 468 244C510 244 542 276 542 318C542 388 468 476 468 476C468 476 394 388 394 318Z" fill="#1F2932"/>
+  <circle cx="468" cy="318" r="30" fill="#B2562F"/>
+  <text x="570" y="320" fill="#1A222B" font-family="Arial, sans-serif" font-size="42" font-weight="700">
+    Banashree, Dhaka
+  </text>
+  <text x="570" y="370" fill="#4D5963" font-family="Arial, sans-serif" font-size="26">
+    Embedded Google Map Placeholder
+  </text>
+</svg>

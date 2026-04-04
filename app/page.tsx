@@ -1,65 +1,185 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  Aperture,
+  Brush,
+  Building2,
+  Clapperboard,
+  Megaphone,
+  MonitorPlay,
+  Newspaper,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
+import Hero from "@/components/Hero";
+import ServiceCard from "@/components/ServiceCard";
+import PortfolioCard from "@/components/PortfolioCard";
+import CTASection from "@/components/CTASection";
+import SectionIntro from "@/components/SectionIntro";
+import Reveal from "@/components/Reveal";
+import {
+  clientLogos,
+  portfolioItems,
+  processSteps,
+  services,
+  testimonials,
+  trustPoints,
+} from "@/data/site";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Adrich builds premium advertising campaigns across TVC, corporate AV, digital marketing, and performance media.",
+};
+
+const serviceIconMap: Record<string, LucideIcon> = {
+  "tvc-production": Clapperboard,
+  "corporate-av-production": Building2,
+  "social-media-content-production": MonitorPlay,
+  "digital-campaign-strategy": TrendingUp,
+  "paid-ads-management": Megaphone,
+  "motion-graphics-animation": Aperture,
+  "branding-and-graphic-design": Brush,
+  "print-production": Newspaper,
+};
 
 export default function Home() {
+  const featuredWork = portfolioItems.slice(0, 4);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Hero />
+
+      <section className="section-y-tight border-y border-slate-300 bg-white">
+        <div className="container-swiss">
+          <div className="metric-grid">
+            {trustPoints.map((point) => (
+              <div key={point.title} className="metric-cell">
+                <p className="text-kicker">{point.title}</p>
+                <p className="mt-2 font-display text-xl font-semibold text-ink-900">{point.value}</p>
+                <p className="mt-2 text-sm leading-6 text-ink-700">{point.detail}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </section>
+
+      <section className="section-y" id="services">
+        <div className="container-swiss">
+          <Reveal>
+            <SectionIntro
+              eyebrow="Capabilities"
+              title="Campaign systems built for brand impact"
+              description="From script and set to social distribution and paid optimization, we build coherent campaigns that perform across every channel."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </Reveal>
+          <div className="mt-8 space-y-1">
+            {services.map((service) => {
+              const Icon = serviceIconMap[service.slug] ?? Megaphone;
+
+              return (
+                <Reveal key={service.slug}>
+                  <ServiceCard service={service} icon={Icon} />
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="section-y bg-white" id="featured-work">
+        <div className="container-swiss">
+          <Reveal>
+            <SectionIntro
+              eyebrow="Featured Work"
+              title="A premium reel gallery of campaign execution"
+              description="Selected TVC and AV projects showcasing creative direction, production quality, and channel-ready campaign assets."
+            />
+          </Reveal>
+          <div className="mt-8 space-y-1">
+            {featuredWork.map((item, index) => (
+              <Reveal key={item.slug}>
+                <PortfolioCard item={item} priority={index < 2} />
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-6">
+            <Link href="/work" className="btn-base btn-secondary">
+              Explore All Work
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-y" id="process">
+        <div className="container-swiss">
+          <Reveal>
+            <SectionIntro
+              eyebrow="Process"
+              title="Think -> Create -> Influence"
+              description="Our 3-step operating model aligns strategy, craft, and media performance into one disciplined production flow."
+            />
+          </Reveal>
+          <div className="grid-12 mt-7 gap-y-4">
+            {processSteps.map((step, index) => (
+              <Reveal key={step.title} className="col-span-12 md:col-span-4">
+                <article className="rule-item h-full">
+                  <p className="text-kicker">0{index + 1}</p>
+                  <h3 className="mt-3 font-display text-2xl font-semibold text-ink-900">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-ink-700">{step.detail}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-y-tight border-y border-slate-300 bg-white" id="clients">
+        <div className="container-swiss">
+          <div className="mb-6 max-w-2xl border-t border-slate-300 pt-4">
+            <p className="text-kicker">Clients</p>
+            <h2 className="section-title mt-3 text-ink-900">Trusted by growth-focused brands</h2>
+          </div>
+          <div className="grid-12 gap-y-2">
+            {clientLogos.map((client) => (
+              <div
+                key={client}
+                className="col-span-6 border-t border-slate-300 pt-3 text-sm font-semibold uppercase tracking-[0.09em] text-ink-700 md:col-span-3"
+              >
+                {client}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-y" id="testimonials">
+        <div className="container-swiss">
+          <Reveal>
+            <SectionIntro
+              eyebrow="Testimonials"
+              title="Client feedback from long-term campaign partners"
+              description="We are trusted for strategic clarity, premium execution, and measurable campaign momentum."
+            />
+          </Reveal>
+          <div className="grid-12 mt-8 gap-y-3">
+            {testimonials.map((testimonial) => (
+              <Reveal key={testimonial.name} className="col-span-12 md:col-span-4">
+                <article className="rule-item h-full">
+                  <p className="text-sm leading-7 text-ink-800">&quot;{testimonial.quote}&quot;</p>
+                  <p className="mt-4 text-sm font-semibold text-ink-900">{testimonial.name}</p>
+                  <p className="mt-1 text-xs text-ink-600">{testimonial.role}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTASection
+        title="Let's build your next campaign"
+        description="Bring your challenge to Adrich and we will shape a custom strategy spanning concept, production, and performance channels."
+      />
+    </>
   );
 }
