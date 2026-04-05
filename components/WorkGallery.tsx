@@ -30,11 +30,7 @@ export default function WorkGallery({ items }: WorkGalleryProps) {
           <button
             key={filter}
             type="button"
-            className={`rounded-sm border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] transition ${
-              activeFilter === filter
-                ? "border-ink-900 bg-ink-900 text-white"
-                : "border-slate-300 bg-white text-ink-700 hover:border-ink-900 hover:text-ink-900"
-            }`}
+            className={`btn-chip ${activeFilter === filter ? "btn-chip-active" : ""}`.trim()}
             onClick={() => setActiveFilter(filter)}
             aria-pressed={activeFilter === filter}
           >

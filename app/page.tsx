@@ -50,17 +50,19 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="section-y-tight border-y border-slate-300 bg-white">
+      <section className="section-y-tight border-b-2 border-slate-300 bg-white">
         <div className="container-swiss">
-          <div className="metric-grid">
-            {trustPoints.map((point) => (
-              <div key={point.title} className="metric-cell">
-                <p className="text-kicker">{point.title}</p>
-                <p className="mt-2 font-display text-xl font-semibold text-ink-900">{point.value}</p>
-                <p className="mt-2 text-sm leading-6 text-ink-700">{point.detail}</p>
-              </div>
-            ))}
-          </div>
+          <Reveal>
+            <div className="metric-grid">
+              {trustPoints.map((point) => (
+                <div key={point.title} className="metric-cell">
+                  <p className="text-kicker">{point.title}</p>
+                  <p className="mt-2 font-display text-xl font-semibold text-ink-900">{point.value}</p>
+                  <p className="mt-2 text-sm leading-6 text-ink-700">{point.detail}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -84,10 +86,11 @@ export default function Home() {
               );
             })}
           </div>
+
         </div>
       </section>
 
-      <section className="section-y bg-white" id="featured-work">
+      <section className="section-y scroll-mt-24 bg-white" id="featured-work">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
@@ -134,9 +137,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-y-tight border-y border-slate-300 bg-white" id="clients">
+      <section className="section-y-tight border-y-2 border-slate-300 bg-white" id="clients">
         <div className="container-swiss">
-          <div className="mb-6 max-w-2xl border-t border-slate-300 pt-4">
+          <div className="mb-6 max-w-2xl">
             <p className="text-kicker">Clients</p>
             <h2 className="section-title mt-3 text-ink-900">Trusted by growth-focused brands</h2>
           </div>
@@ -144,7 +147,7 @@ export default function Home() {
             {clientLogos.map((client) => (
               <div
                 key={client}
-                className="col-span-6 border-t border-slate-300 pt-3 text-sm font-semibold uppercase tracking-[0.09em] text-ink-700 md:col-span-3"
+                className="col-span-6 pt-1 text-sm font-semibold uppercase tracking-[0.09em] text-ink-700 md:col-span-3"
               >
                 {client}
               </div>

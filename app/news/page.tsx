@@ -14,13 +14,14 @@ export const metadata: Metadata = {
 export default function NewsPage() {
   return (
     <>
-      <section className="section-y border-b border-slate-300 bg-white">
+      <section className="section-y border-b-2 border-slate-300 bg-white">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
               eyebrow="News and Updates"
               title="Recent campaign and production updates"
               description="A running timeline of project launches and creative milestones from the Adrich portfolio."
+              titleAs="h1"
             />
           </Reveal>
         </div>
@@ -31,7 +32,7 @@ export default function NewsPage() {
           <div className="grid-12 gap-y-3">
             {newsItems.map((item) => (
               <Reveal key={item.slug} className="col-span-12 md:col-span-6">
-                <article className="rule-item h-full">
+                <article className="h-full pb-6">
                   <p className="text-kicker">{item.date}</p>
                   <h2 className="mt-2 font-display text-xl font-semibold text-ink-900">{item.title}</h2>
                   <p className="mt-2 text-sm leading-7 text-ink-700">{item.summary}</p>

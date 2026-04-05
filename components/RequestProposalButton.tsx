@@ -7,6 +7,7 @@ type RequestProposalButtonProps = {
   serviceTitle?: string;
   label?: string;
   variant?: "primary" | "secondary";
+  iconOnly?: boolean;
   className?: string;
 };
 
@@ -14,6 +15,7 @@ export default function RequestProposalButton({
   serviceTitle,
   label = "Request Proposal",
   variant = "primary",
+  iconOnly = false,
   className,
 }: RequestProposalButtonProps) {
   const { openModal } = useProposalModal();
@@ -25,9 +27,10 @@ export default function RequestProposalButton({
       type="button"
       className={`btn-base ${variantClass} ${className ?? ""}`.trim()}
       onClick={() => openModal(serviceTitle)}
+      aria-label={iconOnly ? label : undefined}
     >
-      <span>{label}</span>
-      <ArrowUpRight size={16} aria-hidden="true" />
+      <span className={iconOnly ? "sr-only" : undefined}>{label}</span>
+      <ArrowUpRight size={iconOnly ? 18 : 16} strokeWidth={2.2} className="shrink-0" aria-hidden="true" />
     </button>
   );
 }

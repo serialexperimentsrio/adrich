@@ -5,7 +5,7 @@ import { companyProfile } from "@/data/site";
 
 export default function Hero() {
   return (
-    <section className="hero-aura section-y relative overflow-hidden border-b border-slate-300" id="top">
+    <section className="hero-aura section-y relative overflow-hidden border-b-2 border-slate-300" id="top">
       <div className="container-swiss relative z-10">
         <div className="grid-12 items-start gap-y-10">
           <div className="col-span-12 md:col-span-8">
@@ -24,7 +24,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-4 md:border-l md:border-slate-300 md:pl-6">
+          <div className="col-span-12 md:col-span-4 md:border-l-2 md:border-slate-300 md:pl-6">
             <p className="text-kicker">At a Glance</p>
             <div className="mt-3 space-y-4 text-sm">
               <div className="rule-item">

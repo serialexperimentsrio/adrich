@@ -17,11 +17,33 @@ export default function Reveal({ children, className }: RevealProps) {
       return;
     }
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      node.dataset.reveal = "visible";
+      return;
+    }
+
+    const isInViewport = () => {
+      const rect = node.getBoundingClientRect();
+      return rect.top <= window.innerHeight && rect.bottom >= 0;
+    };
+
+    if (isInViewport()) {
+      node.dataset.reveal = "visible";
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      node.dataset.reveal = "visible";
+      return;
+    }
+
+    node.dataset.reveal = "pending";
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            (entry.target as HTMLElement).dataset.reveal = "visible";
             observer.unobserve(entry.target);
           }
         });

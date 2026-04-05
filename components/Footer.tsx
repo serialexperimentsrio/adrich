@@ -3,15 +3,25 @@ import { companyProfile, navLinks, socialLinks } from "@/data/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-300 bg-surface-0">
+    <footer className="border-t-2 border-slate-300 bg-surface-0">
       <div className="container-swiss section-y-tight">
         <div className="grid-12 gap-y-8">
           <div className="col-span-12 md:col-span-5">
             <p className="font-display text-xl font-semibold text-ink-900">{companyProfile.name}</p>
             <p className="mt-1 max-w-sm text-xs uppercase tracking-[0.12em] text-ink-600">{companyProfile.tagline}</p>
             <p className="mt-5 text-sm leading-7 text-ink-700">{companyProfile.address}</p>
-            <p className="mt-2 text-sm text-ink-700">{companyProfile.phone}</p>
-            <p className="mt-1 text-sm text-ink-700">{companyProfile.email}</p>
+            <a
+              href={`tel:${companyProfile.phone.replace(/\s+/g, "")}`}
+              className="mt-2 inline-flex text-sm text-ink-700 transition hover:text-ink-900 focus-visible:underline"
+            >
+              {companyProfile.phone}
+            </a>
+            <a
+              href={`mailto:${companyProfile.email}`}
+              className="mt-1 inline-flex text-sm text-ink-700 transition hover:text-ink-900 focus-visible:underline"
+            >
+              {companyProfile.email}
+            </a>
           </div>
 
           <div className="col-span-6 md:col-span-3">

@@ -14,13 +14,14 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className="section-y border-b border-slate-300 bg-white">
+      <section className="section-y border-b-2 border-slate-300 bg-white">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
               eyebrow="Portfolio"
               title="Campaign work designed for recall and results"
               description="Filter projects by category and open each case detail to review objective, category, client, and video placeholder preview."
+              titleAs="h1"
             />
           </Reveal>
         </div>

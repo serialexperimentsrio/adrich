@@ -6,9 +6,15 @@ type CTASectionProps = {
   title: string;
   description: string;
   className?: string;
+  showProposalButton?: boolean;
 };
 
-export default function CTASection({ title, description, className }: CTASectionProps) {
+export default function CTASection({
+  title,
+  description,
+  className,
+  showProposalButton = true,
+}: CTASectionProps) {
   return (
     <section className={`section-y ${className ?? ""}`.trim()}>
       <div className="container-swiss">
@@ -20,8 +26,8 @@ export default function CTASection({ title, description, className }: CTASection
           </div>
 
           <div className="col-span-12 flex flex-wrap gap-3 md:col-span-4 md:justify-end">
-            <RequestProposalButton className="justify-center border border-white bg-white text-ink-900 hover:bg-slate-200" />
-            <Link href="/contact" className="btn-base border border-slate-500 text-white hover:border-slate-300 hover:bg-white/5">
+            {showProposalButton ? <RequestProposalButton className="justify-center btn-inverse" /> : null}
+            <Link href="/contact" className="btn-base btn-inverse">
               Contact Team
               <ArrowRight size={16} aria-hidden="true" />
             </Link>

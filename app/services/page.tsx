@@ -36,13 +36,14 @@ const serviceIconMap: Record<string, LucideIcon> = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="section-y border-b border-slate-300 bg-white">
+      <section className="section-y border-b-2 border-slate-300 bg-white">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
               eyebrow="Services"
               title="Integrated capabilities for modern advertising"
               description="Every service is built to function independently or as part of one unified campaign model from concept and production to media and optimization."
+              titleAs="h1"
             />
           </Reveal>
         </div>

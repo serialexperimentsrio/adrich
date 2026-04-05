@@ -55,10 +55,15 @@ export default function RootLayout({
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-surface-0 text-ink-900">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <ProposalModalProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main id="main-content" className="flex-1 outline-none">
+              {children}
+            </main>
             <Footer />
           </div>
         </ProposalModalProvider>

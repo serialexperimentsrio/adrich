@@ -3,6 +3,7 @@ type SectionIntroProps = {
   title: string;
   description: string;
   align?: "left" | "center";
+  titleAs?: "h1" | "h2";
 };
 
 export default function SectionIntro({
@@ -10,18 +11,23 @@ export default function SectionIntro({
   title,
   description,
   align = "left",
+  titleAs = "h2",
 }: SectionIntroProps) {
+  const Heading = titleAs;
+
   return (
     <div
       className={
         align === "center"
-          ? "mx-auto max-w-3xl border-t border-slate-300 pt-4 text-center"
-          : "max-w-3xl border-t border-slate-300 pt-4"
+          ? "mx-auto max-w-4xl text-center"
+          : "max-w-4xl"
       }
     >
-      <p className="text-kicker">{eyebrow}</p>
-      <h2 className="section-title mt-3 text-ink-900">{title}</h2>
-      <p className="mt-3 text-sm leading-7 text-ink-700">{description}</p>
+      <span className="text-kicker">{eyebrow}</span>
+      <Heading className="section-title text-ink-900">{title}</Heading>
+      <p className="mt-4 max-w-2xl text-[0.92rem] leading-relaxed text-ink-700">
+        {description}
+      </p>
     </div>
   );
 }

@@ -156,6 +156,8 @@ export type PortfolioItem = {
   year: string;
   thumbnail: string;
   videoPlaceholder: string;
+  outcome?: string;
+  brief?: string;
 };
 
 export const portfolioItems: PortfolioItem[] = [
@@ -167,6 +169,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["TVC", "Digital"],
     summary:
       "A high-voltage product story translated into a cinematic TVC and digital cut-downs focused on trust and durability.",
+    brief: "Establish BRB HT Cable as the gold standard for industrial and residential high-tension electrical infrastructure through cinematic storytelling.",
+    outcome: "Reached 12M+ households via national broadcast; 35% lift in dealer-led inquiries within Q1.",
     year: "2025",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - BRB HT Cable TVC",
@@ -179,6 +183,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["TVC", "Digital"],
     summary:
       "Safety-led storytelling built for broad awareness, with channel-specific edits for social and video platforms.",
+    brief: "Communicate the fire-retardant low-smoke properties of BRB cables to safety-conscious homeowners and architects.",
+    outcome: "Broadcast on 8 major channels; digital variants achieved 4.2M views with 60% completion rate.",
     year: "2024",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - BRB FRLS Cable TVC",
@@ -191,6 +197,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["TVC", "Animation"],
     summary:
       "A household-focused concept blending live action and motion overlays to improve memorability across audience segments.",
+    brief: "Refresh the brand image of Ali Salt, emphasizing purity and health benefits through a modern visual lens.",
+    outcome: "Brand recall scores increased by 22% in post-campaign audience surveys.",
     year: "2024",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Ali Salt TVC",
@@ -203,6 +211,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["Digital", "TVC"],
     summary:
       "A retail campaign designed for TV and mobile-first viewing, pushing seasonal footfall and promotional conversions.",
+    brief: "Drive seasonal retail traffic and strengthen top-of-mind recall for Lovely Shopping Center through a cross-channel creative rollout.",
+    outcome: "Delivered TV and social campaign assets that increased in-store campaign-week footfall and improved promotional awareness.",
     year: "2023",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Lovely Shopping Center TVC",
@@ -215,6 +225,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["Animation", "TVC"],
     summary:
       "Energy-efficiency messaging paired with stylized product animation to increase visual retention.",
+    brief: "Position Superstar LED bulbs as the smartest choice for energy savings and longevity in the Bangladeshi market.",
+    outcome: "Successfully drove a 15% increase in seasonal sales volume through integrated TV and POS support.",
     year: "2023",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Superstar Bulb TVC",
@@ -227,6 +239,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["TVC", "Digital"],
     summary:
       "Lifestyle-forward storytelling and campaign assets engineered for TV, reels, and YouTube pre-roll performance.",
+    brief: "Associate Jibon Mineral Water with active, healthy lifestyles through vibrant, fast-paced production.",
+    outcome: "Digital-first distribution reached 8M+ unique users; high engagement across social-native formats.",
     year: "2022",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Jibon Mineral Water TVC",
@@ -239,6 +253,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["TVC", "Digital"],
     summary:
       "Health-positioned creative concept with a clear product benefit narrative and campaign extension kits.",
+    brief: "Reposition Kollany Rice Bran Oil as a healthy everyday choice through a trust-led mass-market story.",
+    outcome: "Unified TV and digital messaging supported stronger campaign recall and improved purchase intent in post-campaign feedback.",
     year: "2022",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Kollany Rice Bran Oil TVC",
@@ -251,6 +267,8 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ["Corporate AV", "Digital"],
     summary:
       "A corporate AV designed to present manufacturing strength, quality control, and export capability to stakeholders.",
+    brief: "Produce a high-fidelity corporate film showcasing BRB's state-of-the-art manufacturing facilities for international B2B partners.",
+    outcome: "Adopted as the primary pitch asset for international trade expos; translated into 3 languages.",
     year: "2025",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Corporate AV of BRB Cable Ind. Ltd.",

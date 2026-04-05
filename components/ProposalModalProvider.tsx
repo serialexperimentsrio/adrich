@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -32,8 +33,11 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
   const [isOpen, setIsOpen] = useState(false);
   const [service, setService] = useState(services[0]?.title ?? "");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   const openModal = useCallback((serviceTitle?: string) => {
+    triggerRef.current = document.activeElement as HTMLElement;
     if (serviceTitle) {
       setService(serviceTitle);
     }
@@ -44,19 +48,47 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
+    setTimeout(() => {
+      triggerRef.current?.focus();
+    }, 0);
   }, []);
 
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closeModal();
       }
+
+      if (event.key === "Tab") {
+        const focusableElements = modalRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+        if (!focusableElements) return;
+
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+        if (event.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            event.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            event.preventDefault();
+          }
+        }
+      }
     };
 
-    if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-    }
+    window.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    const firstInput = modalRef.current?.querySelector("input, select, textarea") as HTMLElement;
+    firstInput?.focus();
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -87,7 +119,10 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
             onClick={closeModal}
             aria-label="Close request proposal modal"
           />
-          <div className="relative w-full max-w-xl rounded-md border border-slate-300 bg-white p-5 md:p-6">
+          <div
+            ref={modalRef}
+            className="relative w-full max-w-xl rounded-md border-2 border-slate-300 bg-white p-5 md:p-6"
+          >
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>
                 <p className="text-kicker">Request Proposal</p>
@@ -97,7 +132,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
               </div>
               <button
                 type="button"
-                className="rounded-sm p-2 text-ink-600 transition hover:bg-slate-100 hover:text-ink-900"
+                className="btn-icon inline-flex items-center justify-center p-2"
                 onClick={closeModal}
                 aria-label="Close modal"
               >
@@ -110,6 +145,11 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
               onSubmit={(event) => {
                 event.preventDefault();
                 setIsSubmitted(true);
+              }}
+              onChange={() => {
+                if (isSubmitted) {
+                  setIsSubmitted(false);
+                }
               }}
             >
               <div>
@@ -174,7 +214,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
             </form>
 
             {isSubmitted ? (
-              <div className="mt-4 rounded-sm border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
+              <div className="mt-4 rounded-sm border-2 border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
                 Thank you. We received your brief and will get back to you shortly.
               </div>
             ) : null}

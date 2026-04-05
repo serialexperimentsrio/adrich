@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -19,6 +19,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuId = "mobile-navigation";
 
   useEffect(() => {
     const onScroll = () => {
@@ -33,9 +36,31 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    const firstFocusable = mobileMenuRef.current?.querySelector<HTMLElement>("a[href], button:not([disabled])");
+    firstFocusable?.focus();
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
+
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-all duration-200 ${
+      className={`sticky top-0 z-50 border-b-2 transition-all duration-200 ${
         scrolled ? "nav-glass border-slate-300/90" : "border-slate-300/60 bg-surface-0/90"
       }`}
     >
@@ -71,11 +96,13 @@ export default function Navbar() {
           </div>
 
           <button
+            ref={menuButtonRef}
             type="button"
-            className="rounded-md border border-slate-300 p-2 text-ink-800 transition hover:border-ink-900 hover:bg-white md:hidden"
+            className="btn-icon inline-flex items-center justify-center p-2 md:!hidden"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-expanded={menuOpen}
-            aria-label="Toggle menu"
+            aria-controls={mobileMenuId}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -83,7 +110,7 @@ export default function Navbar() {
       </div>
 
       {menuOpen ? (
-        <div className="border-t border-slate-300 bg-surface-1 px-4 py-4 md:hidden">
+        <div id={mobileMenuId} ref={mobileMenuRef} className="border-t-2 border-slate-300 bg-surface-1 px-4 py-4 md:!hidden">
           <nav className="container-swiss flex flex-col gap-2" aria-label="Mobile navigation">
             {navLinks.map((link) => {
               const active = linkIsActive(pathname, link.href);
