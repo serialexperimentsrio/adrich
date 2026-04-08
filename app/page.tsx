@@ -25,6 +25,7 @@ import {
   testimonials,
   trustPoints,
 } from "@/data/site";
+import ClientCarousel from "@/components/ClientCarousel";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -48,10 +49,11 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
+      <div className="viewport-group">
+        <Hero />
 
-      <section className="section-y-tight border-b-2 border-slate-300 bg-white">
-        <div className="container-swiss">
+        <section className="section-y-tight border-b-2 border-slate-300 bg-white">
+          <div className="container-swiss">
           <Reveal>
             <div className="metric-grid">
               {trustPoints.map((point) => (
@@ -64,7 +66,8 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
-      </section>
+        </section>
+      </div>
 
       <section className="section-y" id="services">
         <div className="container-swiss">
@@ -143,16 +146,18 @@ export default function Home() {
             <p className="text-kicker">Clients</p>
             <h2 className="section-title mt-3 text-ink-900">Trusted by growth-focused brands</h2>
           </div>
-          <div className="grid-12 gap-y-2">
-            {clientLogos.map((client) => (
-              <div
-                key={client}
-                className="col-span-6 pt-1 text-sm font-semibold uppercase tracking-[0.09em] text-ink-700 md:col-span-3"
-              >
-                {client}
-              </div>
-            ))}
-          </div>
+          <Reveal>
+            <ClientCarousel
+              images={[
+                "/logos/logo-1.svg",
+                "/logos/logo-2.svg",
+                "/logos/logo-3.svg",
+                "/logos/logo-4.svg",
+                "/logos/logo-5.svg",
+                "/logos/logo-6.svg",
+              ]}
+            />
+          </Reveal>
         </div>
       </section>
 

@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
   type ReactNode,
+  type TransitionEvent,
 } from "react";
 import { X } from "lucide-react";
 import { services } from "@/data/site";
@@ -31,6 +32,7 @@ export function useProposalModal() {
 
 export default function ProposalModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [service, setService] = useState(services[0]?.title ?? "");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const triggerRef = useRef<HTMLElement | null>(null);
@@ -43,18 +45,33 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
     }
 
     setIsSubmitted(false);
-    setIsOpen(true);
+
+    setIsMounted(true);
+    window.requestAnimationFrame(() => {
+      setIsOpen(true);
+    });
   }, []);
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
-    setTimeout(() => {
-      triggerRef.current?.focus();
-    }, 0);
   }, []);
 
+  const handlePanelTransitionEnd = useCallback(
+    (event: TransitionEvent<HTMLDivElement>) => {
+      if (event.target !== event.currentTarget) {
+        return;
+      }
+
+      if (!isOpen) {
+        setIsMounted(false);
+        triggerRef.current?.focus();
+      }
+    },
+    [isOpen],
+  );
+
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isMounted) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -84,17 +101,28 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    const firstInput = modalRef.current?.querySelector("input, select, textarea") as HTMLElement;
-    firstInput?.focus();
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
-  }, [closeModal, isOpen]);
+  }, [closeModal, isMounted]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const focusHandle = window.requestAnimationFrame(() => {
+      const firstInput = modalRef.current?.querySelector("input, select, textarea") as HTMLElement;
+      firstInput?.focus();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(focusHandle);
+    };
+  }, [isOpen]);
 
   const value = useMemo(
     () => ({
@@ -106,7 +134,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
   return (
     <ProposalModalContext.Provider value={value}>
       {children}
-      {isOpen ? (
+      {isMounted ? (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center px-4"
           role="dialog"
@@ -115,13 +143,18 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
         >
           <button
             type="button"
-            className="absolute inset-0 bg-[#061019]/70"
+            className={`absolute inset-0 bg-[#061019]/70 transition-opacity duration-180 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+              isOpen ? "opacity-100" : "opacity-0"
+            }`}
             onClick={closeModal}
             aria-label="Close request proposal modal"
           />
           <div
             ref={modalRef}
-            className="relative w-full max-w-xl rounded-md border-2 border-slate-300 bg-white p-5 md:p-6"
+            onTransitionEnd={handlePanelTransitionEnd}
+            className={`relative w-full max-w-xl rounded-md border-2 border-slate-300 bg-white p-5 md:p-6 transition-opacity duration-180 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+              isOpen ? "opacity-100" : "opacity-0"
+            }`}
           >
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>

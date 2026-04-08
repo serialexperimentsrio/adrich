@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import ProposalModalProvider from "@/components/ProposalModalProvider";
 
 const inter = Inter({
@@ -61,8 +62,8 @@ export default function RootLayout({
         <ProposalModalProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />
-            <main id="main-content" className="flex-1 outline-none">
-              {children}
+            <main id="main-content" className="flex-1 outline-none overflow-y-auto snap-y snap-mandatory">
+              <PageTransition>{children}</PageTransition>
             </main>
             <Footer />
           </div>

@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import RequestProposalButton from "@/components/RequestProposalButton";
-import { companyProfile, navLinks } from "@/data/site";
+import logo from "@/public/logo.png";
+import { navLinks } from "@/data/site";
 
 function linkIsActive(pathname: string, href: string) {
   if (href === "/") {
@@ -60,19 +62,19 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b-2 transition-all duration-200 ${
+      className={`sticky top-0 z-50 border-b-2 transition-all duration-150 ${
         scrolled ? "nav-glass border-slate-300/90" : "border-slate-300/60 bg-surface-0/90"
       }`}
     >
       <div className="container-swiss">
         <div className="flex h-16 items-center justify-between gap-6">
-          <Link href="/" className="group inline-flex items-baseline gap-2">
-            <span className="font-display text-lg font-semibold tracking-tight text-ink-900">
-              {companyProfile.name}
-            </span>
-            <span className="hidden text-[10px] uppercase tracking-[0.14em] text-ink-600 lg:inline">
-              {companyProfile.tagline}
-            </span>
+          <Link href="/" className="group inline-flex items-center" aria-label="Adrich home">
+            <Image
+              src={logo}
+              alt="Adrich"
+              priority
+              className="h-11 w-auto sm:h-12 object-contain max-w-[220px]"
+            />
           </Link>
 
           <nav className="hidden items-center gap-5 md:flex" aria-label="Main navigation">
@@ -92,7 +94,7 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden md:block">
-            <RequestProposalButton variant="secondary" className="min-h-10" />
+            <RequestProposalButton className="justify-center" />
           </div>
 
           <button
@@ -109,31 +111,38 @@ export default function Navbar() {
         </div>
       </div>
 
-      {menuOpen ? (
-        <div id={mobileMenuId} ref={mobileMenuRef} className="border-t-2 border-slate-300 bg-surface-1 px-4 py-4 md:!hidden">
-          <nav className="container-swiss flex flex-col gap-2" aria-label="Mobile navigation">
-            {navLinks.map((link) => {
-              const active = linkIsActive(pathname, link.href);
+      <div
+        id={mobileMenuId}
+        ref={mobileMenuRef}
+        aria-hidden={!menuOpen}
+        className={`border-t-2 border-slate-300 bg-surface-1 px-4 py-4 md:!hidden overflow-hidden transition-[max-height,opacity,transform] duration-150 ease-out ${
+          menuOpen
+            ? "visible max-h-96 translate-y-0 opacity-100"
+            : "invisible pointer-events-none max-h-0 -translate-y-1 opacity-0"
+        }`}
+      >
+        <nav className="container-swiss flex flex-col gap-2" aria-label="Mobile navigation">
+          {navLinks.map((link) => {
+            const active = linkIsActive(pathname, link.href);
 
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`border-l-2 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition ${
-                    active
-                      ? "border-ink-900 text-ink-900"
-                      : "border-transparent text-ink-700 hover:border-slate-400 hover:text-ink-900"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-            <RequestProposalButton className="mt-2 w-full justify-center" variant="secondary" />
-          </nav>
-        </div>
-      ) : null}
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`border-l-2 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition ${
+                  active
+                    ? "border-ink-900 text-ink-900"
+                    : "border-transparent text-ink-700 hover:border-slate-400 hover:text-ink-900"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <RequestProposalButton className="mt-2 w-full justify-center" />
+        </nav>
+      </div>
     </header>
   );
 }

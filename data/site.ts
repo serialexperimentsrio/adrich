@@ -6,8 +6,17 @@ export const companyProfile = {
   headquarters: "Dhaka, Bangladesh",
   address:
     "House #32,34, Road #6, Block F, Banashree, Dhaka 1219, Bangladesh",
-  email: "hello@adrich.agency",
+  email: "ahsan@adrich.com.bd",
   phone: "+880 1712-000000",
+};
+
+export const founderProfile = {
+  name: "Ahsan Habib",
+  title: "Founder & Creative Director",
+  photo: "/founder.jpg",
+  linkedin: "https://www.linkedin.com/in/ahsandb/",
+  bio:
+    "We started our journey in Dhaka, back in 1997, when TV, radio, and print were the primary ways to connect with audiences. Over the years, as the media evolved, so did we. Today, Adrich helps brands navigate the digital landscape with clear strategy, creative content, and impactful campaigns.",
 };
 
 export const navLinks = [
@@ -131,6 +140,36 @@ export const services: Service[] = [
       "Brochures and annual profile kits",
       "Poster and OOH adaptation",
       "Pre-press supervision and print QA",
+    ],
+  },
+  {
+    slug: "ecommerce-development",
+    title: "E-commerce Development",
+    description: "Custom e-commerce websites designed for conversion and scalable product management.",
+    deliverables: [
+      "Custom storefront UX and responsive design",
+      "Payment gateway and checkout optimization",
+      "Inventory, orders and fulfillment workflows",
+    ],
+  },
+  {
+    slug: "shopify-development",
+    title: "Shopify Development",
+    description: "Shopify storefront setup, theme customization, and app integrations for rapid deployment.",
+    deliverables: [
+      "Shopify theme development and customization",
+      "Product import and collections setup",
+      "Payments, shipping and app integrations",
+    ],
+  },
+  {
+    slug: "personal-branding",
+    title: "Personal Branding",
+    description: "Personal branding strategies and social media packages for leaders and executives.",
+    deliverables: [
+      "LinkedIn profile strategy and optimisation",
+      "Personal content calendars and creative assets",
+      "Media coaching and profile asset production",
     ],
   },
 ];
@@ -422,8 +461,8 @@ export const newsItems = [
 ] as const;
 
 export const socialLinks = [
-  { label: "Facebook", href: "https://facebook.com/adrich" },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61575491642072" },
   { label: "Instagram", href: "https://instagram.com/adrich" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/adrich" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/adrich/?viewAsMember=true" },
   { label: "YouTube", href: "https://youtube.com/@adrich" },
 ] as const;

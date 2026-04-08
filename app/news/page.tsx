@@ -18,10 +18,11 @@ export default function NewsPage() {
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="News and Updates"
               title="Recent campaign and production updates"
               description="A running timeline of project launches and creative milestones from the Adrich portfolio."
               titleAs="h1"
+              align="center"
+              showDivider
             />
           </Reveal>
         </div>

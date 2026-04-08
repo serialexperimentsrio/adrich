@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SectionIntro from "@/components/SectionIntro";
 import CTASection from "@/components/CTASection";
 import Reveal from "@/components/Reveal";
-import { companyProfile, teamMembers, timeline, values } from "@/data/site";
+import { companyProfile, teamMembers, timeline, values, founderProfile } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -17,11 +18,49 @@ export default function AboutPage() {
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="About Adrich"
               title="A campaign partner built on craft and discipline"
               description="Founded in 1997 in Dhaka, Adrich has evolved from traditional production roots into a modern agency integrating strategy, design, production, and digital media performance."
               titleAs="h1"
+              align="center"
+              showDivider
             />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-y bg-white">
+        <div className="container-swiss">
+          <Reveal>
+            <div className="grid-12 items-center gap-y-6">
+              <div className="col-span-12 md:col-span-4">
+                <div className="decorative-frame w-full max-w-[320px] aspect-square mx-auto relative overflow-hidden">
+                  <Image
+                    src={founderProfile.photo}
+                    alt={`${founderProfile.name}, ${founderProfile.title}`}
+                    fill
+                    sizes="320px"
+                    unoptimized
+                    className="object-cover"
+                    priority
+                    quality={100}
+                  />
+                </div>
+              </div>
+
+              <div className="col-span-12 md:col-span-8">
+                <h3 className="font-display text-2xl font-semibold text-ink-900">{founderProfile.name}</h3>
+                <p className="mt-2 text-sm leading-7 text-ink-700">{founderProfile.title}</p>
+                <p className="mt-4 text-sm leading-7 text-ink-700">{founderProfile.bio}</p>
+                <a
+                  href={founderProfile.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold"
+                >
+                  View LinkedIn profile
+                </a>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -137,7 +176,6 @@ export default function AboutPage() {
       <CTASection
         title="Ready to shape your brand narrative?"
         description="Partner with Adrich to build strategic, production-ready campaigns that hold attention and drive action."
-        showProposalButton={false}
       />
     </>
   );

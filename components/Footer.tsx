@@ -1,14 +1,21 @@
 import Link from "next/link";
+import Image from "next/image";
+import logo from "@/public/logo.png";
 import { companyProfile, navLinks, socialLinks } from "@/data/site";
 
 export default function Footer() {
   return (
     <footer className="border-t-2 border-slate-300 bg-surface-0">
       <div className="container-swiss section-y-tight">
-        <div className="grid-12 gap-y-8">
-          <div className="col-span-12 md:col-span-5">
-            <p className="font-display text-xl font-semibold text-ink-900">{companyProfile.name}</p>
-            <p className="mt-1 max-w-sm text-xs uppercase tracking-[0.12em] text-ink-600">{companyProfile.tagline}</p>
+        <div className="grid-12 gap-y-8 items-stretch">
+          <div className="col-span-12 md:col-span-5 flex flex-col h-full">
+            <div className="self-start">
+              <Image
+                src={logo}
+                alt="Adrich"
+                className="h-16 w-auto object-contain max-w-[320px]"
+              />
+            </div>
             <p className="mt-5 text-sm leading-7 text-ink-700">{companyProfile.address}</p>
             <a
               href={`tel:${companyProfile.phone.replace(/\s+/g, "")}`}
@@ -22,6 +29,11 @@ export default function Footer() {
             >
               {companyProfile.email}
             </a>
+            <div className="mt-auto">
+              <p className="text-xs text-ink-600">
+                Copyright {new Date().getFullYear()} Adrich. All rights reserved.
+              </p>
+            </div>
           </div>
 
           <div className="col-span-6 md:col-span-3">
@@ -53,9 +65,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-xs text-ink-600">
-              Copyright {new Date().getFullYear()} Adrich. All rights reserved.
-            </p>
           </div>
         </div>
       </div>

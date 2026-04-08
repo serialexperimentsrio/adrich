@@ -40,10 +40,11 @@ export default function ServicesPage() {
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="Services"
               title="Integrated capabilities for modern advertising"
               description="Every service is built to function independently or as part of one unified campaign model from concept and production to media and optimization."
               titleAs="h1"
+              align="center"
+              showDivider
             />
           </Reveal>
         </div>

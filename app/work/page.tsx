@@ -18,10 +18,11 @@ export default function WorkPage() {
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="Portfolio"
               title="Campaign work designed for recall and results"
               description="Filter projects by category and open each case detail to review objective, category, client, and video placeholder preview."
               titleAs="h1"
+              align="center"
+              showDivider
             />
           </Reveal>
         </div>
