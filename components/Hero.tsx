@@ -3,18 +3,12 @@ import { ArrowRight } from "lucide-react";
 import RequestProposalButton from "@/components/RequestProposalButton";
 import RotatingText from "@/components/RotatingText";
 import { companyProfile } from "@/data/site";
+import HeroPattern from "@/components/HeroPattern";
 
 export default function Hero() {
   return (
     <section className="section-y relative overflow-hidden border-b-2 border-slate-300" id="top">
-      <div aria-hidden="true" className="hero-pattern__wrapper">
-        <div className="pattern-grid" />
-        <div className="pattern-dots">
-          <span className="dot row-1 speed-1" />
-          <span className="dot row-2 speed-2" />
-          <span className="dot row-3 speed-3" />
-        </div>
-      </div>
+      <HeroPattern dotCount={4} />
       <div className="container-swiss relative z-10">
         <div className="grid-12 items-start gap-y-10">
           <div className="col-span-12 md:col-span-12">

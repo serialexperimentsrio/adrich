@@ -7,7 +7,7 @@ export default function ContactForm() {
 
   return (
     <form
-      className="border-2 border-slate-300 bg-white p-4 md:p-5 space-y-4"
+      className="border-2 border-slate-300 bg-white p-4 md:p-5 rounded-sm h-full flex flex-col gap-4"
       onSubmit={(event) => {
         event.preventDefault();
 
@@ -72,15 +72,17 @@ export default function ContactForm() {
         <p className="form-hint">Short summary is enough. We can refine in a discovery call.</p>
       </div>
 
-      <button type="submit" className="btn-base btn-primary w-full justify-center sm:w-auto">
-        Send Inquiry
-      </button>
+      <div className="mt-auto">
+        <button type="submit" className="btn-base btn-primary w-full justify-center sm:w-auto">
+          Send Inquiry
+        </button>
 
-      {submitted ? (
-        <p className="rounded-sm border-2 border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
-          Thanks for reaching out. The Adrich team will respond within one business day.
-        </p>
-      ) : null}
+        {submitted ? (
+          <p className="mt-4 rounded-sm border-2 border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
+            Thanks for reaching out. The Adrich team will respond within one business day.
+          </p>
+        ) : null}
+      </div>
     </form>
   );
 }

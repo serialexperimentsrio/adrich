@@ -80,7 +80,7 @@ export const services: Service[] = [
     slug: "social-media-content-production",
     title: "Social Media Content Production",
     description:
-      "Always-on social content systems for Facebook, Instagram, YouTube, and LinkedIn.",
+      "Always-on social content systems and social media advertising for Facebook, Instagram, YouTube, and LinkedIn.",
     deliverables: [
       "Monthly content calendars",
       "Short-form video and static creatives",
@@ -91,7 +91,7 @@ export const services: Service[] = [
     slug: "digital-campaign-strategy",
     title: "Digital Campaign Strategy",
     description:
-      "Cross-platform campaign strategy designed around audience behavior and measurable outcomes.",
+      "Cross-platform campaign strategy designed around audience behavior and measurable outcomes. Includes content strategy and SEO fundamentals.",
     deliverables: [
       "Audience and channel planning",
       "Message architecture and funnel mapping",
@@ -110,19 +110,8 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "motion-graphics-animation",
-    title: "Motion Graphics / Animation",
-    description:
-      "Visual storytelling through dynamic motion language, explainers, and animated brand assets.",
-    deliverables: [
-      "2D and 3D animation direction",
-      "Animated product explainers",
-      "Motion packages for digital campaigns",
-    ],
-  },
-  {
     slug: "branding-and-graphic-design",
-    title: "Branding & Graphic Design",
+    title: "Branding",
     description:
       "Brand identities and campaign visuals that stay coherent across every touchpoint.",
     deliverables: [
@@ -142,36 +131,7 @@ export const services: Service[] = [
       "Pre-press supervision and print QA",
     ],
   },
-  {
-    slug: "ecommerce-development",
-    title: "E-commerce Development",
-    description: "Custom e-commerce websites designed for conversion and scalable product management.",
-    deliverables: [
-      "Custom storefront UX and responsive design",
-      "Payment gateway and checkout optimization",
-      "Inventory, orders and fulfillment workflows",
-    ],
-  },
-  {
-    slug: "shopify-development",
-    title: "Shopify Development",
-    description: "Shopify storefront setup, theme customization, and app integrations for rapid deployment.",
-    deliverables: [
-      "Shopify theme development and customization",
-      "Product import and collections setup",
-      "Payments, shipping and app integrations",
-    ],
-  },
-  {
-    slug: "personal-branding",
-    title: "Personal Branding",
-    description: "Personal branding strategies and social media packages for leaders and executives.",
-    deliverables: [
-      "LinkedIn profile strategy and optimisation",
-      "Personal content calendars and creative assets",
-      "Media coaching and profile asset production",
-    ],
-  },
+  // Removed non-core services: ecommerce, shopify, personal-branding
 ];
 
 export type PortfolioCategory = "TVC" | "Corporate AV" | "Digital" | "Animation";
@@ -195,6 +155,7 @@ export type PortfolioItem = {
   year: string;
   thumbnail: string;
   videoPlaceholder: string;
+  embedSrc?: string;
   outcome?: string;
   brief?: string;
 };
@@ -213,6 +174,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2025",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - BRB HT Cable TVC",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644752827056128?collapsed=1",
   },
   {
     slug: "brb-frls-cable-tvc",
@@ -227,6 +189,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2024",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - BRB FRLS Cable TVC",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644528461205504?collapsed=1",
   },
   {
     slug: "ali-salt-tvc",
@@ -241,6 +204,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2024",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Ali Salt TVC",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644350828302336?collapsed=1",
   },
   {
     slug: "lovely-shopping-center-tvc",
@@ -255,6 +219,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2023",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Lovely Shopping Center TVC",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644112621047808?collapsed=1",
   },
   {
     slug: "superstar-bulb-tvc",
@@ -269,6 +234,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2023",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Superstar Bulb TVC",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643602048372736?collapsed=1",
   },
   {
     slug: "jibon-mineral-water-tvc",
@@ -283,6 +249,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2022",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Jibon Mineral Water TVC",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643384116789248?collapsed=1",
   },
   {
     slug: "kollany-rice-bran-oil-tvc",
@@ -297,6 +264,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2022",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Kollany Rice Bran Oil TVC",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643186871177216?collapsed=1",
   },
   {
     slug: "corporate-av-brb-cable",
@@ -311,6 +279,7 @@ export const portfolioItems: PortfolioItem[] = [
     year: "2025",
     thumbnail: "/reel-placeholder.svg",
     videoPlaceholder: "Video placeholder - Corporate AV of BRB Cable Ind. Ltd.",
+    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377642799296528384?collapsed=1",
   },
 ];
 

@@ -19,7 +19,7 @@ import { services } from "@/data/site";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore Adrich services across TVC production, digital campaigns, paid ads management, animation, branding, and print.",
+    "Explore Adrich services across TVC production, social media advertising, digital campaigns, paid ads management, animation, branding, and print.",
 };
 
 const serviceIconMap: Record<string, LucideIcon> = {
@@ -28,7 +28,6 @@ const serviceIconMap: Record<string, LucideIcon> = {
   "social-media-content-production": MonitorPlay,
   "digital-campaign-strategy": TrendingUp,
   "paid-ads-management": Megaphone,
-  "motion-graphics-animation": Aperture,
   "branding-and-graphic-design": Brush,
   "print-production": Newspaper,
 };
@@ -41,7 +40,7 @@ export default function ServicesPage() {
           <Reveal>
             <SectionIntro
               title="Integrated capabilities for modern advertising"
-              description="Every service is built to function independently or as part of one unified campaign model from concept and production to media and optimization."
+              description="Every service is built to function independently or as part of one unified campaign model from concept and production to media and optimization. We help businesses build awareness, drive engagement, and grow online."
               titleAs="h1"
               align="center"
               showDivider

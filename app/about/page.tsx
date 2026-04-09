@@ -28,7 +28,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-y bg-white">
+      <section className="section-y bg-surface-0">
         <div className="container-swiss">
           <Reveal>
             <div className="grid-12 items-center gap-y-6">
@@ -55,7 +55,7 @@ export default function AboutPage() {
                   href={founderProfile.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold underline-link"
                 >
                   View LinkedIn profile
                 </a>
@@ -65,7 +65,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-y">
+      <section className="section-y border-t-2 border-slate-300 bg-white">
         <div className="container-swiss">
           <div className="grid-12 gap-y-6">
             <Reveal className="col-span-12 md:col-span-6 md:border-r-2 md:border-slate-300 md:pr-8">

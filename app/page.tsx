@@ -39,7 +39,6 @@ const serviceIconMap: Record<string, LucideIcon> = {
   "social-media-content-production": MonitorPlay,
   "digital-campaign-strategy": TrendingUp,
   "paid-ads-management": Megaphone,
-  "motion-graphics-animation": Aperture,
   "branding-and-graphic-design": Brush,
   "print-production": Newspaper,
 };
@@ -73,7 +72,7 @@ export default function Home() {
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="Capabilities"
+              eyebrow="Services"
               title="Campaign systems built for brand impact"
               description="From script and set to social distribution and paid optimization, we build coherent campaigns that perform across every channel."
             />
@@ -149,12 +148,12 @@ export default function Home() {
           <Reveal>
             <ClientCarousel
               images={[
-                "/logos/logo-1.svg",
-                "/logos/logo-2.svg",
-                "/logos/logo-3.svg",
-                "/logos/logo-4.svg",
-                "/logos/logo-5.svg",
-                "/logos/logo-6.svg",
+                "/logos/BRB.jpeg",
+                "/logos/city%20group.png",
+                "/logos/kiam.png",
+                "/logos/Kollany%20Rice%20Bran%20Oil.jpeg",
+                "/logos/ssg.png",
+                "/logos/sunlite.png",
               ]}
             />
           </Reveal>

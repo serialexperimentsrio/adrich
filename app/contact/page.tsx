@@ -13,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const phoneDigits = companyProfile.phone.replace(/[^\d+]/g, "");
+  const telHref = `tel:${phoneDigits}`;
+  const waHref = `https://wa.me/${phoneDigits.replace(/^\+/, "")}`;
   return (
     <>
       <section className="section-y border-b-2 border-slate-300 bg-white">
@@ -31,9 +34,10 @@ export default function ContactPage() {
 
       <section className="section-y">
         <div className="container-swiss">
-          <div className="grid-12 gap-y-6">
-            <Reveal className="col-span-12 md:col-span-5">
-              <article className="border-2 border-slate-300 bg-white p-4 md:p-5">
+          <div className="grid-12 gap-y-6 items-stretch gap-x-6">
+            <Reveal className="col-span-12 md:col-span-5 flex">
+              <article className="border-2 border-slate-300 bg-white p-4 md:p-5 rounded-sm flex-1 flex flex-col justify-between">
+                <div>
                   <p className="text-kicker">At a Glance</p>
                   <div className="mt-3 space-y-4 text-sm">
                     <div className="rule-item">
@@ -49,28 +53,24 @@ export default function ContactPage() {
                       <p className="mt-2 text-sm leading-7 text-ink-800">{companyProfile.address}</p>
                     </div>
                   </div>
+                </div>
 
-                  <div className="mt-6 space-y-2 text-sm text-ink-700">
-                    <a
-                      href={`tel:${companyProfile.phone.replace(/\s+/g, "")}`}
-                      className="inline-flex items-center gap-2 transition hover:text-ink-900 focus-visible:underline"
-                    >
-                      <PhoneCall size={14} aria-hidden="true" />
-                      {companyProfile.phone}
-                    </a>
-                    <a
-                      href={`mailto:${companyProfile.email}`}
-                      className="inline-flex transition hover:text-ink-900 focus-visible:underline"
-                    >
-                      {companyProfile.email}
-                    </a>
-                  </div>
+                <div>
+                  <div className="mt-6 flex flex-col items-start gap-2 text-sm text-ink-700">
+                      <a href={telHref} className="inline-flex items-center gap-2 underline-link">
+                        <PhoneCall size={14} aria-hidden="true" />
+                        {companyProfile.phone}
+                      </a>
+                      <a href={`mailto:${companyProfile.email}`} className="inline-flex items-center gap-2 underline-link">
+                        {companyProfile.email}
+                      </a>
+                    </div>
 
                   <a
-                    href={`https://wa.me/8801712000000`}
+                    href={waHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-base btn-primary mt-6"
+                    className="btn-base btn-primary mt-6 inline-flex items-center gap-2"
                   >
                     <MessageCircle size={16} aria-hidden="true" />
                     WhatsApp Us
@@ -86,6 +86,7 @@ export default function ContactPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-chip"
+                            aria-label={social.label}
                           >
                             {social.label}
                           </a>
@@ -93,11 +94,14 @@ export default function ContactPage() {
                       ))}
                     </ul>
                   </div>
-                </article>
+                </div>
+              </article>
             </Reveal>
 
-            <Reveal className="col-span-12 md:col-span-7">
-              <ContactForm />
+            <Reveal className="col-span-12 md:col-span-7 flex">
+              <div className="flex-1">
+                <ContactForm />
+              </div>
             </Reveal>
           </div>
         </div>
@@ -108,12 +112,13 @@ export default function ContactPage() {
           <Reveal>
             <p className="text-kicker">Location Map</p>
             <div className="mt-5 overflow-hidden rounded-sm border-2 border-slate-300">
-              <Image
-                src="/map-placeholder.svg"
-                alt="Google map placeholder for Adrich office"
-                width={1200}
-                height={720}
-                className="h-auto w-full"
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.7134651465412!2d90.3975753!3d23.864306499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c423e474a863%3A0xa4806777ee09a18a!2sHouse%23%2032%2C%20House%2034%20Road-6%2C%20Dhaka%201230!5e0!3m2!1sen!2sbd!4v1775768367121!5m2!1sen!2sbd"
+                title="Adrich office location on Google Maps"
+                className="w-full h-[360px] md:h-[480px] lg:h-[640px] border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </Reveal>

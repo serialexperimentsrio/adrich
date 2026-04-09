@@ -36,7 +36,7 @@ export default function ClientCarousel({
     <div className="overflow-hidden" aria-hidden={false}>
       <div
         ref={containerRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth py-6 no-scrollbar"
+        className="flex gap-6 overflow-x-auto scroll-smooth py-6 no-scrollbar justify-center"
         style={{ alignItems: "center" }}
       >
         {images.map((src, i) => (

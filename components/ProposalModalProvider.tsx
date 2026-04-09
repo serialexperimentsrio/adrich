@@ -242,7 +242,6 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
                 <button type="submit" className="btn-primary btn-base">
                   Submit Request
                 </button>
-                <p className="text-xs text-ink-600">Response window: within 1 business day.</p>
               </div>
             </form>
 

@@ -93,6 +93,53 @@ button:disabled,
 .border-x {
   border-left-width: 2px;
   border-right-width: 2px;
+  .viewport-group > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* allow flex children to shrink correctly */
+    min-height: 0;
+  }
+
+  /* hero (first child) takes remaining space; info strip (last child) fixed at 20% */
+  .viewport-group > *:first-child {
+    flex: 1 1 auto;
+  }
+
+  .viewport-group > *:last-child {
+    flex: 0 0 20%;
+    /* ensure the info strip content is vertically and horizontally centered */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* remove section spacing that can visually offset centering */
+    padding-block: 0;
+  }
+
+  /* ensure the inner container stretches and centers its content */
+  .viewport-group > *:last-child > .container-swiss {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 0;
+  }
+
+  @media (max-width: 640px) {
+    .viewport-group,
+    .viewport-group > * {
+      min-height: auto;
+      display: block;
+      align-items: stretch;
+    }
+  }
+
+  /* Restore top padding for the section immediately after .viewport-group so
+     the Capabilities heading retains its original spacing. */
+  .viewport-group + .section-y,
+  .viewport-group + .section-y-tight {
+    padding-top: clamp(3.5rem, 8vw, 7.5rem);
+  }
 }
 
 .border-y {
@@ -292,6 +339,50 @@ a:focus-visible {
   background: rgba(246, 246, 242, 0.96);
   backdrop-filter: blur(10px);
 }
+
+/* simple underline-on-hover utility for inline links that should show
+   the same underline behavior as header nav links without uppercasing */
+.underline-link {
+  position: relative;
+  padding-bottom: 0.08rem;
+  transition: color 140ms ease;
+}
+
+.underline-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #cbd5e1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms ease;
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.underline-link:hover,
+.underline-link:focus-visible {
+  color: var(--color-ink-900);
+}
+
+.underline-link:hover::after,
+.underline-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .underline-link::after {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .underline-link {
+    transition: none !important;
+  }
+}
+
 
 /* Editorial Rules */
 .rule-top {
@@ -633,8 +724,13 @@ a:focus-visible {
   pointer-events: none;
   /* scoped defaults */
   --grid-size: 48px;
-  --grid-line: rgba(17,24,39,0.035);
-  --grid-opacity: 0.06;
+  --grid-line: rgba(17,24,39,0.18);
+  --grid-line-thickness: 2px;
+  /* nudges: small positional tweaks (px) and axis bias (0..1) */
+  --dot-nudge-x: 0px;
+  --dot-nudge-y: 38px;
+  --dot-axis-bias: 0.5;
+  --grid-opacity: 0.35;
   --dot-color: #fcb134;
   --dot-size: 8px;
   --dot-opacity: 0.95;
@@ -644,8 +740,12 @@ a:focus-visible {
   position: absolute;
   inset: 0;
   background-image:
-    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+    repeating-linear-gradient(90deg,
+      var(--grid-line) 0px calc(var(--grid-line-thickness)),
+      transparent calc(var(--grid-line-thickness)) calc(var(--grid-size))),
+    repeating-linear-gradient(0deg,
+      var(--grid-line) 0px calc(var(--grid-line-thickness)),
+      transparent calc(var(--grid-line-thickness)) calc(var(--grid-size)));
   opacity: var(--grid-opacity);
 }
 
@@ -658,16 +758,15 @@ a:focus-visible {
 .hero-pattern__wrapper .pattern-dots .dot {
   position: absolute;
   left: 0;
+  top: 0;
   width: var(--dot-size);
   height: var(--dot-size);
   border-radius: 50%;
   background: var(--dot-color);
   opacity: var(--dot-opacity);
-  transform: translateX(0);
+  transform: translate(calc(-50% + var(--dot-nudge-x)), calc(-50% + var(--dot-nudge-y)));
   will-change: transform;
-  animation-name: dot-move;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  pointer-events: none;
 }
 
 .hero-pattern__wrapper .pattern-dots .dot.row-1 { top: calc(var(--grid-size) * 1.75); }
@@ -679,9 +778,9 @@ a:focus-visible {
 .hero-pattern__wrapper .pattern-dots .dot.speed-3 { animation-duration: 16s; animation-delay: 6s; }
 
 @keyframes dot-move {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(calc(100% - var(--dot-size))); }
-  100% { transform: translateX(0); }
+  0% { left: 0; }
+  50% { left: calc(100% - var(--dot-size)); }
+  100% { left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -693,6 +792,41 @@ a:focus-visible {
 @media (max-width: 640px) {
   .hero-pattern__wrapper .pattern-grid { opacity: calc(var(--grid-opacity) * 0.6); }
   .hero-pattern__wrapper .pattern-dots .dot { display: none; }
+}
+
+/* Service list: on hover, invert the icon colors instead of highlighting the whole row */
+.service-row .service-icon {
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.service-row:hover .service-icon {
+  background: var(--color-ink-900);
+  color: var(--color-surface-1);
+  border-color: var(--color-ink-900);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-row .service-icon {
+    transition: none !important;
+  }
+}
+
+/* Scoped list hover highlight for services and portfolio items */
+.service-row,
+.portfolio-row {
+  transition: background-color 160ms ease;
+}
+
+.service-row:hover,
+.portfolio-row:hover {
+  background: rgba(248,250,252,0.5); /* matches tailwind slate-50/50 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-row,
+  .portfolio-row {
+    transition: none !important;
+  }
 }
 
 /* Scroll snap container: enable vertical snap inside the main page area */
@@ -723,17 +857,42 @@ a:focus-visible {
 
 /* Group hero + info strip into a single viewport so both are visible together */
 .viewport-group {
-  min-height: calc(100vh - 4rem);
+  height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
 }
 
 .viewport-group > * {
-  flex: 1 1 50%;
-  min-height: calc((100vh - 4rem) / 2);
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* allow flex children to shrink correctly */
+  min-height: 0;
+}
+
+/* hero (first child) takes remaining space; info strip (last child) fixed at 20% */
+.viewport-group > *:first-child {
+  flex: 1 1 auto;
+}
+
+.viewport-group > *:last-child {
+  flex: 0 0 20%;
+  /* ensure the info strip content is vertically and horizontally centered */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* remove section spacing that can visually offset centering */
+  padding-block: 0;
+}
+
+/* ensure the inner container stretches and centers its content */
+.viewport-group > *:last-child > .container-swiss {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0;
 }
 
 @media (max-width: 640px) {
@@ -743,6 +902,13 @@ a:focus-visible {
     display: block;
     align-items: stretch;
   }
+}
+
+/* Restore top padding for the section immediately after .viewport-group so
+   the Capabilities heading retains its original spacing. */
+.viewport-group + .section-y,
+.viewport-group + .section-y-tight {
+  padding-top: clamp(3.5rem, 8vw, 7.5rem);
 }
 
 

@@ -10,22 +10,35 @@ type PortfolioCardProps = {
 
 export default function PortfolioCard({ item, priority = false }: PortfolioCardProps) {
   return (
-    <article className="portfolio-row pt-8 transition-colors hover:bg-slate-50/50">
+    <article className="portfolio-row pt-8 transition-colors">
       <div className="grid-12 items-start gap-y-6">
         <div className="col-span-12 md:col-span-5 lg:col-span-4">
           <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-slate-900">
-            <Image
-              src={item.thumbnail}
-              alt={`${item.title} thumbnail`}
-              fill
-              className="object-cover opacity-80 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 35vw, 25vw"
-              loading={priority ? "eager" : "lazy"}
-            />
-            <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-sm bg-black/50 px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-white backdrop-blur-sm">
-              <Play size={10} aria-hidden="true" fill="currentColor" />
-              Project Reel
-            </div>
+            {item.embedSrc ? (
+              <iframe
+                src={item.embedSrc}
+                title={`${item.title} embed`}
+                className="absolute inset-0 w-full h-full border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            ) : (
+              <>
+                <Image
+                  src={item.thumbnail}
+                  alt={`${item.title} thumbnail`}
+                  fill
+                  className="object-cover opacity-80 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 35vw, 25vw"
+                  loading={priority ? "eager" : "lazy"}
+                />
+                <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-sm bg-black/50 px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-white backdrop-blur-sm">
+                  <Play size={10} aria-hidden="true" fill="currentColor" />
+                  Project Reel
+                </div>
+              </>
+            )}
           </div>
         </div>
 

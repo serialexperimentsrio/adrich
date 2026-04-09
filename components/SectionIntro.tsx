@@ -24,8 +24,8 @@ export default function SectionIntro({
     <div
       className={
         align === "center"
-          ? "mx-auto max-w-4xl text-center"
-          : "max-w-4xl"
+          ? "mx-auto max-w-4xl md:max-w-7xl text-center"
+          : "max-w-4xl md:max-w-7xl"
       }
     >
       {eyebrow && <span className="text-kicker hero-stagger hero-stagger-1">{eyebrow}</span>}
