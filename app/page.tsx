@@ -92,7 +92,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-y scroll-mt-24 bg-white" id="featured-work">
+      <section className="section-y scroll-mt-24 border-y-2 border-slate-300 bg-white" id="featured-work">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
