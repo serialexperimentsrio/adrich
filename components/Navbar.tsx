@@ -68,7 +68,18 @@ export default function Navbar() {
     >
       <div className="container-swiss">
         <div className="flex h-16 items-center justify-between gap-6">
-          <Link href="/" className="group inline-flex items-center transition-opacity hover:opacity-90" aria-label="Adrich home">
+          <Link
+            href="/"
+            className="group inline-flex items-center transition-opacity hover:opacity-90"
+            aria-label="Adrich home"
+            onClick={(e) => {
+              // if already on the home page, scroll to top instead of navigating
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
             <Image
               src={logo}
               alt="Adrich"
