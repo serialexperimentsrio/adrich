@@ -5,37 +5,39 @@ import { companyProfile, navLinks, socialLinks } from "@/data/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t-2 border-slate-300 bg-surface-0">
+    <footer className="border-t border-slate-200 bg-white">
       <div className="container-swiss section-y-tight">
-        <div className="grid-12 gap-y-8 items-stretch">
+        <div className="grid-12 gap-y-12 items-start">
           <div className="col-span-12 md:col-span-5 flex flex-col h-full items-start">
             <div className="self-start">
               <Image
                 src={logo}
                 alt="Adrich"
-                className="h-16 w-auto object-contain max-w-[320px]"
+                className="h-12 w-auto object-contain max-w-[280px]"
               />
             </div>
 
-            <p className="mt-5 text-sm leading-7 text-ink-700">{companyProfile.address}</p>
+            <p className="mt-6 max-w-xs text-[0.85rem] leading-7 text-ink-700">{companyProfile.address}</p>
 
-            <a
-              href={`tel:${companyProfile.phone.replace(/[^\\d+]/g, "")}`}
-              className="mt-2 inline-flex text-sm text-ink-700 transition hover:text-ink-900 underline-link"
-            >
-              {companyProfile.phone}
-            </a>
+            <div className="mt-4 flex flex-col gap-1">
+              <a
+                href={`tel:${companyProfile.phone.replace(/[^\\d+]/g, "")}`}
+                className="inline-flex text-[0.85rem] font-medium text-ink-900 transition hover:text-brand-red"
+              >
+                {companyProfile.phone}
+              </a>
 
-            <a
-              href={`mailto:${companyProfile.email}`}
-              className="mt-1 inline-flex text-sm text-ink-700 transition hover:text-ink-900 underline-link"
-            >
-              {companyProfile.email}
-            </a>
+              <a
+                href={`mailto:${companyProfile.email}`}
+                className="inline-flex text-[0.85rem] font-medium text-ink-900 transition hover:text-brand-red"
+              >
+                {companyProfile.email}
+              </a>
+            </div>
 
-            <div className="mt-auto">
-              <p className="text-xs text-ink-600">
-                Copyright {new Date().getFullYear()} Adrich. All rights reserved.
+            <div className="mt-12">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-ink-400">
+                &copy; {new Date().getFullYear()} Adrich Agency. Dhaka, Bangladesh.
               </p>
             </div>
           </div>

@@ -51,15 +51,15 @@ export default function Home() {
       <div className="viewport-group">
         <Hero />
 
-        <section className="section-y-tight border-b-2 border-slate-300 bg-white">
+        <section className="section-y-tight border-b border-slate-200 bg-white">
           <div className="container-swiss">
           <Reveal>
             <div className="metric-grid">
               {trustPoints.map((point) => (
                 <div key={point.title} className="metric-cell">
                   <p className="text-kicker">{point.title}</p>
-                  <p className="mt-2 font-display text-xl font-semibold text-ink-900">{point.value}</p>
-                  <p className="mt-2 text-sm leading-6 text-ink-700">{point.detail}</p>
+                  <p className="mt-2 font-display text-2xl font-bold text-ink-900">{point.value}</p>
+                  <p className="mt-2 text-[0.85rem] leading-6 text-ink-700">{point.detail}</p>
                 </div>
               ))}
             </div>
@@ -68,16 +68,16 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="section-y" id="services">
+      <section className="section-y bg-surface-0" id="services">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="Services"
+              eyebrow="Capabilities"
               title="Campaign systems built for brand impact"
               description="From script and set to social distribution and paid optimization, we build coherent campaigns that perform across every channel."
             />
           </Reveal>
-          <div className="mt-8 space-y-1">
+          <div className="mt-12 space-y-12">
             {services.map((service) => {
               const Icon = serviceIconMap[service.slug] ?? Megaphone;
 
@@ -92,46 +92,46 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-y scroll-mt-24 border-y-2 border-slate-300 bg-white" id="featured-work">
+      <section className="section-y scroll-mt-24 border-y border-slate-200 bg-white" id="featured-work">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="Featured Work"
+              eyebrow="Portfolio"
               title="A premium reel gallery of campaign execution"
               description="Selected TVC and AV projects showcasing creative direction, production quality, and channel-ready campaign assets."
             />
           </Reveal>
-          <div className="mt-8 space-y-1">
+          <div className="mt-12 space-y-12">
             {featuredWork.map((item, index) => (
               <Reveal key={item.slug}>
                 <PortfolioCard item={item} priority={index < 2} />
               </Reveal>
             ))}
           </div>
-          <div className="mt-6">
+          <div className="mt-10 flex justify-center">
             <Link href="/work" className="btn-base btn-secondary">
-              Explore All Work
+              Explore Full Archive
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="section-y" id="process">
+      <section className="section-y bg-surface-0" id="process">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
-              eyebrow="Process"
+              eyebrow="Methodology"
               title="Think -> Create -> Influence"
               description="Our 3-step operating model aligns strategy, craft, and media performance into one disciplined production flow."
             />
           </Reveal>
-          <div className="grid-12 mt-7 gap-y-4">
+          <div className="grid-12 mt-12 gap-y-8">
             {processSteps.map((step, index) => (
               <Reveal key={step.title} className="col-span-12 md:col-span-4">
-                <article className="rule-item h-full">
-                  <p className="text-kicker">0{index + 1}</p>
-                  <h3 className="mt-3 font-display text-2xl font-semibold text-ink-900">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-ink-700">{step.detail}</p>
+                <article className="h-full border-t border-slate-200 pt-6">
+                  <p className="text-kicker">Phase 0{index + 1}</p>
+                  <h3 className="mt-4 font-display text-2xl font-bold text-ink-900">{step.title}</h3>
+                  <p className="mt-3 text-[0.9rem] leading-7 text-ink-700">{step.detail}</p>
                 </article>
               </Reveal>
             ))}
@@ -139,11 +139,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-y-tight border-y-2 border-slate-300 bg-white" id="clients">
+      <section className="section-y-tight border-y border-slate-200 bg-white" id="clients">
         <div className="container-swiss">
-          <div className="mb-6 max-w-2xl">
-            <p className="text-kicker">Clients</p>
-            <h2 className="section-title mt-3 text-ink-900">Trusted by growth-focused brands</h2>
+          <div className="mb-10 max-w-2xl">
+            <p className="text-kicker">Our Partners</p>
+            <h2 className="section-title mt-4 text-ink-900">Trusted by growth-focused brands</h2>
           </div>
           <Reveal>
             <ClientCarousel
@@ -160,22 +160,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-y" id="testimonials">
+      <section className="section-y bg-surface-0" id="testimonials">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
               eyebrow="Testimonials"
-              title="Client feedback from long-term campaign partners"
+              title="Feedback from our campaign partners"
               description="We are trusted for strategic clarity, premium execution, and measurable campaign momentum."
             />
           </Reveal>
-          <div className="grid-12 mt-8 gap-y-3">
+          <div className="grid-12 mt-12 gap-y-8">
             {testimonials.map((testimonial) => (
               <Reveal key={testimonial.name} className="col-span-12 md:col-span-4">
-                <article className="rule-item h-full">
-                  <p className="text-sm leading-7 text-ink-800">&quot;{testimonial.quote}&quot;</p>
-                  <p className="mt-4 text-sm font-semibold text-ink-900">{testimonial.name}</p>
-                  <p className="mt-1 text-xs text-ink-600">{testimonial.role}</p>
+                <article className="h-full border-t border-slate-200 pt-6">
+                  <p className="text-[0.95rem] italic leading-7 text-ink-800">&quot;{testimonial.quote}&quot;</p>
+                  <div className="mt-6">
+                    <p className="text-sm font-bold text-ink-900">{testimonial.name}</p>
+                    <p className="mt-1 text-[0.7rem] font-bold uppercase tracking-wider text-ink-500">{testimonial.role}</p>
+                  </div>
                 </article>
               </Reveal>
             ))}

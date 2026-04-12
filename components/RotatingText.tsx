@@ -175,8 +175,6 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
 
     const inlineStyle = {
       ...(rest as { style?: React.CSSProperties })?.style,
-      background: 'var(--color-brand-red)',
-      color: '#ffffff',
     } as React.CSSProperties;
 
     return (

@@ -19,7 +19,7 @@ export default function Hero() {
                 <RotatingText
                   texts={["Think.", "Create.", "Influence."]}
                   mainClassName={
-                    "ml-3 sm:ml-4 px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+                    "ml-3 sm:ml-4 px-2.5 sm:px-3 md:px-4 bg-brand-red text-white overflow-hidden py-1 sm:py-1.5 md:py-2 justify-center rounded-sm"
                   }
                   staggerFrom={"last"}
                   initial={{ y: "100%", opacity: 0 }}

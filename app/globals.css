@@ -3,13 +3,13 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-surface-0: #f6f6f2;
+  --color-surface-0: #fcfcf9;
   --color-surface-1: #ffffff;
-  --color-surface-2: #ecece8;
-  --color-surface-3: #e2e2dc;
-  --color-ink-900: #121416;
-  --color-ink-700: #3e464d;
-  --color-ink-600: #66727c;
+  --color-surface-2: #f3f4f1;
+  --color-surface-3: #eaeaec;
+  --color-ink-900: #1a1d21;
+  --color-ink-700: #3f444a;
+  --color-ink-600: #6b7280;
   --color-brand-950: #0a0e12;
   --color-brand-900: #161d24;
   --color-brand-800: #1f2a33;
@@ -25,8 +25,8 @@
 }
 
 :root {
-  --background: #f6f6f2;
-  --foreground: #121416;
+  --background: #fcfcf9;
+  --foreground: #1a1d21;
 }
 
 body {
@@ -69,82 +69,83 @@ button:disabled,
 }
 
 /* Border Scale */
-/* Border Scale */
 .border {
-  border-width: 2px;
+  border-width: 1px;
 }
 
 .border-t {
-  border-top-width: 2px;
+  border-top-width: 1px;
 }
 
 .border-b {
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
 }
 
 .border-l {
-  border-left-width: 2px;
+  border-left-width: 1px;
 }
 
 .border-r {
-  border-right-width: 2px;
+  border-right-width: 1px;
 }
 
 .border-x {
-  border-left-width: 2px;
-  border-right-width: 2px;
-  .viewport-group > * {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* allow flex children to shrink correctly */
-    min-height: 0;
-  }
-
-  /* hero (first child) takes remaining space; info strip (last child) fixed at 20% */
-  .viewport-group > *:first-child {
-    flex: 1 1 auto;
-  }
-
-  .viewport-group > *:last-child {
-    flex: 0 0 20%;
-    /* ensure the info strip content is vertically and horizontally centered */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* remove section spacing that can visually offset centering */
-    padding-block: 0;
-  }
-
-  /* ensure the inner container stretches and centers its content */
-  .viewport-group > *:last-child > .container-swiss {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-block: 0;
-  }
-
-  @media (max-width: 640px) {
-    .viewport-group,
-    .viewport-group > * {
-      min-height: auto;
-      display: block;
-      align-items: stretch;
-    }
-  }
-
-  /* Restore top padding for the section immediately after .viewport-group so
-     the Capabilities heading retains its original spacing. */
-  .viewport-group + .section-y,
-  .viewport-group + .section-y-tight {
-    padding-top: clamp(3.5rem, 8vw, 7.5rem);
-  }
+  border-left-width: 1px;
+  border-right-width: 1px;
 }
 
 .border-y {
-  border-top-width: 2px;
-  border-bottom-width: 2px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+/* Viewport Group */
+.viewport-group {
+  height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+
+.viewport-group > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.viewport-group > *:first-child {
+  flex: 1 1 auto;
+}
+
+.viewport-group > *:last-child {
+  flex: 0 0 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0;
+}
+
+.viewport-group > *:last-child > .container-swiss {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0;
+}
+
+@media (max-width: 640px) {
+  .viewport-group,
+  .viewport-group > * {
+    min-height: auto;
+    display: block;
+    align-items: stretch;
+  }
+}
+
+.viewport-group + .section-y,
+.viewport-group + .section-y-tight {
+  padding-top: clamp(3.5rem, 8vw, 7.5rem);
 }
 .container-swiss {
   width: min(100%, 1280px);
@@ -175,25 +176,25 @@ button:disabled,
 .hero-title {
   font-family: var(--font-poppins), "Segoe UI", sans-serif;
   font-size: clamp(2.25rem, 5.5vw, 4.25rem);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  font-weight: 700;
 }
 
 .section-title {
   font-family: var(--font-poppins), "Segoe UI", sans-serif;
-  font-size: clamp(1.85rem, 4vw, 2.75rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  font-weight: 600;
+  font-size: clamp(1.85rem, 4.5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  font-weight: 650;
 }
 
 .text-kicker {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   line-height: 1rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-ink-600);
   display: block;
 }
@@ -201,19 +202,19 @@ button:disabled,
 /* Components */
 .btn-base {
   display: inline-flex;
-  min-height: 2.85rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   border: 2px solid transparent;
   background: transparent;
   color: var(--color-ink-900);
-  border-radius: 0.2rem;
-  padding-inline: 1.5rem;
-  font-size: 0.84rem;
-  font-weight: 650;
-  letter-spacing: 0.03em;
-  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+  border-radius: 0.25rem;
+  padding-inline: 1.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   white-space: nowrap;
 }
@@ -222,34 +223,40 @@ button:disabled,
   background: var(--btn-fill, var(--color-ink-900));
   border-color: var(--btn-fill, var(--color-ink-900));
   color: var(--btn-fill-text, #ffffff);
+  transform: translateY(-1px);
 }
 
 .btn-base:active {
-  opacity: 0.94;
+  transform: translateY(0);
+  opacity: 0.95;
 }
 
 .btn-primary {
   --btn-fill: var(--color-brand-amber);
   --btn-fill-text: var(--color-ink-900);
   border-color: var(--color-brand-amber);
-  /* Default: filled amber button with dark text */
   color: var(--btn-fill-text);
   background: var(--btn-fill);
+  box-shadow: 0 4px 0 0 rgba(252, 177, 52, 0.1);
 }
 
 .btn-primary:hover {
-  /* Hover matches btn-secondary hover: filled dark background with white text */
   background: var(--color-ink-900);
   border-color: var(--color-ink-900);
   color: #ffffff;
+  box-shadow: 0 4px 12px rgba(26, 29, 33, 0.12);
 }
 
 .btn-secondary {
   --btn-fill: var(--color-ink-900);
   --btn-fill-text: #ffffff;
-  border-color: #9aa3ad;
+  border-color: #d1d5db;
   color: var(--color-ink-900);
   background: transparent;
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 4px 12px rgba(26, 29, 33, 0.08);
 }
 
 .btn-accent {

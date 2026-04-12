@@ -62,22 +62,22 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b-2 transition-all duration-150 ${
-        scrolled ? "nav-glass border-slate-300/90" : "border-slate-300/60 bg-surface-0/90"
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+        scrolled ? "nav-glass border-slate-200/80 py-1" : "border-slate-200/40 bg-surface-0/95 py-2"
       }`}
     >
       <div className="container-swiss">
         <div className="flex h-16 items-center justify-between gap-6">
-          <Link href="/" className="group inline-flex items-center" aria-label="Adrich home">
+          <Link href="/" className="group inline-flex items-center transition-opacity hover:opacity-90" aria-label="Adrich home">
             <Image
               src={logo}
               alt="Adrich"
               priority
-              className="h-11 w-auto sm:h-12 object-contain max-w-[220px]"
+              className="h-10 w-auto sm:h-12 object-contain max-w-[200px]"
             />
           </Link>
 
-          <nav className="hidden items-center gap-5 md:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
             {navLinks.map((link) => {
               const active = linkIsActive(pathname, link.href);
 
@@ -85,9 +85,14 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`nav-link ${active ? "nav-link-active" : ""}`.trim()}
+                  className={`relative py-1 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors ${
+                    active ? "text-ink-900" : "text-ink-600 hover:text-ink-900"
+                  }`}
                 >
                   {link.label}
+                  {active && (
+                    <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-brand-red" />
+                  )}
                 </Link>
               );
             })}

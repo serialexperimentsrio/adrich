@@ -44,8 +44,8 @@ export default function HeroPattern({ dotCount = 8 }: { dotCount?: number }) {
 
     const dots: DotState[] = [];
     for (let i = 0; i < dotCount; i++) {
-      let col = Math.floor(Math.random() * cols);
-      let row = Math.floor(Math.random() * rows);
+      const col = Math.floor(Math.random() * cols);
+      const row = Math.floor(Math.random() * rows);
       // axisBias: 0 => prefer vertical, 1 => prefer horizontal
       let axis: "h" | "v" = Math.random() < axisBias ? "h" : "v";
       if (axis === "h" && cols < 2 && rows > 1) axis = "v";
@@ -137,7 +137,7 @@ export default function HeroPattern({ dotCount = 8 }: { dotCount?: number }) {
         if (ev.propertyName !== "transform" && ev.propertyName !== "-webkit-transform") return;
         if (ended) return;
         ended = true;
-        try { el.removeEventListener("transitionend", onTransitionEnd as any); } catch {}
+        try { el.removeEventListener("transitionend", onTransitionEnd as EventListener); } catch {}
         dot.col = nextCol;
         dot.row = nextRow;
         if (Math.random() < 0.12) dot.axis = Math.random() < axisBias ? "h" : "v";
@@ -145,12 +145,12 @@ export default function HeroPattern({ dotCount = 8 }: { dotCount?: number }) {
         requestAnimationFrame(() => scheduleMove(dot, el));
       };
 
-      el.addEventListener("transitionend", onTransitionEnd as any);
+      el.addEventListener("transitionend", onTransitionEnd as EventListener);
 
-      const fallback = setTimeout(() => {
+      setTimeout(() => {
         if (ended) return;
         ended = true;
-        try { el.removeEventListener("transitionend", onTransitionEnd as any); } catch {}
+        try { el.removeEventListener("transitionend", onTransitionEnd as EventListener); } catch {}
         dot.col = nextCol;
         dot.row = nextRow;
         if (Math.random() < 0.12) dot.axis = Math.random() < axisBias ? "h" : "v";

@@ -9,14 +9,14 @@ type ServiceCardProps = {
 
 export default function ServiceCard({ service, icon: Icon }: ServiceCardProps) {
   return (
-    <article className="service-row py-10 transition-colors">
+    <article className="service-row group relative overflow-hidden rounded-sm border-2 border-transparent px-4 py-10 transition-all duration-300 hover:border-slate-200 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50">
       <div className="grid-12 items-start gap-y-8">
         <div className="col-span-12 md:col-span-4">
           <div className="flex items-center gap-4">
-            <span className="service-icon inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border-2 border-slate-300 bg-white text-ink-900">
-              <Icon size={20} aria-hidden="true" strokeWidth={1.5} />
+            <span className="service-icon inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border-2 border-slate-200 bg-white text-ink-900 transition-all duration-300 group-hover:scale-110 group-hover:border-ink-900 group-hover:bg-ink-900 group-hover:text-white">
+              <Icon size={24} aria-hidden="true" strokeWidth={1.25} />
             </span>
-            <h3 className="font-display text-2xl font-semibold tracking-tight text-ink-900">{service.title}</h3>
+            <h3 className="font-display text-2xl font-bold tracking-tight text-ink-900">{service.title}</h3>
           </div>
         </div>
 
