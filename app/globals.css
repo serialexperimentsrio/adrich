@@ -483,46 +483,21 @@ a:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
 
-/* Reveal Animations */
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-
-.reveal[data-reveal="pending"] {
-  opacity: 0;
-  transform: translateY(1.5rem);
-  transition: opacity 480ms cubic-bezier(0.16, 1, 0.3, 1), transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
+  .reveal,
   .reveal[data-reveal="pending"],
-  .reveal[data-reveal="visible"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .reveal[data-reveal="visible"],
+  .hero-stagger,
+  .filter-results-enter,
+  .page-enter > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
-}
 
-/* Hero decorative background removed per user request */
-
-.reveal[data-reveal="visible"] {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 480ms cubic-bezier(0.16, 1, 0.3, 1), transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Animated hero background removed */
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal[data-reveal="pending"],
-  .reveal[data-reveal="visible"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .clients-stagger .reveal {
+    transition-delay: 0ms !important;
   }
 }
 @keyframes fade-up-soft {
@@ -646,20 +621,6 @@ a:focus-visible {
 
 .page-enter > * {
   animation: page-fade-in 180ms ease both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-stagger,
-  .filter-results-enter,
-  .page-enter > * {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .clients-stagger .reveal {
-    transition-delay: 0ms !important;
-  }
 }
 
 /* Removed hero-aura overrides and background (purged) */

@@ -18,7 +18,7 @@ export default function ContactPage() {
   const waHref = `https://wa.me/${phoneDigits.replace(/^\+/, "")}`;
   return (
     <>
-      <section className="section-y border-b-2 border-slate-300 bg-white">
+      <section className="section-y border-b border-slate-200 bg-white">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
@@ -36,7 +36,7 @@ export default function ContactPage() {
         <div className="container-swiss">
           <div className="grid-12 gap-y-6 items-stretch gap-x-6">
             <Reveal className="col-span-12 md:col-span-5 flex">
-              <article className="border-2 border-slate-300 bg-white p-4 md:p-5 rounded-sm flex-1 flex flex-col justify-between">
+              <article className="border border-slate-200 bg-white p-4 md:p-5 rounded-sm flex-1 flex flex-col justify-between">
                 <div>
                   <p className="text-kicker">At a Glance</p>
                   <div className="mt-3 space-y-4 text-sm">
@@ -107,11 +107,11 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section-y-tight border-t-2 border-slate-300 bg-white">
+      <section className="section-y-tight border-t border-slate-200 bg-white">
         <div className="container-swiss">
           <Reveal>
             <p className="text-kicker">Location Map</p>
-            <div className="mt-5 overflow-hidden rounded-sm border-2 border-slate-300">
+            <div className="mt-5 overflow-hidden rounded-sm border border-slate-200">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.7134651465412!2d90.3975753!3d23.864306499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c423e474a863%3A0xa4806777ee09a18a!2sHouse%23%2032%2C%20House%2034%20Road-6%2C%20Dhaka%201230!5e0!3m2!1sen!2sbd!4v1775768367121!5m2!1sen!2sbd"
                 title="Adrich office location on Google Maps"

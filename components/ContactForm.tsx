@@ -7,7 +7,7 @@ export default function ContactForm() {
 
   return (
     <form
-      className="border-2 border-slate-300 bg-white p-4 md:p-5 rounded-sm h-full flex flex-col gap-4"
+      className="border border-slate-200 bg-white p-4 md:p-5 rounded-sm h-full flex flex-col gap-4"
       onSubmit={(event) => {
         event.preventDefault();
 
@@ -78,7 +78,7 @@ export default function ContactForm() {
         </button>
 
         {submitted ? (
-          <p className="mt-4 rounded-sm border-2 border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
+          <p className="mt-4 rounded-sm border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
             Thanks for reaching out. The Adrich team will respond within one business day.
           </p>
         ) : null}

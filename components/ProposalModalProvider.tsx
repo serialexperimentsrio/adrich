@@ -152,7 +152,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
           <div
             ref={modalRef}
             onTransitionEnd={handlePanelTransitionEnd}
-            className={`relative w-full max-w-xl rounded-md border-2 border-slate-300 bg-white p-5 md:p-6 transition-opacity duration-180 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+            className={`relative w-full max-w-xl rounded-md border border-slate-200 bg-white p-5 md:p-6 transition-opacity duration-180 ease-[cubic-bezier(0.4,0,0.2,1)] ${
               isOpen ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -246,7 +246,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
             </form>
 
             {isSubmitted ? (
-              <div className="mt-4 rounded-sm border-2 border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
+              <div className="mt-4 rounded-sm border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
                 Thank you. We received your brief and will get back to you shortly.
               </div>
             ) : null}

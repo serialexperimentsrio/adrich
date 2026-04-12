@@ -7,7 +7,7 @@ import HeroPattern from "@/components/HeroPattern";
 
 export default function Hero() {
   return (
-    <section className="section-y relative overflow-hidden border-b-2 border-slate-300" id="top">
+    <section className="section-y relative overflow-hidden border-b border-slate-200" id="top">
       <HeroPattern dotCount={4} />
       <div className="container-swiss relative z-10">
         <div className="grid-12 items-start gap-y-10">

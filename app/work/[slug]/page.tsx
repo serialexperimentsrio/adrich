@@ -87,11 +87,11 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
         </div>
       </section>
 
-      <section className="section-y-tight border-t-2 border-slate-300">
+      <section className="section-y-tight border-t border-slate-200">
         <div className="container-swiss">
           <div className="grid-12 gap-y-12">
             <div className="col-span-12 lg:col-span-8">
-              <div className="aspect-[16/9] overflow-hidden rounded-sm border-2 border-slate-300 bg-slate-900">
+              <div className="aspect-[16/9] overflow-hidden rounded-sm border border-slate-200 bg-slate-900">
                 <div className="relative h-full w-full">
                   <Image
                     src={project.thumbnail}
@@ -101,7 +101,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
                     sizes="(max-width: 1024px) 100vw, 66vw"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="rounded-sm border-2 border-white/20 bg-black/40 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-sm">
+                    <span className="rounded-sm border border-white/20 bg-black/40 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-sm">
                       {project.videoPlaceholder}
                     </span>
                   </div>

@@ -35,7 +35,7 @@ const serviceIconMap: Record<string, LucideIcon> = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="section-y border-b-2 border-slate-300 bg-white">
+      <section className="section-y border-b border-slate-200 bg-white">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro

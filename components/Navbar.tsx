@@ -120,7 +120,7 @@ export default function Navbar() {
         id={mobileMenuId}
         ref={mobileMenuRef}
         aria-hidden={!menuOpen}
-        className={`border-t-2 border-slate-300 bg-surface-1 px-4 py-4 md:!hidden overflow-hidden transition-[max-height,opacity,transform] duration-150 ease-out ${
+        className={`border-t border-slate-200 bg-surface-1 px-4 py-4 md:!hidden overflow-hidden transition-[max-height,opacity,transform] duration-150 ease-out ${
           menuOpen
             ? "visible max-h-96 translate-y-0 opacity-100"
             : "invisible pointer-events-none max-h-0 -translate-y-1 opacity-0"
@@ -135,10 +135,10 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`border-l-2 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition ${
+                className={`border-l px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition ${
                   active
-                    ? "border-ink-900 text-ink-900"
-                    : "border-transparent text-ink-700 hover:border-slate-400 hover:text-ink-900"
+                    ? "border-brand-red text-ink-900 bg-slate-50"
+                    : "border-transparent text-ink-700 hover:border-slate-200 hover:text-ink-900"
                 }`}
               >
                 {link.label}

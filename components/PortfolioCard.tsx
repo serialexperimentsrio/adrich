@@ -10,7 +10,7 @@ type PortfolioCardProps = {
 
 export default function PortfolioCard({ item, priority = false }: PortfolioCardProps) {
   return (
-    <article className="portfolio-row group relative overflow-hidden rounded-sm border-2 border-transparent px-4 py-10 transition-all duration-300 hover:border-slate-200 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50">
+    <article className="portfolio-row group relative overflow-hidden rounded-sm border border-transparent px-4 py-10 transition-all duration-300 hover:border-slate-200 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50">
       <div className="grid-12 items-start gap-y-6">
         <div className="col-span-12 md:col-span-5 lg:col-span-4">
           <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-slate-900 shadow-inner">

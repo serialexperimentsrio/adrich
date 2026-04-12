@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="section-y border-b-2 border-slate-300 bg-white">
+      <section className="section-y border-b border-slate-200 bg-white">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
@@ -65,10 +65,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-y border-t-2 border-slate-300 bg-white">
+      <section className="section-y border-t border-slate-200 bg-white">
         <div className="container-swiss">
           <div className="grid-12 gap-y-6">
-            <Reveal className="col-span-12 md:col-span-6 md:border-r-2 md:border-slate-300 md:pr-8">
+            <Reveal className="col-span-12 md:col-span-6 md:border-r md:border-slate-200 md:pr-8">
               <article className="h-full">
                 <p className="text-kicker">Mission</p>
                 <h2 className="mt-3 font-display text-2xl font-semibold text-ink-900">
@@ -97,7 +97,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-y border-y-2 border-slate-300 bg-white">
+      <section className="section-y border-y border-slate-200 bg-white">
         <div className="container-swiss">
           <div className="max-w-3xl">
             <p className="text-kicker">Timeline</p>
@@ -142,7 +142,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-y border-y-2 border-slate-300 bg-white">
+      <section className="section-y border-y border-slate-200 bg-white">
         <div className="container-swiss">
           <div className="max-w-3xl">
             <p className="text-kicker">Team</p>
@@ -153,7 +153,7 @@ export default function AboutPage() {
             {teamMembers.map((member) => (
               <Reveal key={member.name} className="col-span-12 md:col-span-6 lg:col-span-3">
                 <article className="rule-item h-full">
-                  <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-sm border-2 border-slate-300 font-display text-xs font-semibold text-ink-700">
+                  <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-sm border border-slate-200 font-display text-xs font-semibold text-ink-700">
                     {member.name
                       .split(" ")
                       .map((part) => part[0])

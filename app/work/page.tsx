@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className="section-y border-b-2 border-slate-300 bg-white">
+      <section className="section-y border-b border-slate-200 bg-white">
         <div className="container-swiss">
           <Reveal>
             <SectionIntro
