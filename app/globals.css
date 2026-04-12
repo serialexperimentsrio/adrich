@@ -706,7 +706,7 @@ a:focus-visible {
   --grid-line-thickness: 2px;
   /* nudges: small positional tweaks (px) and axis bias (0..1) */
   --dot-nudge-x: 0px;
-  --dot-nudge-y: 38px;
+  --dot-nudge-y: 44px;
   --dot-axis-bias: 0.5;
   --grid-opacity: 0.35;
   --dot-color: #fcb134;
@@ -717,6 +717,13 @@ a:focus-visible {
 .hero-pattern__wrapper .pattern-grid {
   position: absolute;
   inset: 0;
+  /* Anchor the grid to top-left and size tiles to the grid variable so
+     the repeating pattern does not shift when the container height changes. */
+  /* anchor both background layers explicitly so they don't shift when height changes */
+  background-position: 0px 0px, 0px 0px;
+  background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
+  background-repeat: repeat, repeat;
+  background-origin: border-box, border-box;
   background-image:
     repeating-linear-gradient(90deg,
       var(--grid-line) 0px calc(var(--grid-line-thickness)),
@@ -887,6 +894,16 @@ a:focus-visible {
 .viewport-group + .section-y,
 .viewport-group + .section-y-tight {
   padding-top: clamp(3.5rem, 8vw, 7.5rem);
+}
+
+/* Hide the hero pattern entirely for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-pattern__wrapper {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 }
 
 

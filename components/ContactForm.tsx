@@ -79,7 +79,7 @@ export default function ContactForm() {
 
         {submitted ? (
           <p className="mt-4 rounded-sm border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
-            Thanks for reaching out. The Adrich team will respond within one business day.
+            Thanks for reaching out.
           </p>
         ) : null}
       </div>

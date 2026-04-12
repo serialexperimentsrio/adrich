@@ -78,7 +78,7 @@ export default function Home() {
             />
           </Reveal>
           <div className="mt-12 space-y-12">
-            {services.map((service) => {
+            {services.slice(0, 5).map((service) => {
               const Icon = serviceIconMap[service.slug] ?? Megaphone;
 
               return (
@@ -87,6 +87,12 @@ export default function Home() {
                 </Reveal>
               );
             })}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+              <Link href="/services" className="btn-base btn-primary">
+              Explore Full Capabilities
+            </Link>
           </div>
 
         </div>
@@ -109,7 +115,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-10 flex justify-center">
-            <Link href="/work" className="btn-base btn-secondary">
+              <Link href="/work" className="btn-base btn-primary">
               Explore Full Archive
             </Link>
           </div>
