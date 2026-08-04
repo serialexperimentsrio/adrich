@@ -7,7 +7,7 @@ export const companyProfile = {
   address:
     "House #32,34, Road #6, Block F, Banashree, Dhaka 1219, Bangladesh",
   email: "ahsan@adrich.com.bd",
-  phone: "+880 1712-000000",
+  phone: "+880 1711-638437",
 };
 
 export const founderProfile = {
