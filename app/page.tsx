@@ -76,7 +76,7 @@ export default function Home() {
       </section>
 
       {/* (04) Process */}
-      <section className="section border-t border-ink/15 bg-paper-2">
+      <section className="section border-t border-ink/15">
         <div className="container-x">
           <SectionLabel index="04" label="How we work" />
           <div className="mt-14 grid gap-14 md:grid-cols-3 md:gap-8">

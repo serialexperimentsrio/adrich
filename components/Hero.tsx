@@ -67,7 +67,9 @@ export default function Hero() {
           <span className="sr-only">Adrich: Think. Create. Influence.</span>
           <span aria-hidden="true">
             <motion.span className="block" style={{ x: xLeft }}>
-              <Line delay={0.15}>Think.</Line>
+              <Line delay={0.15}>
+                Think<span className="text-red">.</span>
+              </Line>
             </motion.span>
             <motion.span className="block pl-[12vw]" style={{ x: xRight }}>
               <Line delay={0.27}>

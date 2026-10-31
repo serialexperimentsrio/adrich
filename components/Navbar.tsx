@@ -1,15 +1,14 @@
 "use client";
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import DhakaClock from "@/components/DhakaClock";
+import Logo from "@/components/Logo";
 import { useProposalModal } from "@/components/ProposalModalProvider";
 import { companyProfile, navLinks, socialLinks } from "@/data/site";
 import { lockScroll, unlockScroll } from "@/lib/smoothScroll";
-import logo from "@/public/logo.png";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -70,7 +69,7 @@ export default function Navbar() {
             aria-label="Adrich home"
             className={`relative z-10 shrink-0 transition-opacity duration-300 ${menuOpen ? "pointer-events-none opacity-0" : ""}`}
           >
-            <Image src={logo} alt="Adrich" priority className="h-12 w-auto sm:h-14 lg:h-16" />
+            <Logo className="h-12 w-auto sm:h-14 lg:h-16" />
           </Link>
 
           <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">

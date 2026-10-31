@@ -7,8 +7,8 @@
 ------------------------------------------------------------------- */
 @theme {
   --color-paper: #ffffff;
-  --color-paper-2: #f5f4f1;
-  --color-paper-3: #e8e6e1;
+  --color-paper-2: #f4f4f4;
+  --color-paper-3: #e6e6e6;
   --color-ink: #141210;
   --color-ink-soft: #4b463f;
   --color-ink-mute: #6f685d;
@@ -520,16 +520,6 @@
     display: none;
   }
 
-  .logo-ink {
-    filter: grayscale(1) contrast(1.15);
-    mix-blend-mode: multiply;
-    opacity: 0.75;
-    transition: filter 0.4s, opacity 0.4s;
-  }
-  .logo-ink:hover {
-    filter: none;
-    opacity: 1;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

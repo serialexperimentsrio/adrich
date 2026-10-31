@@ -1,5 +1,14 @@
 import type { ReactNode } from "react";
 
+/** The ring from the logo (the dot of the "i"), used between ticker items. */
+export function Ring({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" className={`inline-block h-[0.42em] w-[0.42em] ${className ?? ""}`} aria-hidden="true">
+      <circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
+    </svg>
+  );
+}
+
 type MarqueeProps = {
   items: readonly ReactNode[];
   className?: string;
@@ -9,7 +18,7 @@ type MarqueeProps = {
 };
 
 /** An endlessly scrolling ticker. The track is duplicated so the loop is seamless. */
-export default function Marquee({ items, className, duration = 40, separator = "✺" }: MarqueeProps) {
+export default function Marquee({ items, className, duration = 40, separator = <Ring /> }: MarqueeProps) {
   const track = (hidden: boolean) => (
     <div className="marquee__track" aria-hidden={hidden || undefined}>
       {items.map((item, index) => (

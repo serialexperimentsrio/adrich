@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import DhakaClock from "@/components/DhakaClock";
+import Logo from "@/components/Logo";
 import { companyProfile, navLinks, socialLinks } from "@/data/site";
 import { getLenis } from "@/lib/smoothScroll";
 
@@ -58,12 +59,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p
-          className="display mt-20 select-none text-center text-[23.5vw] leading-[0.78] tracking-[-0.02em] lowercase"
-          aria-hidden="true"
-        >
-          adr<span className="text-red">i</span>ch
-        </p>
+        <Logo className="mx-auto mt-20 block h-auto w-full max-w-4xl" />
 
         <div className="caption mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 text-ink-mute">
           <span>© {new Date().getFullYear()} Adrich. Think. Create. Influence.</span>

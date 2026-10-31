@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CTASection from "@/components/CTASection";
-import Marquee from "@/components/Marquee";
+import Marquee, { Ring } from "@/components/Marquee";
 import PageHeader from "@/components/PageHeader";
 import ServicesIndex from "@/components/ServicesIndex";
 import { services } from "@/data/site";
@@ -31,7 +31,7 @@ export default function ServicesPage() {
         <Marquee
           className="display text-[clamp(1.6rem,3.2vw,2.75rem)]"
           items={["Think", "Create", "Influence"]}
-          separator="●"
+          separator={<Ring className="text-paper" />}
           duration={22}
         />
       </div>
