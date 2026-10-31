@@ -10,6 +10,9 @@ export const companyProfile = {
   phone: "+880 1711-638437",
 };
 
+/** Addresses that receive contact-form and proposal-request emails. */
+export const inquiryRecipients = [companyProfile.email, "rio@adrich.com.bd"];
+
 export const founderProfile = {
   name: "Ahsan Habib",
   title: "Founder & Creative Director",

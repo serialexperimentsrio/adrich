@@ -1,6 +1,6 @@
 "use server";
 
-import { companyProfile, services } from "@/data/site";
+import { companyProfile, inquiryRecipients, services } from "@/data/site";
 
 export type InquiryState = {
   status: "idle" | "success" | "error";
@@ -63,7 +63,9 @@ async function sendInquiry(formData: FormData, source: "contact" | "proposal"): 
     };
   }
 
-  const to = process.env.CONTACT_TO_EMAIL || companyProfile.email;
+  const to = process.env.CONTACT_TO_EMAIL
+    ? process.env.CONTACT_TO_EMAIL.split(",").map((address) => address.trim()).filter(Boolean)
+    : inquiryRecipients;
   const from = process.env.RESEND_FROM_EMAIL || "Adrich Website <onboarding@resend.dev>";
   const label = source === "proposal" ? "Proposal request" : "Contact inquiry";
   const subject = `${label} from ${name}${service ? ` (${service})` : ""}`;
@@ -91,7 +93,7 @@ async function sendInquiry(formData: FormData, source: "contact" | "proposal"): 
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ from, to: [to], reply_to: email, subject, text, html }),
+      body: JSON.stringify({ from, to, reply_to: email, subject, text, html }),
       signal: AbortSignal.timeout(10_000),
     });
 
