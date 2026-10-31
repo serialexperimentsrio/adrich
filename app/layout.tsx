@@ -20,7 +20,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://adrich.agency"),
+  metadataBase: new URL("https://adrich.com.bd"),
   title: {
     default: "Adrich | Think. Create. Influence.",
     template: "%s | Adrich",
@@ -62,7 +62,7 @@ export default function RootLayout({
         <ProposalModalProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />
-            <main id="main-content" className="flex-1 outline-none overflow-y-auto snap-y snap-mandatory">
+            <main id="main-content" className="flex-1 outline-none">
               <PageTransition>{children}</PageTransition>
             </main>
             <Footer />

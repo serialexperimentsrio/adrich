@@ -1,37 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { submitContactInquiry } from "@/app/actions/inquiry";
+import { FieldError, HoneypotField, SubmitStatus } from "@/components/FormStatus";
+import { useInquiryForm } from "@/components/useInquiryForm";
 
 export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const { state, isPending, formRef, handleSubmit } = useInquiryForm(submitContactInquiry);
+  const errors = state.status === "error" ? state.fieldErrors ?? {} : {};
 
   return (
     <form
-      className="border border-slate-200 bg-white p-4 md:p-5 rounded-sm h-full flex flex-col gap-4"
-      onSubmit={(event) => {
-        event.preventDefault();
-
-        const form = event.currentTarget;
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        setSubmitted(true);
-        form.reset();
-      }}
-      onChange={() => {
-        if (submitted) {
-          setSubmitted(false);
-        }
-      }}
+      ref={formRef}
+      className="relative border border-slate-200 bg-white p-4 md:p-5 rounded-sm h-full flex flex-col gap-4"
+      onSubmit={handleSubmit}
       noValidate
     >
+      <HoneypotField />
+
       <div>
         <label htmlFor="contact-name" className="form-label">
           Full name
         </label>
-        <input id="contact-name" name="name" required className="form-input" placeholder="Your full name" />
+        <input
+          id="contact-name"
+          name="name"
+          required
+          maxLength={120}
+          autoComplete="name"
+          className="form-input"
+          placeholder="Your full name"
+          aria-invalid={errors.name ? true : undefined}
+          aria-describedby={errors.name ? "contact-name-error" : undefined}
+        />
+        <FieldError id="contact-name-error" message={errors.name} />
         <p className="form-hint">Use the name of the primary decision maker.</p>
       </div>
 
@@ -44,9 +45,14 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
+          maxLength={254}
+          autoComplete="email"
           className="form-input"
           placeholder="name@company.com"
+          aria-invalid={errors.email ? true : undefined}
+          aria-describedby={errors.email ? "contact-email-error" : undefined}
         />
+        <FieldError id="contact-email-error" message={errors.email} />
         <p className="form-hint">We will send proposal details to this address.</p>
       </div>
 
@@ -54,7 +60,19 @@ export default function ContactForm() {
         <label htmlFor="contact-phone" className="form-label">
           Phone number
         </label>
-        <input id="contact-phone" name="phone" required className="form-input" placeholder="+880 ..." />
+        <input
+          id="contact-phone"
+          name="phone"
+          type="tel"
+          required
+          maxLength={40}
+          autoComplete="tel"
+          className="form-input"
+          placeholder="+880 ..."
+          aria-invalid={errors.phone ? true : undefined}
+          aria-describedby={errors.phone ? "contact-phone-error" : undefined}
+        />
+        <FieldError id="contact-phone-error" message={errors.phone} />
         <p className="form-hint">Include WhatsApp number if available.</p>
       </div>
 
@@ -66,22 +84,29 @@ export default function ContactForm() {
           id="contact-message"
           name="message"
           required
+          maxLength={5000}
           className="form-input min-h-36"
           placeholder="Share objectives, timeline, and budget range"
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? "contact-message-error" : undefined}
         />
+        <FieldError id="contact-message-error" message={errors.message} />
         <p className="form-hint">Short summary is enough. We can refine in a discovery call.</p>
       </div>
 
       <div className="mt-auto">
-        <button type="submit" className="btn-base btn-primary w-full justify-center sm:w-auto">
-          Send Inquiry
+        <button
+          type="submit"
+          disabled={isPending}
+          className="btn-base btn-primary w-full justify-center sm:w-auto disabled:cursor-wait disabled:opacity-70"
+        >
+          {isPending ? "Sending…" : "Send Inquiry"}
         </button>
 
-        {submitted ? (
-          <p className="mt-4 rounded-sm border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
-            Thanks for reaching out.
-          </p>
-        ) : null}
+        <SubmitStatus
+          state={state}
+          successMessage="Thanks for reaching out. We received your inquiry and will get back to you shortly."
+        />
       </div>
     </form>
   );

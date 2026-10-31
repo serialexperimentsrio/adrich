@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import RequestProposalButton from "@/components/RequestProposalButton";
 import CTASection from "@/components/CTASection";
-import { portfolioItems } from "@/data/site";
+import { portfolioItems, serviceForCategory } from "@/data/site";
 
 type WorkDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -79,7 +79,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
                   </div>
                 </dl>
                 <div className="mt-10">
-                  <RequestProposalButton className="w-full justify-center" serviceTitle={project.title} />
+                  <RequestProposalButton className="w-full justify-center" serviceTitle={serviceForCategory(project.category)} />
                 </div>
               </div>
             </div>

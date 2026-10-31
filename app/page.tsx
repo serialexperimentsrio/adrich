@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Aperture,
   Brush,
   Building2,
   Clapperboard,
@@ -152,16 +151,7 @@ export default function Home() {
             <h2 className="section-title mt-4 text-ink-900">Trusted by growth-focused brands</h2>
           </div>
           <Reveal>
-            <ClientCarousel
-              images={[
-                "/logos/BRB.jpeg",
-                "/logos/city%20group.png",
-                "/logos/kiam.png",
-                "/logos/Kollany%20Rice%20Bran%20Oil.jpeg",
-                "/logos/ssg.png",
-                "/logos/sunlite.png",
-              ]}
-            />
+            <ClientCarousel logos={clientLogos} />
           </Reveal>
         </div>
       </section>

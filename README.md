@@ -20,6 +20,14 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Contact & proposal forms
+
+The contact form and the "Request Proposal" modal submit through a server action
+(`app/actions/inquiry.ts`) that emails each inquiry via [Resend](https://resend.com).
+Copy `.env.example` to `.env.local` and set `RESEND_API_KEY` (also set it in your
+hosting provider's environment variables). To send from your own address, verify
+`adrich.com.bd` in Resend and set `RESEND_FROM_EMAIL`, e.g. `Adrich Website <website@adrich.com.bd>`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
