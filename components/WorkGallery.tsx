@@ -20,6 +20,7 @@ export default function WorkGallery({ items }: { items: PortfolioItem[] }) {
         {portfolioFilters.map((filter) => {
           const count =
             filter === "All" ? items.length : items.filter((item) => item.tags.includes(filter)).length;
+          if (count === 0) return null;
           return (
             <button
               key={filter}
@@ -56,7 +57,7 @@ export default function WorkGallery({ items }: { items: PortfolioItem[] }) {
                 <ProjectPoster item={item} index={index} />
                 <div className="mt-4 flex items-baseline justify-between gap-4">
                   <p className="text-lg font-medium leading-tight">{item.title}</p>
-                  <p className="mono shrink-0 text-ink-mute">{item.year}</p>
+                  <p className="caption shrink-0 text-ink-mute">{item.year}</p>
                 </div>
                 <p className="mt-1 text-ink-soft">{item.summary}</p>
               </motion.li>

@@ -28,7 +28,7 @@ export default function ContactPage() {
         <Reveal className="md:col-span-4">
           <dl className="space-y-8">
             <div>
-              <dt className="mono text-ink-mute">Email</dt>
+              <dt className="caption text-ink-mute">Email</dt>
               <dd className="mt-2 text-xl">
                 <a href={`mailto:${companyProfile.email}`} className="link-u">
                   {companyProfile.email}
@@ -36,28 +36,28 @@ export default function ContactPage() {
               </dd>
             </div>
             <div>
-              <dt className="mono text-ink-mute">Phone / WhatsApp</dt>
+              <dt className="caption text-ink-mute">Phone / WhatsApp</dt>
               <dd className="mt-2 flex flex-col gap-1 text-xl">
                 <a href={`tel:${phoneDigits}`} className="link-u w-fit">
                   {companyProfile.phone}
                 </a>
-                <a href={waHref} target="_blank" rel="noopener noreferrer" className="mono link-u mt-1 w-fit text-ink-soft">
+                <a href={waHref} target="_blank" rel="noopener noreferrer" className="caption link-u mt-1 w-fit text-ink-soft">
                   Message on WhatsApp ↗
                 </a>
               </dd>
             </div>
             <div>
-              <dt className="mono text-ink-mute">Studio</dt>
+              <dt className="caption text-ink-mute">Studio</dt>
               <dd className="mt-2 max-w-[28ch] text-xl leading-snug">{companyProfile.address}</dd>
             </div>
             <div>
-              <dt className="mono text-ink-mute">Local time</dt>
+              <dt className="caption text-ink-mute">Local time</dt>
               <dd className="mt-2 text-xl">
                 <DhakaClock />
               </dd>
             </div>
             <div>
-              <dt className="mono text-ink-mute">Elsewhere</dt>
+              <dt className="caption text-ink-mute">Elsewhere</dt>
               <dd className="mt-3 flex flex-wrap gap-2">
                 {socialLinks.map((social) => (
                   <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="chip">
@@ -76,7 +76,7 @@ export default function ContactPage() {
 
       <section className="border-t border-ink/15 bg-paper-2">
         <div className="container-x py-16">
-          <p className="mono mb-6 text-ink-mute">Find us — Banashree, Dhaka</p>
+          <p className="caption mb-6 text-ink-mute">Find us — Banashree, Dhaka</p>
           <div className="crop text-ink">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.7134651465412!2d90.3975753!3d23.864306499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c423e474a863%3A0xa4806777ee09a18a!2sHouse%23%2032%2C%20House%2034%20Road-6%2C%20Dhaka%201230!5e0!3m2!1sen!2sbd!4v1775768367121!5m2!1sen!2sbd"

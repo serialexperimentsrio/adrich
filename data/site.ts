@@ -25,7 +25,6 @@ export const navLinks = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -140,105 +139,73 @@ export type PortfolioItem = {
   tags: PortfolioCategory[];
   summary: string;
   year: string;
-  /** LinkedIn post embed URL for the film. */
-  embedSrc?: string;
+  /** YouTube video ID for the film (the part after "watch?v=" in its link). */
+  youtubeId?: string;
 };
 
 export const portfolioItems: PortfolioItem[] = [
   {
-    slug: "brb-ht-cable-tvc",
-    title: "BRB HT Cable",
-    client: "BRB Cable Industries",
-    category: "TVC",
-    tags: ["TVC", "Digital"],
+    slug: "united-knitwear-corporate-film",
+    title: "United Knitwear",
+    client: "United Knitwear Pvt. Ltd.",
+    category: "Corporate AV",
+    tags: ["Corporate AV"],
     summary:
-      "A TV commercial for BRB's high-tension cables, built around strength and reliability, with shorter cuts for social and digital.",
-    year: "2025",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644752827056128?collapsed=1",
+      "A corporate film for United Knitwear that walks through the company's work, from the production floor to packing and dispatch.",
+    year: "2019",
+    youtubeId: "-H_0kJBRNT0",
   },
   {
-    slug: "brb-frls-cable-tvc",
-    title: "BRB FRLS Cable",
-    client: "BRB Cable Industries",
-    category: "TVC",
-    tags: ["TVC", "Digital"],
-    summary:
-      "A safety-led commercial for BRB's fire-retardant, low-smoke cables, with versions edited for social and video platforms.",
-    year: "2024",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644528461205504?collapsed=1",
-  },
-  {
-    slug: "ali-salt-tvc",
-    title: "Ali Salt",
-    client: "Ali Salt",
-    category: "TVC",
-    tags: ["TVC", "Animation"],
-    summary:
-      "A household story for Ali Salt that mixes live action with motion graphics.",
-    year: "2024",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644350828302336?collapsed=1",
+    slug: "adrich-agency-film",
+    title: "This Is Adrich",
+    client: "Adrich",
+    category: "Corporate AV",
+    tags: ["Corporate AV", "TVC"],
+    summary: "Our own film: a short introduction to Adrich and the kind of work we make for our clients.",
+    year: "2019",
+    youtubeId: "pOFKyhthyX4",
   },
   {
     slug: "lovely-shopping-center-tvc",
     title: "Lovely Shopping Center",
-    client: "Lovely Shopping Center",
-    category: "Digital",
-    tags: ["Digital", "TVC"],
-    summary:
-      "A seasonal retail campaign made for TV and for watching on a phone.",
-    year: "2023",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644112621047808?collapsed=1",
-  },
-  {
-    slug: "superstar-bulb-tvc",
-    title: "Superstar Bulb",
-    client: "Superstar Group",
-    category: "Animation",
-    tags: ["Animation", "TVC"],
-    summary:
-      "An energy-saving message for Superstar's LED bulbs, told through stylised product animation.",
-    year: "2023",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643602048372736?collapsed=1",
-  },
-  {
-    slug: "jibon-mineral-water-tvc",
-    title: "Jibon Mineral Water",
-    client: "Jibon",
+    client: "Lovely Shopping Center, Kushtia",
     category: "TVC",
-    tags: ["TVC", "Digital"],
+    tags: ["TVC"],
+    summary: "A TV commercial for Lovely Shopping Center, one of Kushtia's shopping destinations.",
+    year: "2016",
+    youtubeId: "aFxgG1nCt8g",
+  },
+  {
+    slug: "corporate-av-brb-cable",
+    title: "Inside BRB Cable",
+    client: "BRB Cable Industries",
+    category: "Corporate AV",
+    tags: ["Corporate AV"],
     summary:
-      "A bright, fast-paced lifestyle commercial for Jibon, with cuts for TV, reels and YouTube.",
-    year: "2022",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643384116789248?collapsed=1",
+      "A corporate film about BRB Cable Industries, showing how its cables are made and tested, for partners and stakeholders.",
+    year: "2015",
+    youtubeId: "Q50WUE1C6iI",
   },
   {
     slug: "kollany-rice-bran-oil-tvc",
     title: "Kollany Rice Bran Oil",
     client: "Kollany Foods",
     category: "TVC",
-    tags: ["TVC", "Digital"],
-    summary:
-      "A commercial presenting Kollany Rice Bran Oil as an everyday healthy choice, with matching digital assets.",
-    year: "2022",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643186871177216?collapsed=1",
-  },
-  {
-    slug: "corporate-av-brb-cable",
-    title: "BRB Cable — Corporate Film",
-    client: "BRB Cable Industries",
-    category: "Corporate AV",
-    tags: ["Corporate AV", "Digital"],
-    summary:
-      "A corporate film about BRB's manufacturing, quality control and export work, made for partners and stakeholders.",
-    year: "2025",
-    embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377642799296528384?collapsed=1",
+    tags: ["TVC"],
+    summary: "A one-minute TV commercial presenting Kollany Rice Bran Oil as an everyday healthy choice for the family kitchen.",
+    year: "2015",
+    youtubeId: "JxDpsNLSRE0",
   },
 ];
 
-/** Public LinkedIn post URL for a project's embed, for a "watch on LinkedIn" link. */
-export function linkedinPostUrl(embedSrc?: string) {
-  const urn = embedSrc?.match(/urn:li:[A-Za-z]+:\d+/)?.[0];
-  return urn ? `https://www.linkedin.com/feed/update/${urn}/` : undefined;
+
+/** YouTube embed and watch links for a project's film. */
+export function youtubeUrls(id: string) {
+  return {
+    thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+    embed: `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`,
+    watch: `https://www.youtube.com/watch?v=${id}`,
+  };
 }
 
 export const processSteps = [
@@ -284,36 +251,6 @@ export const eras = [
   },
 ] as const;
 
-export const newsItems = [
-  {
-    slug: "brb-ht-cable-tvc-launch",
-    date: "March 2026",
-    title: "BRB HT Cable commercial is on air",
-    summary: "Our TVC for BRB HT Cable is out, alongside shorter cuts for social and digital.",
-    href: "/work/brb-ht-cable-tvc",
-  },
-  {
-    slug: "corporate-av-brb-release",
-    date: "January 2026",
-    title: "BRB Cable corporate film released",
-    summary: "A look inside BRB's manufacturing and quality process, made for partners and stakeholders.",
-    href: "/work/corporate-av-brb-cable",
-  },
-  {
-    slug: "superstar-motion-refresh",
-    date: "November 2025",
-    title: "New animated work for Superstar Bulb",
-    summary: "Animated explainers and social cut-downs extending the Superstar Bulb campaign.",
-    href: "/work/superstar-bulb-tvc",
-  },
-  {
-    slug: "kollany-oil-awareness-wave",
-    date: "August 2025",
-    title: "Kollany Rice Bran Oil campaign launched",
-    summary: "One story told across TV and digital for Kollany Rice Bran Oil.",
-    href: "/work/kollany-rice-bran-oil-tvc",
-  },
-] as const;
 
 export const socialLinks = [
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61575491642072" },

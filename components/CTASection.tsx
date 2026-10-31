@@ -25,7 +25,7 @@ export default function CTASection({
         className="pointer-events-none absolute -right-[20vw] top-1/2 w-[min(90vw,60rem)] -translate-y-1/2 opacity-90 md:-right-[6vw]"
       />
       <div className="container-x section relative">
-        <p className="mono text-paper/50">(Fin) — Your scene next</p>
+        <p className="caption text-paper/50">(Fin) — Your scene next</p>
         <SplitText as="h2" text={title} className="display display-lg mt-8 max-w-[12ch]" />
         <p className="mt-8 max-w-[34ch] text-xl leading-snug text-paper/75">{description}</p>
         <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">

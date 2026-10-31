@@ -35,10 +35,10 @@ export default function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] flex-col overflow-hidden pt-[4.5rem]" id="top">
+    <section ref={ref} className="relative flex min-h-[100svh] flex-col overflow-hidden pt-[4.75rem] lg:pt-24" id="top">
       {/* Slate row */}
       <motion.div
-        className="container-x mono relative z-10 mt-6 flex items-center justify-between text-ink-mute"
+        className="container-x caption relative z-10 mt-6 flex items-center justify-between text-ink-mute"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 1 }}
@@ -111,7 +111,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <div className="container-x mono flex items-center gap-4 pb-6 text-ink-mute" aria-hidden="true">
+      <div className="container-x caption flex items-center gap-4 pb-6 text-ink-mute" aria-hidden="true">
         <span>Scroll</span>
         <span className="relative h-px w-16 overflow-hidden bg-ink/15">
           <motion.span

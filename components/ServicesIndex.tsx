@@ -34,12 +34,12 @@ export default function ServicesIndex({ services, expanded = false }: ServicesIn
                 className="absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-red transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
                 aria-hidden="true"
               />
-              <span className="mono col-span-2 text-ink-mute md:col-span-1">{String(index + 1).padStart(2, "0")}</span>
+              <span className="caption col-span-2 text-ink-mute md:col-span-1">{String(index + 1).padStart(2, "0")}</span>
               <span className="display col-span-10 text-[clamp(1.9rem,5.2vw,4.75rem)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 md:col-span-9">
                 {service.title}
               </span>
               <span
-                className="mono col-span-2 hidden justify-self-end text-ink transition-transform duration-500 group-hover:-rotate-45 md:block"
+                className="caption col-span-2 hidden justify-self-end text-ink transition-transform duration-500 group-hover:-rotate-45 md:block"
                 aria-hidden="true"
               >
                 →
@@ -62,7 +62,7 @@ export default function ServicesIndex({ services, expanded = false }: ServicesIn
                     </p>
                     <ul className="col-span-12 space-y-1.5 md:col-span-5 md:col-start-8">
                       {service.deliverables.map((deliverable) => (
-                        <li key={deliverable} className="mono flex gap-3 text-ink-soft">
+                        <li key={deliverable} className="caption flex gap-3 text-ink-soft">
                           <span className="text-red" aria-hidden="true">
                             +
                           </span>

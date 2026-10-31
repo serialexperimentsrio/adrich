@@ -67,7 +67,7 @@ export default function Home() {
           <SectionLabel index="03" label="Capabilities" />
           <div className="mt-10 mb-12 flex flex-wrap items-end justify-between gap-6">
             <SplitText as="h2" text="What we make" className="display display-lg" />
-            <Link href="/services" className="mono link-u">
+            <Link href="/services" className="caption link-u">
               All services →
             </Link>
           </div>
@@ -83,7 +83,7 @@ export default function Home() {
             {processSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 0.12}>
                 <article>
-                  <p className="mono text-ink-mute">Step 0{index + 1}</p>
+                  <p className="caption text-ink-mute">Step 0{index + 1}</p>
                   <h3 className="display display-md mt-4">
                     {step.title}
                     <span className="text-red">.</span>

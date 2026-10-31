@@ -157,7 +157,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
           >
             <div className="mb-10 flex items-start justify-between gap-4">
               <div>
-                <p className="mono text-ink-mute">New project — Slate 01</p>
+                <p className="caption text-ink-mute">New project — Slate 01</p>
                 <h2 id="proposal-modal-title" className="display display-md mt-4">
                   Start a <span className="serif text-red">project</span>
                 </h2>

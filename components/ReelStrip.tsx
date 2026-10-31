@@ -50,7 +50,7 @@ export default function ReelStrip({ items }: { items: PortfolioItem[] }) {
             <h2 id="reel-heading" className="display display-md">
               Now <span className="serif text-amber">showing</span>
             </h2>
-            <Link href="/work" className="mono link-u text-paper/80">
+            <Link href="/work" className="caption link-u text-paper/80">
               All projects ({items.length}) →
             </Link>
           </div>
@@ -74,11 +74,11 @@ export default function ReelStrip({ items }: { items: PortfolioItem[] }) {
         </div>
 
         <div className="container-x mt-8 hidden items-center gap-4 lg:flex" aria-hidden="true">
-          <span className="mono text-paper/50">Reel</span>
+          <span className="caption text-paper/50">Reel</span>
           <span className="relative h-px flex-1 bg-paper/15">
             <motion.span className="absolute inset-y-0 left-0 bg-amber" style={{ width: progressWidth }} />
           </span>
-          <span className="mono text-paper/50">{String(items.length).padStart(2, "0")}</span>
+          <span className="caption text-paper/50">{String(items.length).padStart(2, "0")}</span>
         </div>
       </div>
     </section>

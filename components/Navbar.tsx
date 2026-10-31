@@ -64,13 +64,13 @@ export default function Navbar() {
         animate={{ y: hidden && !menuOpen ? "-100%" : "0%" }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="container-x flex h-[4.5rem] items-center justify-between gap-6">
+        <div className="container-x flex h-[4.75rem] items-center justify-between gap-6 lg:h-24">
           <Link
             href="/"
             aria-label="Adrich home"
             className={`relative z-10 shrink-0 transition-opacity duration-300 ${menuOpen ? "pointer-events-none opacity-0" : ""}`}
           >
-            <Image src={logo} alt="Adrich" priority className="h-9 w-auto sm:h-10" />
+            <Image src={logo} alt="Adrich" priority className="h-12 w-auto sm:h-14 lg:h-16" />
           </Link>
 
           <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
@@ -81,9 +81,9 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className="group mono flex items-baseline gap-1.5 text-ink"
+                  className="group caption flex items-baseline gap-1.5 !text-[0.85rem] !tracking-[0.08em] text-ink"
                 >
-                  <span className="text-[0.6rem] text-ink-mute">0{index + 1}</span>
+                  <span className="text-[0.65rem] text-ink-mute">0{index + 1}</span>
                   <span className={`link-u ${active ? "!bg-[length:100%_1px]" : ""}`}>{link.label}</span>
                 </Link>
               );
@@ -91,8 +91,8 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-6 lg:flex">
-            <DhakaClock className="mono text-ink-mute" />
-            <button type="button" className="btn-base btn-primary !min-h-0 !py-2.5" onClick={() => openModal()}>
+            <DhakaClock className="caption hidden text-ink-mute xl:inline" />
+            <button type="button" className="btn-base btn-primary" onClick={() => openModal()}>
               Start a project
             </button>
           </div>
@@ -100,7 +100,7 @@ export default function Navbar() {
           <button
             ref={menuButtonRef}
             type="button"
-            className="mono relative z-10 flex items-center gap-3 lg:hidden"
+            className="caption relative z-10 flex items-center gap-3 lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -149,7 +149,7 @@ export default function Navbar() {
                         isActive(pathname, link.href) ? "text-amber" : "text-paper"
                       }`}
                     >
-                      <span className="mono text-paper/40">0{index}</span>
+                      <span className="caption text-paper/40">0{index}</span>
                       {link.label}
                     </Link>
                   </motion.div>
@@ -157,7 +157,7 @@ export default function Navbar() {
               ))}
             </nav>
             <motion.div
-              className="container-x mono flex flex-col gap-3 border-t border-night-line py-6 text-paper/60"
+              className="container-x caption flex flex-col gap-3 border-t border-night-line py-6 text-paper/60"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}

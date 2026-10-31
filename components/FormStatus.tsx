@@ -24,14 +24,14 @@ export function HoneypotField() {
 export function SubmitStatus({ state, successMessage }: { state: InquiryState; successMessage: string }) {
   if (state.status === "success") {
     return (
-      <p role="status" className="mono mt-6 border-l-2 border-ink bg-paper-2 px-4 py-3 normal-case text-ink">
+      <p role="status" className="caption mt-6 border-l-2 border-ink bg-paper-2 px-4 py-3 normal-case text-ink">
         {successMessage}
       </p>
     );
   }
   if (state.status === "error" && state.message) {
     return (
-      <p role="alert" className="mono mt-6 border-l-2 border-red bg-red/10 px-4 py-3 normal-case text-ink">
+      <p role="alert" className="caption mt-6 border-l-2 border-red bg-red/10 px-4 py-3 normal-case text-ink">
         {state.message}
       </p>
     );

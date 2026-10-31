@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="container-x pt-20 pb-8">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="mono text-ink-mute">Studio</p>
+            <p className="caption text-ink-mute">Studio</p>
             <address className="mt-4 max-w-[30ch] text-lg not-italic leading-snug">{companyProfile.address}</address>
             <div className="mt-6 flex flex-col gap-1 text-lg">
               <a href={`mailto:${companyProfile.email}`} className="link-u w-fit">
@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
 
           <nav className="md:col-span-3" aria-label="Footer navigation">
-            <p className="mono text-ink-mute">Index</p>
+            <p className="caption text-ink-mute">Index</p>
             <ul className="mt-4 space-y-1.5 text-lg">
               {[{ label: "Home", href: "/" }, ...navLinks].map((link) => (
                 <li key={link.href}>
@@ -45,7 +45,7 @@ export default function Footer() {
           </nav>
 
           <div className="md:col-span-4">
-            <p className="mono text-ink-mute">Elsewhere</p>
+            <p className="caption text-ink-mute">Elsewhere</p>
             <ul className="mt-4 space-y-1.5 text-lg">
               {socialLinks.map((social) => (
                 <li key={social.label}>
@@ -65,7 +65,7 @@ export default function Footer() {
           adr<span className="text-red">i</span>ch
         </p>
 
-        <div className="mono mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 text-ink-mute">
+        <div className="caption mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 text-ink-mute">
           <span>© {new Date().getFullYear()} Adrich. Think. Create. Influence.</span>
           <DhakaClock />
           <button type="button" onClick={backToTop} className="link-u">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Archivo, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,12 +20,6 @@ const instrument = Instrument_Serif({
   display: "swap",
   weight: "400",
   style: ["normal", "italic"],
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -58,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${instrument.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${instrument.variable}`}>
       <body className="min-h-full">
         <a href="#main-content" className="skip-link">
           Skip to main content

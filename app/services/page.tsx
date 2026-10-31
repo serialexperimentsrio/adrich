@@ -20,7 +20,7 @@ export default function ServicesPage() {
         title="Everything a campaign needs"
         accent="campaign"
         intro="Hire us for one piece or the whole thing, from the first idea to the film, the posts and the media plan."
-        aside={<p className="mono text-ink-mute">Click any service to start a project with it selected.</p>}
+        aside={<p className="caption text-ink-mute">Click any service to start a project with it selected.</p>}
       />
 
       <section className="container-x pb-28">

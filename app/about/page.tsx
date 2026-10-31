@@ -44,7 +44,7 @@ export default function AboutPage() {
                   priority
                 />
               </div>
-              <figcaption className="mono mt-4 flex justify-between text-ink-mute">
+              <figcaption className="caption mt-4 flex justify-between text-ink-mute">
                 <span>{founderProfile.name}</span>
                 <span>{founderProfile.title}</span>
               </figcaption>
@@ -98,7 +98,7 @@ export default function AboutPage() {
           <div className="mt-6">
             {processSteps.map((step, index) => (
               <Reveal key={step.title} className="grid gap-4 border-b border-ink/15 py-10 md:grid-cols-12 md:items-baseline">
-                <p className="mono text-ink-mute md:col-span-2">Step 0{index + 1}</p>
+                <p className="caption text-ink-mute md:col-span-2">Step 0{index + 1}</p>
                 <h3 className="display display-md md:col-span-5">
                   {step.title}
                   <span className="text-red">.</span>
@@ -108,7 +108,7 @@ export default function AboutPage() {
             ))}
           </div>
           <Reveal className="mt-16">
-            <p className="mono text-ink-mute">Studio</p>
+            <p className="caption text-ink-mute">Studio</p>
             <p className="mt-3 max-w-[40ch] text-xl">{companyProfile.address}</p>
           </Reveal>
         </div>

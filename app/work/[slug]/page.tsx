@@ -7,7 +7,7 @@ import RequestProposalButton from "@/components/RequestProposalButton";
 import Reveal from "@/components/Reveal";
 import SectionLabel from "@/components/SectionLabel";
 import SplitText from "@/components/SplitText";
-import { linkedinPostUrl, portfolioItems, serviceForCategory } from "@/data/site";
+import { portfolioItems, serviceForCategory, youtubeUrls } from "@/data/site";
 
 type WorkDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -35,12 +35,12 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
   const project = portfolioItems[index];
   const nextIndex = (index + 1) % portfolioItems.length;
   const next = portfolioItems[nextIndex];
-  const postUrl = linkedinPostUrl(project.embedSrc);
+  const video = project.youtubeId ? youtubeUrls(project.youtubeId) : null;
 
   return (
     <>
       <header className="container-x pt-36 pb-14 md:pt-44">
-        <div className="mono flex flex-wrap items-center justify-between gap-4 text-ink-mute">
+        <div className="caption flex flex-wrap items-center justify-between gap-4 text-ink-mute">
           <Link href="/work" className="link-u text-ink">
             ← All work
           </Link>
@@ -55,7 +55,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
       {/* Screening room */}
       <section className="bg-night py-16 text-paper md:py-24" aria-label="Film">
         <div className="container-x">
-          <div className="mono mb-6 flex items-center justify-between text-paper/50">
+          <div className="caption mb-6 flex items-center justify-between text-paper/50">
             <span className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-red" aria-hidden="true" /> Now playing
             </span>
@@ -64,26 +64,29 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
             </span>
           </div>
           <div className="sprockets bg-night-2 px-4 py-12 [--sprocket-color:var(--color-night)] md:px-10">
-            {project.embedSrc ? (
-              <div className="mx-auto w-full max-w-[560px] overflow-hidden rounded-sm bg-paper">
+            {video ? (
+              <div className="relative mx-auto aspect-video w-full max-w-6xl overflow-hidden bg-night">
                 <iframe
-                  src={project.embedSrc}
+                  src={video.embed}
                   title={`${project.title} — film`}
-                  className="block h-[620px] w-full border-0 md:h-[700px]"
+                  className="absolute inset-0 h-full w-full border-0"
                   loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
                 />
               </div>
             ) : (
-              <p className="py-24 text-center text-paper/60">Film coming soon.</p>
+              <div className="mx-auto flex aspect-video w-full max-w-6xl flex-col items-center justify-center gap-3 text-center">
+                <p className="display display-sm text-paper/80">Film coming soon</p>
+                <p className="text-paper/50">We are uploading this one.</p>
+              </div>
             )}
           </div>
-          {postUrl ? (
-            <p className="mono mt-6 text-paper/60">
-              Not loading?{" "}
-              <a href={postUrl} target="_blank" rel="noopener noreferrer" className="link-u text-paper">
-                Watch on LinkedIn ↗
+          {video ? (
+            <p className="caption mt-6 text-paper/60">
+              <a href={video.watch} target="_blank" rel="noopener noreferrer" className="link-u text-paper">
+                Watch on YouTube ↗
               </a>
             </p>
           ) : null}
@@ -99,7 +102,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
             </p>
           </Reveal>
           <Reveal className="md:col-span-4 md:col-start-9" delay={0.1}>
-            <dl className="mono divide-y divide-ink/15 border-y border-ink/15">
+            <dl className="caption divide-y divide-ink/15 border-y border-ink/15">
               {[
                 ["Client", project.client],
                 ["Year", project.year],
@@ -125,7 +128,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
       <section className="border-t border-ink/15">
         <div className="container-x grid items-center gap-10 py-20 md:grid-cols-12">
           <div className="md:col-span-6">
-            <p className="mono text-ink-mute">Next project</p>
+            <p className="caption text-ink-mute">Next project</p>
             <Link href={`/work/${next.slug}`} className="group mt-4 block">
               <span className="display display-md block transition-colors duration-500 group-hover:text-red">
                 {next.title} →
