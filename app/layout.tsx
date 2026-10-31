@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import ProposalModalProvider from "@/components/ProposalModalProvider";
+import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const archivo = Archivo({
@@ -68,6 +69,7 @@ export default function RootLayout({
               <PageTransition>{children}</PageTransition>
             </main>
             <Footer />
+            <ScrollToTop />
           </ProposalModalProvider>
         </SmoothScroll>
         <div className="grain" aria-hidden="true" />

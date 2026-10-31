@@ -1,19 +1,10 @@
-"use client";
-
 import Link from "next/link";
 import DhakaClock from "@/components/DhakaClock";
 import Logo from "@/components/Logo";
 import { companyProfile, navLinks, socialLinks } from "@/data/site";
-import { getLenis } from "@/lib/smoothScroll";
 
 export default function Footer() {
   const phoneHref = `tel:${companyProfile.phone.replace(/[^\d+]/g, "")}`;
-
-  const backToTop = () => {
-    const lenis = getLenis();
-    if (lenis) lenis.scrollTo(0, { duration: 1.6 });
-    else window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <footer className="relative overflow-hidden bg-paper-2 text-ink">
@@ -61,12 +52,20 @@ export default function Footer() {
 
         <Logo className="mx-auto mt-20 block h-auto w-full max-w-4xl" />
 
-        <div className="caption mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 text-ink-mute">
+        <div className="caption mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 pr-16 text-ink-mute md:pr-24">
           <span>© {new Date().getFullYear()} Adrich. Think. Create. Influence.</span>
           <DhakaClock />
-          <button type="button" onClick={backToTop} className="link-u">
-            Back to top ↑
-          </button>
+          <span>
+            Designed and developed by{" "}
+            <a
+              href="https://github.com/serialexperimentsrio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink underline decoration-1 underline-offset-4 transition-colors hover:text-red"
+            >
+              Rio
+            </a>
+          </span>
         </div>
       </div>
     </footer>
