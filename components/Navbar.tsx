@@ -1,164 +1,178 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import RequestProposalButton from "@/components/RequestProposalButton";
-import logo from "@/public/logo.png";
-import { navLinks } from "@/data/site";
+import { useEffect, useRef, useState } from "react";
+import DhakaClock from "@/components/DhakaClock";
+import Logo from "@/components/Logo";
+import { useProposalModal } from "@/components/ProposalModalProvider";
+import { companyProfile, navLinks, socialLinks } from "@/data/site";
+import { lockScroll, unlockScroll } from "@/lib/smoothScroll";
 
-function linkIsActive(pathname: string, href: string) {
-  if (href === "/") {
-    return pathname === "/";
-  }
-
-  return pathname.startsWith(href);
+function isActive(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { openModal } = useProposalModal();
+  // The menu is open only on the page where it was opened, so navigating closes it.
+  const [menuPath, setMenuPath] = useState<string | null>(null);
+  const menuOpen = menuPath === pathname;
+  const setMenuOpen = (open: boolean) => setMenuPath(open ? pathname : null);
+  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
-  const mobileMenuId = "mobile-navigation";
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const { scrollY } = useScroll();
+
+  // Hide while scrolling down, reveal when scrolling up.
+  useMotionValueEvent(scrollY, "change", (current) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    setScrolled(current > 24);
+    setHidden(current > 240 && current > previous);
+  });
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 8);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!menuOpen) {
-      return;
-    }
+    if (!menuOpen) return;
+    lockScroll();
+    menuRef.current?.querySelector<HTMLElement>("a[href]")?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setMenuOpen(false);
+        setMenuPath(null);
         menuButtonRef.current?.focus();
       }
     };
-
     window.addEventListener("keydown", onKeyDown);
-
-    const firstFocusable = mobileMenuRef.current?.querySelector<HTMLElement>("a[href], button:not([disabled])");
-    firstFocusable?.focus();
-
     return () => {
       window.removeEventListener("keydown", onKeyDown);
+      unlockScroll();
     };
   }, [menuOpen]);
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
-        scrolled ? "nav-glass border-slate-200/80 py-1" : "border-slate-200/40 bg-surface-0/95 py-2"
-      }`}
-    >
-      <div className="container-swiss">
-        <div className="flex h-16 items-center justify-between gap-6">
+    <>
+      <motion.header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
+          scrolled && !menuOpen
+            ? "border-b border-ink/10 bg-paper/80 backdrop-blur-md"
+            : "border-b border-transparent"
+        }`}
+        animate={{ y: hidden && !menuOpen ? "-100%" : "0%" }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="container-x flex h-[4.75rem] items-center justify-between gap-6 lg:h-24">
           <Link
             href="/"
-            className="group inline-flex items-center transition-opacity hover:opacity-90"
             aria-label="Adrich home"
-            onClick={(e) => {
-              // if already on the home page, scroll to top instead of navigating
-              if (pathname === "/") {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-            }}
+            className={`relative z-10 shrink-0 transition-opacity duration-300 ${menuOpen ? "pointer-events-none opacity-0" : ""}`}
           >
-            <Image
-              src={logo}
-              alt="Adrich"
-              priority
-              className="h-10 w-auto sm:h-12 object-contain max-w-[200px]"
-            />
+            <Logo tagline={false} className="h-12 w-auto sm:h-14 lg:h-16" />
           </Link>
 
-          <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
+          <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => {
-              const active = linkIsActive(pathname, link.href);
-
+              const active = isActive(pathname, link.href);
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative py-1 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors ${
-                    active ? "text-ink-900" : "text-ink-600 hover:text-ink-900"
-                  }`}
+                  aria-current={active ? "page" : undefined}
+                  className="group caption flex items-baseline gap-1.5 !text-[0.85rem] !tracking-[0.08em] text-ink"
                 >
-                  {link.label}
-                  {active && (
-                    <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-brand-red" />
-                  )}
+                  <span className={`link-u ${active ? "!bg-[length:100%_1px]" : ""}`}>{link.label}</span>
                 </Link>
               );
             })}
           </nav>
 
-          <div className="hidden md:block">
-            <RequestProposalButton className="justify-center" />
+          <div className="hidden items-center gap-6 lg:flex">
+            <DhakaClock className="caption hidden text-ink-mute xl:inline" />
+            <button type="button" className="btn-base btn-primary" onClick={() => openModal()}>
+              Start a project
+            </button>
           </div>
 
           <button
             ref={menuButtonRef}
             type="button"
-            className="btn-icon inline-flex items-center justify-center p-2 md:!hidden"
-            onClick={() => setMenuOpen((prev) => !prev)}
+            className="caption relative z-10 flex items-center gap-3 lg:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
-            aria-controls={mobileMenuId}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-controls="mobile-menu"
           >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+            <span className={menuOpen ? "text-paper" : "text-ink"}>{menuOpen ? "Close" : "Menu"}</span>
+            <span className="relative block h-3 w-6" aria-hidden="true">
+              <span
+                className={`absolute left-0 h-px w-full transition-all duration-500 ${
+                  menuOpen ? "top-1.5 rotate-45 bg-paper" : "top-0 bg-ink"
+                }`}
+              />
+              <span
+                className={`absolute left-0 h-px w-full transition-all duration-500 ${
+                  menuOpen ? "top-1.5 -rotate-45 bg-paper" : "top-3 bg-ink"
+                }`}
+              />
+            </span>
           </button>
         </div>
-      </div>
+      </motion.header>
 
-      <div
-        id={mobileMenuId}
-        ref={mobileMenuRef}
-        aria-hidden={!menuOpen}
-        className={`border-t border-slate-200 bg-surface-1 px-4 py-4 md:!hidden overflow-hidden transition-[max-height,opacity,transform] duration-150 ease-out ${
-          menuOpen
-            ? "visible max-h-96 translate-y-0 opacity-100"
-            : "invisible pointer-events-none max-h-0 -translate-y-1 opacity-0"
-        }`}
-      >
-        <nav className="container-swiss flex flex-col gap-2" aria-label="Mobile navigation">
-          {navLinks.map((link) => {
-            const active = linkIsActive(pathname, link.href);
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`border-l px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition ${
-                  active
-                    ? "border-brand-red text-ink-900 bg-slate-50"
-                    : "border-transparent text-ink-700 hover:border-slate-200 hover:text-ink-900"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-          <RequestProposalButton className="mt-2 w-full justify-center" />
-        </nav>
-      </div>
-    </header>
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            id="mobile-menu"
+            ref={menuRef}
+            className="fixed inset-0 z-40 flex flex-col bg-night text-paper lg:hidden"
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+            data-lenis-prevent
+          >
+            <nav aria-label="Mobile navigation" className="container-x flex flex-1 flex-col justify-center gap-1 pt-20">
+              {[{ label: "Home", href: "/" }, ...navLinks].map((link, index) => (
+                <div key={link.href} className="overflow-hidden">
+                  <motion.div
+                    initial={{ y: "100%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.25 + index * 0.06 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`display flex items-baseline gap-3 text-[clamp(3rem,15vw,5.5rem)] ${
+                        isActive(pathname, link.href) ? "text-amber" : "text-paper"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                </div>
+              ))}
+            </nav>
+            <motion.div
+              className="container-x caption flex flex-col gap-3 border-t border-night-line py-6 text-paper/60"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <a href={`mailto:${companyProfile.email}`} className="text-paper">
+                {companyProfile.email}
+              </a>
+              <div className="flex flex-wrap gap-x-5 gap-y-2">
+                {socialLinks.map((social) => (
+                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer">
+                    {social.label}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </>
   );
 }

@@ -1,142 +1,94 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Brush,
-  Building2,
-  Clapperboard,
-  Megaphone,
-  MonitorPlay,
-  Newspaper,
-  TrendingUp,
-  type LucideIcon,
-} from "lucide-react";
-import Hero from "@/components/Hero";
-import ServiceCard from "@/components/ServiceCard";
-import PortfolioCard from "@/components/PortfolioCard";
+import ClientWall from "@/components/ClientWall";
+import CountUp from "@/components/CountUp";
 import CTASection from "@/components/CTASection";
-import SectionIntro from "@/components/SectionIntro";
+import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
+import ReelStrip from "@/components/ReelStrip";
 import Reveal from "@/components/Reveal";
-import {
-  clientLogos,
-  portfolioItems,
-  processSteps,
-  services,
-  testimonials,
-  trustPoints,
-} from "@/data/site";
-import ClientCarousel from "@/components/ClientCarousel";
+import ScrollLitText from "@/components/ScrollLitText";
+import SectionLabel from "@/components/SectionLabel";
+import ServicesIndex from "@/components/ServicesIndex";
+import SplitText from "@/components/SplitText";
+import { companyProfile, portfolioItems, processSteps, services, yearsInBusiness } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: { absolute: "Adrich | Think. Create. Influence." },
   description:
-    "Adrich builds premium advertising campaigns across TVC, corporate AV, digital marketing, and performance media.",
-};
-
-const serviceIconMap: Record<string, LucideIcon> = {
-  "tvc-production": Clapperboard,
-  "corporate-av-production": Building2,
-  "social-media-content-production": MonitorPlay,
-  "digital-campaign-strategy": TrendingUp,
-  "paid-ads-management": Megaphone,
-  "branding-and-graphic-design": Brush,
-  "print-production": Newspaper,
+    "Adrich is an advertising agency in Dhaka, making TV commercials, corporate films and digital campaigns since 1997.",
 };
 
 export default function Home() {
-  const featuredWork = portfolioItems.slice(0, 4);
-
   return (
     <>
-      <div className="viewport-group">
-        <Hero />
+      <Hero />
 
-        <section className="section-y-tight border-b border-slate-200 bg-white">
-          <div className="container-swiss">
-          <Reveal>
-            <div className="metric-grid">
-              {trustPoints.map((point) => (
-                <div key={point.title} className="metric-cell">
-                  <p className="text-kicker">{point.title}</p>
-                  <p className="mt-2 font-display text-2xl font-bold text-ink-900">{point.value}</p>
-                  <p className="mt-2 text-[0.85rem] leading-6 text-ink-700">{point.detail}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-        </section>
+      <div className="border-y border-ink bg-ink py-5 text-paper">
+        <Marquee
+          className="display text-[clamp(1.6rem,3.2vw,2.75rem)]"
+          items={services.map((service) => service.title.replace(/ \(.*\)$/, ""))}
+          duration={45}
+        />
       </div>
 
-      <section className="section-y bg-surface-0" id="services">
-        <div className="container-swiss">
-          <Reveal>
-            <SectionIntro
-              eyebrow="Capabilities"
-              title="Campaign systems built for brand impact"
-              description="From script and set to social distribution and paid optimization, we build coherent campaigns that perform across every channel."
-            />
-          </Reveal>
-          <div className="mt-12 space-y-12">
-            {services.slice(0, 5).map((service) => {
-              const Icon = serviceIconMap[service.slug] ?? Megaphone;
-
-              return (
-                <Reveal key={service.slug}>
-                  <ServiceCard service={service} icon={Icon} />
-                </Reveal>
-              );
-            })}
-          </div>
-
-          <div className="mt-10 flex justify-center">
-              <Link href="/services" className="btn-base btn-primary">
-              Explore Full Capabilities
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-      <section className="section-y scroll-mt-24 border-y border-slate-200 bg-white" id="featured-work">
-        <div className="container-swiss">
-          <Reveal>
-            <SectionIntro
-              eyebrow="Portfolio"
-              title="A premium reel gallery of campaign execution"
-              description="Selected TVC and AV projects showcasing creative direction, production quality, and channel-ready campaign assets."
-            />
-          </Reveal>
-          <div className="mt-12 space-y-12">
-            {featuredWork.map((item, index) => (
-              <Reveal key={item.slug}>
-                <PortfolioCard item={item} priority={index < 2} />
+      {/* (01) Intro */}
+      <section className="section">
+        <div className="container-x">
+          <SectionLabel index="01" label="The agency" />
+          <div className="mt-14 grid gap-12 md:grid-cols-12">
+            <Reveal className="md:col-span-4">
+              <p className="display text-[clamp(7rem,16vw,15rem)] leading-[0.8] text-red">
+                <CountUp to={yearsInBusiness} from={1} />
+              </p>
+              <p className="serif mt-3 text-3xl">years of making ads in Dhaka.</p>
+            </Reveal>
+            <div className="md:col-span-8">
+              <ScrollLitText
+                className="text-[clamp(1.6rem,3.1vw,2.9rem)] font-medium leading-[1.15] tracking-[-0.01em]"
+                text={`We started in ${companyProfile.founded}, when TV, radio and print were how you reached people. The media changed, and so did we. Today we help brands think clearly, make work people remember, and put it where their audience actually is.`}
+              />
+              <Reveal delay={0.1}>
+                <Link href="/about" className="btn-base btn-secondary mt-10">
+                  Our story
+                </Link>
               </Reveal>
-            ))}
-          </div>
-          <div className="mt-10 flex justify-center">
-              <Link href="/work" className="btn-base btn-primary">
-              Explore Full Archive
-            </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-y bg-surface-0" id="process">
-        <div className="container-swiss">
-          <Reveal>
-            <SectionIntro
-              eyebrow="Methodology"
-              title="Think -> Create -> Influence"
-              description="Our 3-step operating model aligns strategy, craft, and media performance into one disciplined production flow."
-            />
-          </Reveal>
-          <div className="grid-12 mt-12 gap-y-8">
+      {/* (02) Selected work */}
+      <ReelStrip items={portfolioItems} />
+
+      {/* (03) Services */}
+      <section className="section">
+        <div className="container-x">
+          <SectionLabel index="03" label="Capabilities" />
+          <div className="mt-10 mb-12 flex flex-wrap items-end justify-between gap-6">
+            <SplitText as="h2" text="What we create" className="display display-lg" />
+            <Link href="/services" className="caption link-u">
+              All services →
+            </Link>
+          </div>
+          <ServicesIndex services={services} />
+        </div>
+      </section>
+
+      {/* (04) Process */}
+      <section className="section border-t border-ink/15">
+        <div className="container-x">
+          <SectionLabel index="04" label="How we work" />
+          <div className="mt-14 grid gap-14 md:grid-cols-3 md:gap-8">
             {processSteps.map((step, index) => (
-              <Reveal key={step.title} className="col-span-12 md:col-span-4">
-                <article className="h-full border-t border-slate-200 pt-6">
-                  <p className="text-kicker">Phase 0{index + 1}</p>
-                  <h3 className="mt-4 font-display text-2xl font-bold text-ink-900">{step.title}</h3>
-                  <p className="mt-3 text-[0.9rem] leading-7 text-ink-700">{step.detail}</p>
+              <Reveal key={step.title} delay={index * 0.12}>
+                <article>
+                  <p className="caption text-ink-mute">Step 0{index + 1}</p>
+                  <h3 className="display display-md mt-4">
+                    {step.title}
+                    <span className="text-red">.</span>
+                  </h3>
+                  <p className="mt-5 max-w-[32ch] text-lg leading-snug text-ink-soft">{step.detail}</p>
                 </article>
               </Reveal>
             ))}
@@ -144,47 +96,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-y-tight border-y border-slate-200 bg-white" id="clients">
-        <div className="container-swiss">
-          <div className="mb-10 max-w-2xl">
-            <p className="text-kicker">Our Partners</p>
-            <h2 className="section-title mt-4 text-ink-900">Trusted by growth-focused brands</h2>
-          </div>
-          <Reveal>
-            <ClientCarousel logos={clientLogos} />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section-y bg-surface-0" id="testimonials">
-        <div className="container-swiss">
-          <Reveal>
-            <SectionIntro
-              eyebrow="Testimonials"
-              title="Feedback from our campaign partners"
-              description="We are trusted for strategic clarity, premium execution, and measurable campaign momentum."
+      {/* (05) Clients */}
+      <section className="section">
+        <div className="container-x">
+          <SectionLabel index="05" label="Clients" />
+          <div className="mt-10 mb-14 grid gap-6 md:grid-cols-12 md:items-end">
+            <SplitText
+              as="h2"
+              text="Brands we have worked with"
+              className="display display-md md:col-span-8"
             />
-          </Reveal>
-          <div className="grid-12 mt-12 gap-y-8">
-            {testimonials.map((testimonial) => (
-              <Reveal key={testimonial.name} className="col-span-12 md:col-span-4">
-                <article className="h-full border-t border-slate-200 pt-6">
-                  <p className="text-[0.95rem] italic leading-7 text-ink-800">&quot;{testimonial.quote}&quot;</p>
-                  <div className="mt-6">
-                    <p className="text-sm font-bold text-ink-900">{testimonial.name}</p>
-                    <p className="mt-1 text-[0.7rem] font-bold uppercase tracking-wider text-ink-500">{testimonial.role}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+            <p className="serif text-2xl text-ink-soft md:col-span-4 md:text-right">
+              From cables to cooking oil.
+            </p>
           </div>
+          <ClientWall />
         </div>
       </section>
 
-      <CTASection
-        title="Let's build your next campaign"
-        description="Bring your challenge to Adrich and we will shape a custom strategy spanning concept, production, and performance channels."
-      />
+      <CTASection />
     </>
   );
 }

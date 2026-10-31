@@ -1,73 +1,42 @@
 import type { Metadata } from "next";
-import {
-  Brush,
-  Building2,
-  Clapperboard,
-  Megaphone,
-  MonitorPlay,
-  Newspaper,
-  TrendingUp,
-  type LucideIcon,
-} from "lucide-react";
-import SectionIntro from "@/components/SectionIntro";
-import ServiceCard from "@/components/ServiceCard";
 import CTASection from "@/components/CTASection";
-import Reveal from "@/components/Reveal";
+import Marquee, { Ring } from "@/components/Marquee";
+import PageHeader from "@/components/PageHeader";
+import ServicesIndex from "@/components/ServicesIndex";
 import { services } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore Adrich services across TVC production, social media advertising, digital campaigns, paid ads management, animation, branding, and print.",
-};
-
-const serviceIconMap: Record<string, LucideIcon> = {
-  "tvc-production": Clapperboard,
-  "corporate-av-production": Building2,
-  "social-media-content-production": MonitorPlay,
-  "digital-campaign-strategy": TrendingUp,
-  "paid-ads-management": Megaphone,
-  "branding-and-graphic-design": Brush,
-  "print-production": Newspaper,
+    "TV commercials, corporate films, social content, digital strategy, paid ads, branding and print from Adrich in Dhaka.",
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="section-y border-b border-slate-200 bg-white">
-        <div className="container-swiss">
-          <Reveal>
-            <SectionIntro
-              title="Integrated capabilities for modern advertising"
-              description="Every service is built to function independently or as part of one unified campaign model from concept and production to media and optimization. We help businesses build awareness, drive engagement, and grow online."
-              titleAs="h1"
-              align="center"
-              showDivider
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section-y">
-        <div className="container-swiss">
-          <div className="space-y-1">
-            {services.map((service) => {
-              const Icon = serviceIconMap[service.slug] ?? Megaphone;
-
-              return (
-                <Reveal key={service.slug}>
-                  <ServiceCard service={service} icon={Icon} />
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <CTASection
-        title="Need a custom service bundle?"
-        description="Share your objectives and timeline. We will assemble a campaign plan combining the right strategic, creative, and media components."
+      <PageHeader
+        index="S"
+        label="Services"
+        title="Everything a campaign needs"
+        accent="campaign"
+        intro="Hire us for one piece or the whole thing, from the first idea to the film, the posts and the media plan."
+        aside={<p className="caption text-ink-mute">Click any service to start a project with it selected.</p>}
       />
+
+      <section className="container-x pb-28">
+        <ServicesIndex services={services} expanded />
+      </section>
+
+      <div className="bg-red py-5 text-paper">
+        <Marquee
+          className="display text-[clamp(1.6rem,3.2vw,2.75rem)]"
+          items={["Think", "Create", "Influence"]}
+          separator={<Ring className="text-paper" />}
+          duration={22}
+        />
+      </div>
+
+      <CTASection title="Need a mix of these?" description="Tell us what you are trying to do and we will put the right team together." />
     </>
   );
 }

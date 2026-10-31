@@ -3,7 +3,7 @@ import type { InquiryState } from "@/app/actions/inquiry";
 export function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="mt-1 text-sm text-red-700">
+    <p id={id} className="mt-1.5 text-sm text-red-deep">
       {message}
     </p>
   );
@@ -24,14 +24,14 @@ export function HoneypotField() {
 export function SubmitStatus({ state, successMessage }: { state: InquiryState; successMessage: string }) {
   if (state.status === "success") {
     return (
-      <p role="status" className="mt-4 rounded-sm border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
+      <p role="status" className="caption mt-6 border-l-2 border-ink bg-paper-2 px-4 py-3 normal-case text-ink">
         {successMessage}
       </p>
     );
   }
   if (state.status === "error" && state.message) {
     return (
-      <p role="alert" className="mt-4 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900">
+      <p role="alert" className="caption mt-6 border-l-2 border-red bg-red/10 px-4 py-3 normal-case text-ink">
         {state.message}
       </p>
     );

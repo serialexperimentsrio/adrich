@@ -16,7 +16,7 @@ export default function ProposalForm({ service, onServiceChange }: ProposalFormP
 
   return (
     <>
-      <form ref={formRef} className="relative space-y-4" onSubmit={handleSubmit} noValidate>
+      <form ref={formRef} className="relative space-y-7" onSubmit={handleSubmit} noValidate>
         <HoneypotField />
 
         <div>
