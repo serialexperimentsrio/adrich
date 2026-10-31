@@ -22,6 +22,10 @@ const instrument = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
+// Re-render pages at most once a day, so year-based text ("29 years", "Take 29",
+// the footer copyright) rolls over on its own without needing a new deploy.
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://adrich.com.bd"),
   title: {

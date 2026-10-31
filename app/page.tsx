@@ -66,7 +66,7 @@ export default function Home() {
         <div className="container-x">
           <SectionLabel index="03" label="Capabilities" />
           <div className="mt-10 mb-12 flex flex-wrap items-end justify-between gap-6">
-            <SplitText as="h2" text="What we make" className="display display-lg" />
+            <SplitText as="h2" text="What we create" className="display display-lg" />
             <Link href="/services" className="caption link-u">
               All services →
             </Link>

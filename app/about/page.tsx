@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Arc from "@/components/Arc";
 import CTASection from "@/components/CTASection";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
@@ -29,11 +28,6 @@ export default function AboutPage() {
         <div className="container-x grid gap-14 md:grid-cols-12 md:items-center">
           <Reveal className="md:col-span-5">
             <figure className="relative">
-              <Arc
-                scrollLinked
-                strokeWidth={10}
-                className="pointer-events-none absolute -top-[12%] -right-[14%] z-10 w-[70%]"
-              />
               <div className="crop relative aspect-[912/856] text-ink">
                 <Image
                   src={founderProfile.photo}

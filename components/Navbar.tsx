@@ -69,11 +69,11 @@ export default function Navbar() {
             aria-label="Adrich home"
             className={`relative z-10 shrink-0 transition-opacity duration-300 ${menuOpen ? "pointer-events-none opacity-0" : ""}`}
           >
-            <Logo className="h-12 w-auto sm:h-14 lg:h-16" />
+            <Logo tagline={false} className="h-12 w-auto sm:h-14 lg:h-16" />
           </Link>
 
           <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((link, index) => {
+            {navLinks.map((link) => {
               const active = isActive(pathname, link.href);
               return (
                 <Link
@@ -82,7 +82,6 @@ export default function Navbar() {
                   aria-current={active ? "page" : undefined}
                   className="group caption flex items-baseline gap-1.5 !text-[0.85rem] !tracking-[0.08em] text-ink"
                 >
-                  <span className="text-[0.65rem] text-ink-mute">0{index + 1}</span>
                   <span className={`link-u ${active ? "!bg-[length:100%_1px]" : ""}`}>{link.label}</span>
                 </Link>
               );
@@ -148,7 +147,6 @@ export default function Navbar() {
                         isActive(pathname, link.href) ? "text-amber" : "text-paper"
                       }`}
                     >
-                      <span className="caption text-paper/40">0{index}</span>
                       {link.label}
                     </Link>
                   </motion.div>

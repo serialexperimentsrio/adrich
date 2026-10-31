@@ -113,15 +113,22 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <div className="container-x caption flex items-center gap-4 pb-6 text-ink-mute" aria-hidden="true">
-        <span>Scroll</span>
-        <span className="relative h-px w-16 overflow-hidden bg-ink/15">
-          <motion.span
-            className="absolute inset-y-0 left-0 w-1/2 bg-ink"
-            animate={{ x: ["-100%", "200%"] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+      <div className="container-x caption flex items-start gap-3 pb-4 text-ink-mute" aria-hidden="true">
+        <span className="leading-[12px]">Scroll</span>
+        <svg viewBox="0 0 72 34" className="h-[34px] w-[72px] overflow-visible" fill="none">
+          {/* faint track: a straight line that curves down into an arrow */}
+          <path d="M1 6 H46 Q60 6 60 20 V32" stroke="currentColor" strokeOpacity={0.25} strokeWidth={1.25} />
+          <path d="M54.5 26.5 L60 32 L65.5 26.5" stroke="currentColor" strokeWidth={1.25} />
+          {/* a segment that travels along the track */}
+          <motion.path
+            d="M1 6 H46 Q60 6 60 20 V32"
+            stroke="var(--color-ink)"
+            strokeWidth={1.25}
+            initial={{ pathLength: 0, pathOffset: 0 }}
+            animate={{ pathLength: [0, 0.4, 0], pathOffset: [0, 0.3, 1] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
           />
-        </span>
+        </svg>
       </div>
     </section>
   );
