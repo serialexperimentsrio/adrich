@@ -76,7 +76,7 @@ export default function ContactPage() {
 
       <section className="border-t border-ink/15 bg-paper-2">
         <div className="container-x py-16">
-          <p className="caption mb-6 text-ink-mute">Find us — Banashree, Dhaka</p>
+          <p className="caption mb-6 text-ink-mute">Find us in Banashree, Dhaka</p>
           <div className="crop text-ink">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.7134651465412!2d90.3975753!3d23.864306499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c423e474a863%3A0xa4806777ee09a18a!2sHouse%23%2032%2C%20House%2034%20Road-6%2C%20Dhaka%201230!5e0!3m2!1sen!2sbd!4v1775768367121!5m2!1sen!2sbd"

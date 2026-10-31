@@ -60,7 +60,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
               <span className="h-2 w-2 rounded-full bg-red" aria-hidden="true" /> Now playing
             </span>
             <span>
-              {project.category} — {project.year}
+              {project.category} · {project.year}
             </span>
           </div>
           <div className="sprockets bg-night-2 px-4 py-12 [--sprocket-color:var(--color-night)] md:px-10">
@@ -68,7 +68,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
               <div className="relative mx-auto aspect-video w-full max-w-6xl overflow-hidden bg-night">
                 <iframe
                   src={video.embed}
-                  title={`${project.title} — film`}
+                  title={`Film: ${project.title}`}
                   className="absolute inset-0 h-full w-full border-0"
                   loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

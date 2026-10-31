@@ -44,7 +44,7 @@ export default function Hero() {
         transition={{ delay: 0.2, duration: 1 }}
       >
         <span>
-          Est. {companyProfile.founded} — {companyProfile.headquarters}
+          Est. {companyProfile.founded} · {companyProfile.headquarters}
         </span>
         <span className="hidden sm:inline">Take {yearsInBusiness}</span>
         <span className="flex items-center gap-2">

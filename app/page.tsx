@@ -14,7 +14,7 @@ import SplitText from "@/components/SplitText";
 import { companyProfile, portfolioItems, processSteps, services, yearsInBusiness } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "Adrich — Think. Create. Influence." },
+  title: { absolute: "Adrich | Think. Create. Influence." },
   description:
     "Adrich is an advertising agency in Dhaka, making TV commercials, corporate films and digital campaigns since 1997.",
 };

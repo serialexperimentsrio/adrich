@@ -6,7 +6,7 @@ export default function NotFound() {
     <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-[4.75rem] lg:pt-24">
       <Arc className="pointer-events-none absolute -right-[20vw] top-1/2 w-[80vw] max-w-[60rem] -translate-y-1/2" strokeWidth={10} />
       <div className="container-x relative">
-        <p className="caption text-ink-mute">Error 404 — Scene missing</p>
+        <p className="caption text-ink-mute">Error 404 · Scene missing</p>
         <h1 className="display display-xl mt-6">
           Cut<span className="text-red">!</span>
         </h1>

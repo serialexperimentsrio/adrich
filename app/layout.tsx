@@ -29,8 +29,8 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   metadataBase: new URL("https://adrich.com.bd"),
   title: {
-    default: "Adrich — Think. Create. Influence.",
-    template: "%s — Adrich",
+    default: "Adrich | Think. Create. Influence.",
+    template: "%s | Adrich",
   },
   description:
     "Adrich is an advertising agency in Dhaka, making TV commercials, corporate films and digital campaigns since 1997.",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "Digital marketing Bangladesh",
   ],
   openGraph: {
-    title: "Adrich — Think. Create. Influence.",
+    title: "Adrich | Think. Create. Influence.",
     description: "TV commercials, corporate films and digital campaigns from Dhaka, since 1997.",
     type: "website",
     siteName: "Adrich",
