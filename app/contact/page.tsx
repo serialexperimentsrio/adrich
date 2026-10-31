@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { MessageCircle, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import SectionIntro from "@/components/SectionIntro";

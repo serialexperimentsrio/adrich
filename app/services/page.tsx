@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Aperture,
   Brush,
   Building2,
   Clapperboard,

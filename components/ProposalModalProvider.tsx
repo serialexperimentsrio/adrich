@@ -13,6 +13,7 @@ import {
 } from "react";
 import { X } from "lucide-react";
 import { services } from "@/data/site";
+import ProposalForm from "@/components/ProposalForm";
 
 type ProposalModalContextType = {
   openModal: (serviceTitle?: string) => void;
@@ -34,17 +35,14 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [service, setService] = useState(services[0]?.title ?? "");
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const triggerRef = useRef<HTMLElement | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const openModal = useCallback((serviceTitle?: string) => {
     triggerRef.current = document.activeElement as HTMLElement;
-    if (serviceTitle) {
+    if (serviceTitle && services.some((item) => item.title === serviceTitle)) {
       setService(serviceTitle);
     }
-
-    setIsSubmitted(false);
 
     setIsMounted(true);
     window.requestAnimationFrame(() => {
@@ -80,7 +78,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
 
       if (event.key === "Tab") {
         const focusableElements = modalRef.current?.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          'button, [href], input:not([tabindex="-1"]), select, textarea, [tabindex]:not([tabindex="-1"])',
         );
         if (!focusableElements) return;
 
@@ -115,7 +113,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
     if (!isOpen) return;
 
     const focusHandle = window.requestAnimationFrame(() => {
-      const firstInput = modalRef.current?.querySelector("input, select, textarea") as HTMLElement;
+      const firstInput = modalRef.current?.querySelector('input:not([tabindex="-1"]), select, textarea') as HTMLElement;
       firstInput?.focus();
     });
 
@@ -173,83 +171,7 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
               </button>
             </div>
 
-            <form
-              className="space-y-4"
-              onSubmit={(event) => {
-                event.preventDefault();
-                setIsSubmitted(true);
-              }}
-              onChange={() => {
-                if (isSubmitted) {
-                  setIsSubmitted(false);
-                }
-              }}
-            >
-              <div>
-                <label htmlFor="proposal-name" className="form-label">
-                  Full name
-                </label>
-                <input id="proposal-name" name="name" required className="form-input" placeholder="Your name" />
-              </div>
-
-              <div>
-                <label htmlFor="proposal-email" className="form-label">
-                  Work email
-                </label>
-                <input
-                  id="proposal-email"
-                  name="email"
-                  type="email"
-                  required
-                  className="form-input"
-                  placeholder="name@company.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="proposal-service" className="form-label">
-                  Service interest
-                </label>
-                <select
-                  id="proposal-service"
-                  name="service"
-                  value={service}
-                  onChange={(event) => setService(event.target.value)}
-                  className="form-input"
-                >
-                  {services.map((serviceItem) => (
-                    <option key={serviceItem.slug} value={serviceItem.title}>
-                      {serviceItem.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="proposal-message" className="form-label">
-                  Project brief
-                </label>
-                <textarea
-                  id="proposal-message"
-                  name="message"
-                  required
-                  className="form-input min-h-32"
-                  placeholder="Campaign goal, timeline, and expected deliverables"
-                />
-              </div>
-
-              <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                <button type="submit" className="btn-primary btn-base">
-                  Submit Request
-                </button>
-              </div>
-            </form>
-
-            {isSubmitted ? (
-              <div className="mt-4 rounded-sm border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
-                Thank you. We received your brief and will get back to you shortly.
-              </div>
-            ) : null}
+            <ProposalForm service={service} onServiceChange={setService} />
           </div>
         </div>
       ) : null}

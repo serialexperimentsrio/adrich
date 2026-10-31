@@ -10,6 +10,9 @@ export const companyProfile = {
   phone: "+880 1711-638437",
 };
 
+/** Addresses that receive contact-form and proposal-request emails. */
+export const inquiryRecipients = [companyProfile.email, "rio@adrich.com.bd"];
+
 export const founderProfile = {
   name: "Ahsan Habib",
   title: "Founder & Creative Director",
@@ -28,11 +31,13 @@ export const navLinks = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
+export const yearsInBusiness = new Date().getFullYear() - Number(companyProfile.founded);
+
 export const trustPoints = [
   {
     title: "Founded",
     value: companyProfile.founded,
-    detail: "27+ years shaping campaigns that move markets.",
+    detail: `${yearsInBusiness}+ years shaping campaigns that move markets.`,
   },
   {
     title: "Headquarters",
@@ -144,6 +149,18 @@ export const portfolioFilters: PortfolioFilter[] = [
   "Digital",
   "Animation",
 ];
+
+const categoryServiceSlug: Record<PortfolioCategory, string> = {
+  TVC: "tvc-production",
+  "Corporate AV": "corporate-av-production",
+  Digital: "social-media-content-production",
+  Animation: "tvc-production",
+};
+
+/** Title of the service that best matches a portfolio category (used to preselect the proposal form). */
+export function serviceForCategory(category: PortfolioCategory) {
+  return services.find((service) => service.slug === categoryServiceSlug[category])?.title;
+}
 
 export type PortfolioItem = {
   slug: string;
@@ -302,14 +319,12 @@ export const processSteps = [
 ] as const;
 
 export const clientLogos = [
-  "BRB",
-  "Ali Salt",
-  "Lovely",
-  "Superstar",
-  "Jibon",
-  "Kollany",
-  "Nexus Trade",
-  "Delta Build",
+  { name: "BRB Cable Industries", src: "/logos/BRB.jpeg" },
+  { name: "City Group", src: "/logos/city%20group.png" },
+  { name: "Kiam", src: "/logos/kiam.png" },
+  { name: "Kollany Rice Bran Oil", src: "/logos/Kollany%20Rice%20Bran%20Oil.jpeg" },
+  { name: "SSG", src: "/logos/ssg.png" },
+  { name: "Sunlite", src: "/logos/sunlite.png" },
 ] as const;
 
 export const testimonials = [

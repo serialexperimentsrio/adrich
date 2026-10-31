@@ -814,12 +814,12 @@ a:focus-visible {
   }
 }
 
-/* Scroll snap container: enable vertical snap inside the main page area */
-#main-content {
-  scroll-snap-type: y mandatory;
+/* Scroll snap: the page scrolls on the document (not <main>), so snapping lives on <html>.
+   "proximity" snaps the hero viewport into place without trapping scroll inside tall sections. */
+html {
+  scroll-snap-type: y proximity;
   /* ensure snapped sections don't slide under the sticky header */
   scroll-padding-top: 4rem;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Full-viewport helpers for hero and info strip */
