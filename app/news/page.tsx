@@ -1,56 +1,45 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import SectionIntro from "@/components/SectionIntro";
 import CTASection from "@/components/CTASection";
+import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { newsItems } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "News",
-  description:
-    "Company updates from Adrich covering campaign launches, production milestones, and creative releases.",
+  description: "Recent launches and releases from Adrich.",
 };
 
 export default function NewsPage() {
   return (
     <>
-      <section className="section-y border-b border-slate-200 bg-white">
-        <div className="container-swiss">
-          <Reveal>
-            <SectionIntro
-              title="Recent campaign and production updates"
-              description="A running timeline of project launches and creative milestones from the Adrich portfolio."
-              titleAs="h1"
-              align="center"
-              showDivider
-            />
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader index="N" label="News" title="Latest from the studio" accent="studio" />
 
-      <section className="section-y">
-        <div className="container-swiss">
-          <div className="grid-12 gap-y-3">
-            {newsItems.map((item) => (
-              <Reveal key={item.slug} className="col-span-12 md:col-span-6">
-                <article className="h-full pb-6">
-                  <p className="text-kicker">{item.date}</p>
-                  <h2 className="mt-2 font-display text-xl font-semibold text-ink-900">{item.title}</h2>
-                  <p className="mt-2 text-sm leading-7 text-ink-700">{item.summary}</p>
-                  <Link href="/work" className="mt-3 inline-flex text-xs font-semibold uppercase tracking-[0.1em] text-ink-900">
-                    View related work
-                  </Link>
-                </article>
+      <section className="container-x pb-32">
+        <ol className="border-b border-ink/15">
+          {newsItems.map((item, index) => (
+            <li key={item.slug} className="border-t border-ink/15">
+              <Reveal delay={index * 0.05}>
+                <Link href={item.href} className="group grid gap-3 py-10 md:grid-cols-12 md:items-baseline">
+                  <p className="mono text-ink-mute md:col-span-2">{item.date}</p>
+                  <h2 className="display text-[clamp(1.9rem,4vw,3.5rem)] transition-colors duration-500 group-hover:text-red md:col-span-6">
+                    {item.title}
+                  </h2>
+                  <p className="text-lg leading-snug text-ink-soft md:col-span-3">{item.summary}</p>
+                  <span
+                    className="mono hidden justify-self-end transition-transform duration-500 group-hover:-rotate-45 md:col-span-1 md:block"
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                </Link>
               </Reveal>
-            ))}
-          </div>
-        </div>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <CTASection
-        title="Want updates from your campaign in this feed?"
-        description="Collaborate with Adrich and we will build launch-ready creative systems with transparent progress reporting."
-      />
+      <CTASection />
     </>
   );
 }

@@ -4,8 +4,7 @@ export const companyProfile = {
   industry: "Advertising Services",
   founded: "1997",
   headquarters: "Dhaka, Bangladesh",
-  address:
-    "House #32,34, Road #6, Block F, Banashree, Dhaka 1219, Bangladesh",
+  address: "House #32,34, Road #6, Block F, Banashree, Dhaka 1219, Bangladesh",
   email: "ahsan@adrich.com.bd",
   phone: "+880 1711-638437",
 };
@@ -23,33 +22,14 @@ export const founderProfile = {
 };
 
 export const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 export const yearsInBusiness = new Date().getFullYear() - Number(companyProfile.founded);
-
-export const trustPoints = [
-  {
-    title: "Founded",
-    value: companyProfile.founded,
-    detail: `${yearsInBusiness}+ years shaping campaigns that move markets.`,
-  },
-  {
-    title: "Headquarters",
-    value: companyProfile.headquarters,
-    detail: "Rooted in Dhaka, producing for national and global audiences.",
-  },
-  {
-    title: "Positioning",
-    value: "Full-service creative agency",
-    detail: "From strategy to production to performance media.",
-  },
-] as const;
 
 export type Service = {
   slug: string;
@@ -63,92 +43,82 @@ export const services: Service[] = [
     slug: "tvc-production",
     title: "TVC Production",
     description:
-      "Concept to final edit TV commercials crafted for recall, reach, and brand lift.",
+      "Television commercials from the first idea to the final master: script, casting, shoot, edit and colour.",
     deliverables: [
       "Creative direction and scripts",
       "Production planning and casting",
-      "Shoot, edit, color, and final mastering",
+      "Shoot, edit, colour and final mastering",
     ],
   },
   {
     slug: "corporate-av-production",
     title: "Corporate AV Production",
     description:
-      "Corporate narratives that communicate capability, trust, and business impact.",
+      "Films that show what a company actually does: its people, its facilities and the way it works.",
     deliverables: [
-      "Storyboarding and interview frameworks",
-      "On-site filming and sound capture",
-      "Motion titles and multilingual subtitle packs",
+      "Storyboards and interview planning",
+      "On-site filming and sound",
+      "Motion titles and subtitled versions",
     ],
   },
   {
     slug: "social-media-content-production",
     title: "Social Media Content Production",
     description:
-      "Always-on social content systems and social media advertising for Facebook, Instagram, YouTube, and LinkedIn.",
+      "Regular content and social advertising for Facebook, Instagram, YouTube and LinkedIn.",
     deliverables: [
       "Monthly content calendars",
-      "Short-form video and static creatives",
-      "Community-ready copy and posting kits",
+      "Short-form video and static posts",
+      "Captions and posting kits",
     ],
   },
   {
     slug: "digital-campaign-strategy",
     title: "Digital Campaign Strategy",
     description:
-      "Cross-platform campaign strategy designed around audience behavior and measurable outcomes. Includes content strategy and SEO fundamentals.",
+      "Planning which channels to use, what to say on each, and how to tell whether it worked, including content strategy and SEO basics.",
     deliverables: [
       "Audience and channel planning",
-      "Message architecture and funnel mapping",
-      "KPI dashboards and campaign reporting",
+      "Messaging and funnel mapping",
+      "Campaign reporting",
     ],
   },
   {
     slug: "paid-ads-management",
     title: "Paid Ads Management (Meta, Google, LinkedIn)",
-    description:
-      "Performance media buying and optimization across key paid channels.",
+    description: "Setting up, running and adjusting paid campaigns across the main ad platforms.",
     deliverables: [
       "Campaign setup and tracking",
-      "A/B creative and audience testing",
-      "Budget optimization and weekly insights",
+      "Creative and audience testing",
+      "Budget management and weekly updates",
     ],
   },
   {
     slug: "branding-and-graphic-design",
     title: "Branding",
-    description:
-      "Brand identities and campaign visuals that stay coherent across every touchpoint.",
+    description: "Identities and campaign visuals that hold together wherever the brand shows up.",
     deliverables: [
-      "Brand key visual systems",
+      "Key visuals and identity systems",
       "Campaign design toolkits",
-      "Presentation and collateral design",
+      "Presentations and collateral",
     ],
   },
   {
     slug: "print-production",
     title: "Print Production",
-    description:
-      "Premium print assets delivered with precision in layout, color, and finishing.",
+    description: "Brochures, posters and outdoor, with careful attention to layout, colour and finish.",
     deliverables: [
-      "Brochures and annual profile kits",
-      "Poster and OOH adaptation",
-      "Pre-press supervision and print QA",
+      "Brochures and company profiles",
+      "Posters and outdoor adaptations",
+      "Pre-press checks and print supervision",
     ],
   },
-  // Removed non-core services: ecommerce, shopify, personal-branding
 ];
 
 export type PortfolioCategory = "TVC" | "Corporate AV" | "Digital" | "Animation";
 export type PortfolioFilter = "All" | PortfolioCategory;
 
-export const portfolioFilters: PortfolioFilter[] = [
-  "All",
-  "TVC",
-  "Corporate AV",
-  "Digital",
-  "Animation",
-];
+export const portfolioFilters: PortfolioFilter[] = ["All", "TVC", "Corporate AV", "Digital", "Animation"];
 
 const categoryServiceSlug: Record<PortfolioCategory, string> = {
   TVC: "tvc-production",
@@ -170,151 +140,119 @@ export type PortfolioItem = {
   tags: PortfolioCategory[];
   summary: string;
   year: string;
-  thumbnail: string;
-  videoPlaceholder: string;
+  /** LinkedIn post embed URL for the film. */
   embedSrc?: string;
-  outcome?: string;
-  brief?: string;
 };
 
 export const portfolioItems: PortfolioItem[] = [
   {
     slug: "brb-ht-cable-tvc",
-    title: "BRB HT Cable TVC",
+    title: "BRB HT Cable",
     client: "BRB Cable Industries",
     category: "TVC",
     tags: ["TVC", "Digital"],
     summary:
-      "A high-voltage product story translated into a cinematic TVC and digital cut-downs focused on trust and durability.",
-    brief: "Establish BRB HT Cable as the gold standard for industrial and residential high-tension electrical infrastructure through cinematic storytelling.",
-    outcome: "Reached 12M+ households via national broadcast; 35% lift in dealer-led inquiries within Q1.",
+      "A TV commercial for BRB's high-tension cables, built around strength and reliability, with shorter cuts for social and digital.",
     year: "2025",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - BRB HT Cable TVC",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644752827056128?collapsed=1",
   },
   {
     slug: "brb-frls-cable-tvc",
-    title: "BRB FRLS Cable TVC",
+    title: "BRB FRLS Cable",
     client: "BRB Cable Industries",
     category: "TVC",
     tags: ["TVC", "Digital"],
     summary:
-      "Safety-led storytelling built for broad awareness, with channel-specific edits for social and video platforms.",
-    brief: "Communicate the fire-retardant low-smoke properties of BRB cables to safety-conscious homeowners and architects.",
-    outcome: "Broadcast on 8 major channels; digital variants achieved 4.2M views with 60% completion rate.",
+      "A safety-led commercial for BRB's fire-retardant, low-smoke cables, with versions edited for social and video platforms.",
     year: "2024",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - BRB FRLS Cable TVC",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644528461205504?collapsed=1",
   },
   {
     slug: "ali-salt-tvc",
-    title: "Ali Salt TVC",
+    title: "Ali Salt",
     client: "Ali Salt",
     category: "TVC",
     tags: ["TVC", "Animation"],
     summary:
-      "A household-focused concept blending live action and motion overlays to improve memorability across audience segments.",
-    brief: "Refresh the brand image of Ali Salt, emphasizing purity and health benefits through a modern visual lens.",
-    outcome: "Brand recall scores increased by 22% in post-campaign audience surveys.",
+      "A household story for Ali Salt that mixes live action with motion graphics.",
     year: "2024",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - Ali Salt TVC",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644350828302336?collapsed=1",
   },
   {
     slug: "lovely-shopping-center-tvc",
-    title: "Lovely Shopping Center TVC",
+    title: "Lovely Shopping Center",
     client: "Lovely Shopping Center",
     category: "Digital",
     tags: ["Digital", "TVC"],
     summary:
-      "A retail campaign designed for TV and mobile-first viewing, pushing seasonal footfall and promotional conversions.",
-    brief: "Drive seasonal retail traffic and strengthen top-of-mind recall for Lovely Shopping Center through a cross-channel creative rollout.",
-    outcome: "Delivered TV and social campaign assets that increased in-store campaign-week footfall and improved promotional awareness.",
+      "A seasonal retail campaign made for TV and for watching on a phone.",
     year: "2023",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - Lovely Shopping Center TVC",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377644112621047808?collapsed=1",
   },
   {
     slug: "superstar-bulb-tvc",
-    title: "Superstar Bulb TVC",
+    title: "Superstar Bulb",
     client: "Superstar Group",
     category: "Animation",
     tags: ["Animation", "TVC"],
     summary:
-      "Energy-efficiency messaging paired with stylized product animation to increase visual retention.",
-    brief: "Position Superstar LED bulbs as the smartest choice for energy savings and longevity in the Bangladeshi market.",
-    outcome: "Successfully drove a 15% increase in seasonal sales volume through integrated TV and POS support.",
+      "An energy-saving message for Superstar's LED bulbs, told through stylised product animation.",
     year: "2023",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - Superstar Bulb TVC",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643602048372736?collapsed=1",
   },
   {
     slug: "jibon-mineral-water-tvc",
-    title: "Jibon Mineral Water TVC",
+    title: "Jibon Mineral Water",
     client: "Jibon",
     category: "TVC",
     tags: ["TVC", "Digital"],
     summary:
-      "Lifestyle-forward storytelling and campaign assets engineered for TV, reels, and YouTube pre-roll performance.",
-    brief: "Associate Jibon Mineral Water with active, healthy lifestyles through vibrant, fast-paced production.",
-    outcome: "Digital-first distribution reached 8M+ unique users; high engagement across social-native formats.",
+      "A bright, fast-paced lifestyle commercial for Jibon, with cuts for TV, reels and YouTube.",
     year: "2022",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - Jibon Mineral Water TVC",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643384116789248?collapsed=1",
   },
   {
     slug: "kollany-rice-bran-oil-tvc",
-    title: "Kollany Rice Bran Oil TVC",
+    title: "Kollany Rice Bran Oil",
     client: "Kollany Foods",
     category: "TVC",
     tags: ["TVC", "Digital"],
     summary:
-      "Health-positioned creative concept with a clear product benefit narrative and campaign extension kits.",
-    brief: "Reposition Kollany Rice Bran Oil as a healthy everyday choice through a trust-led mass-market story.",
-    outcome: "Unified TV and digital messaging supported stronger campaign recall and improved purchase intent in post-campaign feedback.",
+      "A commercial presenting Kollany Rice Bran Oil as an everyday healthy choice, with matching digital assets.",
     year: "2022",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - Kollany Rice Bran Oil TVC",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377643186871177216?collapsed=1",
   },
   {
     slug: "corporate-av-brb-cable",
-    title: "Corporate AV of BRB Cable Ind. Ltd.",
+    title: "BRB Cable — Corporate Film",
     client: "BRB Cable Industries",
     category: "Corporate AV",
     tags: ["Corporate AV", "Digital"],
     summary:
-      "A corporate AV designed to present manufacturing strength, quality control, and export capability to stakeholders.",
-    brief: "Produce a high-fidelity corporate film showcasing BRB's state-of-the-art manufacturing facilities for international B2B partners.",
-    outcome: "Adopted as the primary pitch asset for international trade expos; translated into 3 languages.",
+      "A corporate film about BRB's manufacturing, quality control and export work, made for partners and stakeholders.",
     year: "2025",
-    thumbnail: "/reel-placeholder.svg",
-    videoPlaceholder: "Video placeholder - Corporate AV of BRB Cable Ind. Ltd.",
     embedSrc: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7377642799296528384?collapsed=1",
   },
 ];
 
+/** Public LinkedIn post URL for a project's embed, for a "watch on LinkedIn" link. */
+export function linkedinPostUrl(embedSrc?: string) {
+  const urn = embedSrc?.match(/urn:li:[A-Za-z]+:\d+/)?.[0];
+  return urn ? `https://www.linkedin.com/feed/update/${urn}/` : undefined;
+}
+
 export const processSteps = [
   {
     title: "Think",
-    detail:
-      "Research-first strategy, audience mapping, and campaign architecture aligned with business outcomes.",
+    detail: "We start by understanding the brand, the audience and what the campaign has to achieve.",
   },
   {
     title: "Create",
-    detail:
-      "Concept development, production, design, and media asset pipelines executed with Swiss-level precision.",
+    detail: "Then we write, design and shoot: scripts, films, visuals and everything the media plan needs.",
   },
   {
     title: "Influence",
-    detail:
-      "Launch, optimize, and scale across TV and digital channels to drive awareness, preference, and leads.",
+    detail: "Finally we put the work in front of people on TV and online, and keep adjusting it while it runs.",
   },
 ] as const;
 
@@ -327,89 +265,22 @@ export const clientLogos = [
   { name: "Sunlite", src: "/logos/sunlite.png" },
 ] as const;
 
-export const testimonials = [
+/** The agency's story, told from the founder's own account. */
+export const eras = [
   {
-    quote:
-      "Adrich translates ideas into campaign systems. Their production quality and media execution are equally strong.",
-    name: "Rahman Kabir",
-    role: "Head of Marketing, BRB Cable Industries",
+    label: "1997",
+    title: "Dhaka, the beginning",
+    detail: "Adrich starts out when TV, radio and print are the main ways to reach an audience.",
   },
   {
-    quote:
-      "From TVC craft to digital optimization, the team brought strategic clarity and measurable campaign lift.",
-    name: "Nabila Chowdhury",
-    role: "Brand Manager, Ali Salt",
+    label: "Since",
+    title: "The media changed. So did we.",
+    detail: "As audiences moved to new screens, the work moved with them.",
   },
   {
-    quote:
-      "What stands out is discipline. Every deliverable felt editorially precise and commercially effective.",
-    name: "Mahin Ahmed",
-    role: "Director, Lovely Shopping Center",
-  },
-] as const;
-
-export const timeline = [
-  {
-    year: "1997",
-    title: "Adrich founded in Dhaka",
-    detail: "Launched as a creative and production-focused advertising partner.",
-  },
-  {
-    year: "2006",
-    title: "Scaled national TVC operations",
-    detail: "Expanded production capacity for FMCG and industrial sectors.",
-  },
-  {
-    year: "2015",
-    title: "Digital campaign division established",
-    detail: "Integrated social, video, and search channels into campaign offerings.",
-  },
-  {
-    year: "Today",
-    title: "Unified full-service agency model",
-    detail: "Combining strategy, production, design, media, and performance marketing.",
-  },
-] as const;
-
-export const values = [
-  {
-    title: "Creativity",
-    detail: "Original ideas designed to move people and brands forward.",
-  },
-  {
-    title: "Strategy",
-    detail: "Decision-making rooted in audience insights and campaign intelligence.",
-  },
-  {
-    title: "Execution",
-    detail: "Disciplined delivery from concept development to launch-day operations.",
-  },
-  {
-    title: "Impact",
-    detail: "Work measured by outcomes, not by outputs alone.",
-  },
-] as const;
-
-export const teamMembers = [
-  {
-    name: "Farhan Islam",
-    role: "Managing Director",
-    bio: "Leads growth strategy and long-term client partnerships.",
-  },
-  {
-    name: "Sadia Hossain",
-    role: "Executive Creative Director",
-    bio: "Drives creative systems for TVC, digital, and cross-media campaigns.",
-  },
-  {
-    name: "Shihab Uddin",
-    role: "Head of Production",
-    bio: "Oversees film, motion, and post-production pipelines.",
-  },
-  {
-    name: "Nusrat Jahan",
-    role: "Performance Media Lead",
-    bio: "Leads paid ads strategy across Meta, Google, and LinkedIn.",
+    label: "Today",
+    title: "Strategy, content, campaigns",
+    detail: "We help brands find their way through digital with clear thinking and well-made work.",
   },
 ] as const;
 
@@ -417,36 +288,36 @@ export const newsItems = [
   {
     slug: "brb-ht-cable-tvc-launch",
     date: "March 2026",
-    title: "BRB HT Cable TVC campaign rollout completed",
-    summary:
-      "Adrich delivered broadcast and digital campaign variants with audience-targeted cuts for high-frequency reach.",
+    title: "BRB HT Cable commercial is on air",
+    summary: "Our TVC for BRB HT Cable is out, alongside shorter cuts for social and digital.",
+    href: "/work/brb-ht-cable-tvc",
   },
   {
     slug: "corporate-av-brb-release",
     date: "January 2026",
-    title: "Corporate AV for BRB Cable Ind. Ltd. premiered",
-    summary:
-      "The AV package highlights manufacturing capability, quality process, and export readiness for global stakeholders.",
+    title: "BRB Cable corporate film released",
+    summary: "A look inside BRB's manufacturing and quality process, made for partners and stakeholders.",
+    href: "/work/corporate-av-brb-cable",
   },
   {
     slug: "superstar-motion-refresh",
     date: "November 2025",
-    title: "Superstar Bulb campaign expanded with motion-led assets",
-    summary:
-      "Animated explainers and social cut-downs boosted completion rate on paid video placements.",
+    title: "New animated work for Superstar Bulb",
+    summary: "Animated explainers and social cut-downs extending the Superstar Bulb campaign.",
+    href: "/work/superstar-bulb-tvc",
   },
   {
     slug: "kollany-oil-awareness-wave",
     date: "August 2025",
-    title: "Kollany Rice Bran Oil awareness wave launched",
-    summary:
-      "A unified TV and digital narrative was deployed with conversion-friendly creative testing.",
+    title: "Kollany Rice Bran Oil campaign launched",
+    summary: "One story told across TV and digital for Kollany Rice Bran Oil.",
+    href: "/work/kollany-rice-bran-oil-tvc",
   },
 ] as const;
 
 export const socialLinks = [
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61575491642072" },
   { label: "Instagram", href: "https://instagram.com/adrich" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/adrich/?viewAsMember=true" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/adrich/" },
   { label: "YouTube", href: "https://youtube.com/@adrich" },
 ] as const;

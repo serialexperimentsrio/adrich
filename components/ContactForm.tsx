@@ -11,7 +11,7 @@ export default function ContactForm() {
   return (
     <form
       ref={formRef}
-      className="relative border border-slate-200 bg-white p-4 md:p-5 rounded-sm h-full flex flex-col gap-4"
+      className="relative flex h-full flex-col gap-8"
       onSubmit={handleSubmit}
       noValidate
     >
@@ -98,7 +98,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="btn-base btn-primary w-full justify-center sm:w-auto disabled:cursor-wait disabled:opacity-70"
+          className="btn-base btn-primary w-full justify-center disabled:cursor-wait disabled:opacity-70 sm:w-auto"
         >
           {isPending ? "Sending…" : "Send Inquiry"}
         </button>

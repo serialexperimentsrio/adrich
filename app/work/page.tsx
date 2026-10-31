@@ -1,43 +1,28 @@
 import type { Metadata } from "next";
-import SectionIntro from "@/components/SectionIntro";
-import WorkGallery from "@/components/WorkGallery";
 import CTASection from "@/components/CTASection";
-import Reveal from "@/components/Reveal";
+import PageHeader from "@/components/PageHeader";
+import WorkGallery from "@/components/WorkGallery";
 import { portfolioItems } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Work",
-  description:
-    "Explore Adrich campaign portfolio across TVC, corporate AV, digital, and animation-led projects.",
+  description: "TV commercials, corporate films and animation made by Adrich for brands in Bangladesh.",
 };
 
 export default function WorkPage() {
   return (
     <>
-      <section className="section-y border-b border-slate-200 bg-white">
-        <div className="container-swiss">
-          <Reveal>
-            <SectionIntro
-              title="Campaign work designed for recall and results"
-              description="Filter projects by category and open each case detail to review objective, category, client, and video placeholder preview."
-              titleAs="h1"
-              align="center"
-              showDivider
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section-y">
-        <div className="container-swiss">
-          <WorkGallery items={portfolioItems} />
-        </div>
-      </section>
-
-      <CTASection
-        title="Want your campaign featured in our next reel?"
-        description="Bring your brief to Adrich and we will produce a high-impact concept and execution roadmap tailored to your market."
+      <PageHeader
+        index="W"
+        label="Work"
+        title="Films we have made"
+        accent="made"
+        intro="Commercials, corporate films and animation for brands across Bangladesh. Open any project to watch it."
       />
+      <section className="container-x pb-32">
+        <WorkGallery items={portfolioItems} />
+      </section>
+      <CTASection title="Your film next?" />
     </>
   );
 }

@@ -1,68 +1,27 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
+  delay?: number;
+  /** Distance in px the element travels up while fading in. */
+  y?: number;
 };
 
-export default function Reveal({ children, className }: RevealProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) {
-      return;
-    }
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      node.dataset.reveal = "visible";
-      return;
-    }
-
-    const isInViewport = () => {
-      const rect = node.getBoundingClientRect();
-      return rect.top <= window.innerHeight && rect.bottom >= 0;
-    };
-
-    if (isInViewport()) {
-      node.dataset.reveal = "visible";
-      return;
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      node.dataset.reveal = "visible";
-      return;
-    }
-
-    node.dataset.reveal = "pending";
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            (entry.target as HTMLElement).dataset.reveal = "visible";
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-      },
-    );
-
-    observer.observe(node);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
+/** Fades and lifts its children into place the first time they scroll into view. */
+export default function Reveal({ children, className, delay = 0, y = 32 }: RevealProps) {
   return (
-    <div ref={ref} className={`reveal ${className ?? ""}`.trim()}>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay }}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }

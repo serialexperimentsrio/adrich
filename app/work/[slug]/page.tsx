@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
-import RequestProposalButton from "@/components/RequestProposalButton";
 import CTASection from "@/components/CTASection";
-import { portfolioItems, serviceForCategory } from "@/data/site";
+import ProjectPoster from "@/components/ProjectPoster";
+import RequestProposalButton from "@/components/RequestProposalButton";
+import Reveal from "@/components/Reveal";
+import SectionLabel from "@/components/SectionLabel";
+import SplitText from "@/components/SplitText";
+import { linkedinPostUrl, portfolioItems, serviceForCategory } from "@/data/site";
 
 type WorkDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
-
-function getPortfolioItem(slug: string) {
-  return portfolioItems.find((item) => item.slug === slug);
-}
 
 export function generateStaticParams() {
   return portfolioItems.map((item) => ({ slug: item.slug }));
@@ -21,120 +19,126 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: WorkDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getPortfolioItem(slug);
-
-  if (!project) {
-    return {
-      title: "Project Not Found",
-    };
-  }
-
+  const project = portfolioItems.find((item) => item.slug === slug);
+  if (!project) return { title: "Project not found" };
   return {
     title: project.title,
-    description: `${project.title} by Adrich for ${project.client}.`,
+    description: `${project.title}: ${project.category} by Adrich for ${project.client}. ${project.summary}`,
   };
 }
 
 export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
   const { slug } = await params;
-  const project = getPortfolioItem(slug);
+  const index = portfolioItems.findIndex((item) => item.slug === slug);
+  if (index === -1) notFound();
 
-  if (!project) {
-    notFound();
-  }
+  const project = portfolioItems[index];
+  const nextIndex = (index + 1) % portfolioItems.length;
+  const next = portfolioItems[nextIndex];
+  const postUrl = linkedinPostUrl(project.embedSrc);
 
   return (
     <>
-      <section className="section-y bg-white">
-        <div className="container-swiss">
-          <Link href="/work" className="btn-base btn-secondary mb-12 inline-flex font-bold">
-            <ArrowLeft size={16} aria-hidden="true" />
-            Back to Case Studies
+      <header className="container-x pt-36 pb-14 md:pt-44">
+        <div className="mono flex flex-wrap items-center justify-between gap-4 text-ink-mute">
+          <Link href="/work" className="link-u text-ink">
+            ← All work
           </Link>
+          <span>
+            № {String(index + 1).padStart(2, "0")} / {String(portfolioItems.length).padStart(2, "0")}
+          </span>
+        </div>
+        <p className="serif mt-12 text-3xl text-ink-soft">{project.client}</p>
+        <SplitText as="h1" immediate delay={0.1} text={project.title} className="display display-lg mt-2 max-w-[16ch]" />
+      </header>
 
-          <div className="grid-12 gap-y-12">
-            <div className="col-span-12 lg:col-span-8">
-              <span className="text-kicker">{project.category}</span>
-              <h1 className="hero-title mt-4 text-ink-900">{project.title}</h1>
-              <p className="mt-8 text-xl font-medium leading-relaxed text-ink-800 lg:text-2xl">
-                {project.summary}
-              </p>
-            </div>
-
-            <div className="col-span-12 lg:col-span-4">
-              <div className="rule-top-heavy">
-                <p className="text-kicker">Project Context</p>
-                <dl className="mt-6 space-y-6 text-[0.92rem]">
-                  <div className="flex flex-col gap-1">
-                    <dt className="font-bold text-ink-900">Client</dt>
-                    <dd className="text-ink-700">{project.client}</dd>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <dt className="font-bold text-ink-900">Year</dt>
-                    <dd className="text-ink-700">{project.year}</dd>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <dt className="font-bold text-ink-900">Distribution</dt>
-                    <dd className="text-ink-700">{project.tags.join(", ")}</dd>
-                  </div>
-                </dl>
-                <div className="mt-10">
-                  <RequestProposalButton className="w-full justify-center" serviceTitle={serviceForCategory(project.category)} />
-                </div>
+      {/* Screening room */}
+      <section className="bg-night py-16 text-paper md:py-24" aria-label="Film">
+        <div className="container-x">
+          <div className="mono mb-6 flex items-center justify-between text-paper/50">
+            <span className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-red" aria-hidden="true" /> Now playing
+            </span>
+            <span>
+              {project.category} — {project.year}
+            </span>
+          </div>
+          <div className="sprockets bg-night-2 px-4 py-12 [--sprocket-color:var(--color-night)] md:px-10">
+            {project.embedSrc ? (
+              <div className="mx-auto w-full max-w-[560px] overflow-hidden rounded-sm bg-paper">
+                <iframe
+                  src={project.embedSrc}
+                  title={`${project.title} — film`}
+                  className="block h-[620px] w-full border-0 md:h-[700px]"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
               </div>
-            </div>
+            ) : (
+              <p className="py-24 text-center text-paper/60">Film coming soon.</p>
+            )}
+          </div>
+          {postUrl ? (
+            <p className="mono mt-6 text-paper/60">
+              Not loading?{" "}
+              <a href={postUrl} target="_blank" rel="noopener noreferrer" className="link-u text-paper">
+                Watch on LinkedIn ↗
+              </a>
+            </p>
+          ) : null}
+        </div>
+      </section>
+
+      <section className="container-x section">
+        <div className="grid gap-12 md:grid-cols-12">
+          <Reveal className="md:col-span-7">
+            <SectionLabel index="i" label="About the project" />
+            <p className="mt-8 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.2] tracking-[-0.01em]">
+              {project.summary}
+            </p>
+          </Reveal>
+          <Reveal className="md:col-span-4 md:col-start-9" delay={0.1}>
+            <dl className="mono divide-y divide-ink/15 border-y border-ink/15">
+              {[
+                ["Client", project.client],
+                ["Year", project.year],
+                ["Category", project.category],
+                ["Formats", project.tags.join(", ")],
+              ].map(([term, value]) => (
+                <div key={term} className="flex justify-between gap-4 py-3">
+                  <dt className="text-ink-mute">{term}</dt>
+                  <dd className="text-right">{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <RequestProposalButton
+              className="mt-8 w-full justify-center"
+              serviceTitle={serviceForCategory(project.category)}
+              label="Make something like this"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Next project */}
+      <section className="border-t border-ink/15">
+        <div className="container-x grid items-center gap-10 py-20 md:grid-cols-12">
+          <div className="md:col-span-6">
+            <p className="mono text-ink-mute">Next project</p>
+            <Link href={`/work/${next.slug}`} className="group mt-4 block">
+              <span className="display display-md block transition-colors duration-500 group-hover:text-red">
+                {next.title} →
+              </span>
+            </Link>
+          </div>
+          <div className="md:col-span-4 md:col-start-9">
+            <ProjectPoster item={next} index={nextIndex} />
           </div>
         </div>
       </section>
 
-      <section className="section-y-tight border-t border-slate-200">
-        <div className="container-swiss">
-          <div className="grid-12 gap-y-12">
-            <div className="col-span-12 lg:col-span-8">
-              <div className="aspect-[16/9] overflow-hidden rounded-sm border border-slate-200 bg-slate-900">
-                <div className="relative h-full w-full">
-                  <Image
-                    src={project.thumbnail}
-                    alt={`${project.title} showcase`}
-                    fill
-                    className="object-cover opacity-60"
-                    sizes="(max-width: 1024px) 100vw, 66vw"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="rounded-sm border border-white/20 bg-black/40 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-sm">
-                      {project.videoPlaceholder}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-span-12 lg:col-span-4 flex flex-col gap-12">
-              {project.brief && (
-                <div className="rule-top">
-                  <p className="text-kicker">The Brief</p>
-                  <p className="mt-4 text-[0.92rem] leading-relaxed text-ink-700">
-                    {project.brief}
-                  </p>
-                </div>
-              )}
-              {project.outcome && (
-                <div className="rule-top">
-                  <p className="text-kicker">The Outcome</p>
-                  <p className="mt-4 text-[0.92rem] leading-relaxed text-ink-700">
-                    {project.outcome}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <CTASection
-        title="Start your campaign with Adrich"
-        description="Share your audience, objective, and launch date. We will align strategy, production, and media to deliver impact."
-      />
+      <CTASection />
     </>
   );
 }

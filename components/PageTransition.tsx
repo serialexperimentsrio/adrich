@@ -3,11 +3,7 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-type PageTransitionProps = {
-  children: ReactNode;
-};
-
-export default function PageTransition({ children }: PageTransitionProps) {
+export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   return (

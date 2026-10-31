@@ -14,6 +14,7 @@ import {
 import { X } from "lucide-react";
 import { services } from "@/data/site";
 import ProposalForm from "@/components/ProposalForm";
+import { lockScroll, unlockScroll } from "@/lib/smoothScroll";
 
 type ProposalModalContextType = {
   openModal: (serviceTitle?: string) => void;
@@ -99,13 +100,12 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
       }
     };
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    lockScroll();
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
+      unlockScroll();
     };
   }, [closeModal, isMounted]);
 
@@ -134,14 +134,14 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
       {children}
       {isMounted ? (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center px-4"
+          className="fixed inset-0 z-[100] flex justify-end"
           role="dialog"
           aria-modal="true"
           aria-labelledby="proposal-modal-title"
         >
           <button
             type="button"
-            className={`absolute inset-0 bg-[#061019]/70 transition-opacity duration-180 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+            className={`absolute inset-0 cursor-default bg-night/60 backdrop-blur-[2px] transition-opacity duration-500 ${
               isOpen ? "opacity-100" : "opacity-0"
             }`}
             onClick={closeModal}
@@ -150,23 +150,19 @@ export default function ProposalModalProvider({ children }: { children: ReactNod
           <div
             ref={modalRef}
             onTransitionEnd={handlePanelTransitionEnd}
-            className={`relative w-full max-w-xl rounded-md border border-slate-200 bg-white p-5 md:p-6 transition-opacity duration-180 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-              isOpen ? "opacity-100" : "opacity-0"
+            data-lenis-prevent
+            className={`relative flex h-full w-full max-w-2xl flex-col overflow-y-auto bg-paper p-6 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:p-12 ${
+              isOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            <div className="mb-6 flex items-start justify-between gap-4">
+            <div className="mb-10 flex items-start justify-between gap-4">
               <div>
-                <p className="text-kicker">Request Proposal</p>
-                <h3 id="proposal-modal-title" className="font-display text-2xl font-semibold text-ink-900">
-                  Tell us about your next campaign
-                </h3>
+                <p className="mono text-ink-mute">New project — Slate 01</p>
+                <h2 id="proposal-modal-title" className="display display-md mt-4">
+                  Start a <span className="serif text-red">project</span>
+                </h2>
               </div>
-              <button
-                type="button"
-                className="btn-icon inline-flex items-center justify-center p-2"
-                onClick={closeModal}
-                aria-label="Close modal"
-              >
+              <button type="button" className="btn-icon shrink-0" onClick={closeModal} aria-label="Close">
                 <X size={18} />
               </button>
             </div>

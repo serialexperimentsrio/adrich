@@ -1,80 +1,76 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
-import logo from "@/public/logo.png";
+import DhakaClock from "@/components/DhakaClock";
 import { companyProfile, navLinks, socialLinks } from "@/data/site";
+import { getLenis } from "@/lib/smoothScroll";
 
 export default function Footer() {
+  const phoneHref = `tel:${companyProfile.phone.replace(/[^\d+]/g, "")}`;
+
+  const backToTop = () => {
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(0, { duration: 1.6 });
+    else window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="border-t border-slate-200 bg-white">
-      <div className="container-swiss section-y-tight">
-        <div className="grid-12 gap-y-12 items-start">
-          <div className="col-span-12 md:col-span-5 flex flex-col h-full items-start">
-            <div className="self-start">
-              <Image
-                src={logo}
-                alt="Adrich"
-                className="h-12 w-auto object-contain max-w-[280px]"
-              />
-            </div>
-
-            <p className="mt-6 max-w-xs text-[0.85rem] leading-7 text-ink-700">{companyProfile.address}</p>
-
-            <div className="mt-4 flex flex-col gap-1">
-              <a
-                href={`tel:${companyProfile.phone.replace(/[^\\d+]/g, "")}`}
-                className="inline-flex text-[0.85rem] font-medium text-ink-900 transition hover:text-brand-red"
-              >
-                {companyProfile.phone}
-              </a>
-
-              <a
-                href={`mailto:${companyProfile.email}`}
-                className="inline-flex text-[0.85rem] font-medium text-ink-900 transition hover:text-brand-red"
-              >
+    <footer className="relative overflow-hidden bg-paper-2 text-ink">
+      <div className="container-x pt-20 pb-8">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <p className="mono text-ink-mute">Studio</p>
+            <address className="mt-4 max-w-[30ch] text-lg not-italic leading-snug">{companyProfile.address}</address>
+            <div className="mt-6 flex flex-col gap-1 text-lg">
+              <a href={`mailto:${companyProfile.email}`} className="link-u w-fit">
                 {companyProfile.email}
               </a>
-            </div>
-
-            <div className="mt-12">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-ink-400">
-                &copy; {new Date().getFullYear()} Adrich Agency. Dhaka, Bangladesh.
-              </p>
+              <a href={phoneHref} className="link-u w-fit">
+                {companyProfile.phone}
+              </a>
             </div>
           </div>
 
-          <div className="col-span-6 md:col-span-3">
-            <p className="text-kicker">Navigate</p>
-            <ul className="mt-3 space-y-2">
-              {navLinks.map((link) => (
+          <nav className="md:col-span-3" aria-label="Footer navigation">
+            <p className="mono text-ink-mute">Index</p>
+            <ul className="mt-4 space-y-1.5 text-lg">
+              {[{ label: "Home", href: "/" }, ...navLinks].map((link) => (
                 <li key={link.href}>
-                  <Link
-                    className="nav-link text-xs uppercase tracking-[0.09em] text-ink-700 transition hover:text-ink-900"
-                    href={link.href}
-                  >
+                  <Link href={link.href} className="link-u">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div className="col-span-6 md:col-span-4">
-            <p className="text-kicker">Connect</p>
-            <ul className="mt-3 space-y-2">
+          <div className="md:col-span-4">
+            <p className="mono text-ink-mute">Elsewhere</p>
+            <ul className="mt-4 space-y-1.5 text-lg">
               {socialLinks.map((social) => (
                 <li key={social.label}>
-                  <a
-                    className="nav-link text-xs uppercase tracking-[0.09em] text-ink-700 transition hover:text-ink-900"
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {social.label}
+                  <a href={social.href} target="_blank" rel="noopener noreferrer" className="link-u">
+                    {social.label} ↗
                   </a>
                 </li>
               ))}
             </ul>
           </div>
+        </div>
+
+        <p
+          className="display mt-20 select-none text-center text-[23.5vw] leading-[0.78] tracking-[-0.02em] lowercase"
+          aria-hidden="true"
+        >
+          adr<span className="text-red">i</span>ch
+        </p>
+
+        <div className="mono mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 text-ink-mute">
+          <span>© {new Date().getFullYear()} Adrich. Think. Create. Influence.</span>
+          <DhakaClock />
+          <button type="button" onClick={backToTop} className="link-u">
+            Back to top ↑
+          </button>
         </div>
       </div>
     </footer>
